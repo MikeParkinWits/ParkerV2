@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "snap",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nerdsupremacist/Snap.git",
+      "state" : {
+        "revision" : "29943b7064547f391ea8352dea04903e2263d831",
+        "version" : "0.2.2"
+      }
+    },
+    {
+      "identity" : "swiftui-drawer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maustinstar/swiftui-drawer.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "6d22f5c1362bfa71f2915c28aebba343b9243363"
+      }
+    }
+  ],
+  "version" : 2
+}
