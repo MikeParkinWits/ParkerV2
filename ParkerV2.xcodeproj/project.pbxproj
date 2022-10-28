@@ -15,6 +15,7 @@
 		6A58A7B229014541001F4AE8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A58A7B12901453E001F4AE8 /* MainView.swift */; };
 		6AA7E75A2900A0DC00D67B13 /* Snap in Frameworks */ = {isa = PBXBuildFile; productRef = 6AA7E7592900A0DC00D67B13 /* Snap */; };
 		6AA7E75D2900A76A00D67B13 /* Drawer in Frameworks */ = {isa = PBXBuildFile; productRef = 6AA7E75C2900A76A00D67B13 /* Drawer */; };
+		6AD942A2290AA4B700B25C1F /* ParallaxSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AD942A1290AA4B700B25C1F /* ParallaxSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AA7E75A2900A0DC00D67B13 /* Snap in Frameworks */,
+				6AD942A2290AA4B700B25C1F /* ParallaxSwiftUI in Frameworks */,
 				6AA7E75D2900A76A00D67B13 /* Drawer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,6 +106,7 @@
 			packageProductDependencies = (
 				6AA7E7592900A0DC00D67B13 /* Snap */,
 				6AA7E75C2900A76A00D67B13 /* Drawer */,
+				6AD942A1290AA4B700B25C1F /* ParallaxSwiftUI */,
 			);
 			productName = ParkerV2;
 			productReference = 6A2D72AA290035FC00C25F71 /* ParkerV2.app */;
@@ -136,6 +139,7 @@
 			packageReferences = (
 				6AA7E7582900A0DC00D67B13 /* XCRemoteSwiftPackageReference "Snap" */,
 				6AA7E75B2900A76A00D67B13 /* XCRemoteSwiftPackageReference "swiftui-drawer" */,
+				6AD942A0290AA4B600B25C1F /* XCRemoteSwiftPackageReference "ParallaxSwiftUI" */,
 			);
 			productRefGroup = 6A2D72AB290035FC00C25F71 /* Products */;
 			projectDirPath = "";
@@ -385,6 +389,14 @@
 				kind = branch;
 			};
 		};
+		6AD942A0290AA4B600B25C1F /* XCRemoteSwiftPackageReference "ParallaxSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Priva28/ParallaxSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -397,6 +409,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6AA7E75B2900A76A00D67B13 /* XCRemoteSwiftPackageReference "swiftui-drawer" */;
 			productName = Drawer;
+		};
+		6AD942A1290AA4B700B25C1F /* ParallaxSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6AD942A0290AA4B600B25C1F /* XCRemoteSwiftPackageReference "ParallaxSwiftUI" */;
+			productName = ParallaxSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

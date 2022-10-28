@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct MainView: View {
+	
+	init() {
+	  UITabBar.appearance().backgroundColor = UIColor.systemBackground
+	}
+	
 	var body: some View {
 		TabView {
 			HomeView()
@@ -16,8 +21,9 @@ struct MainView: View {
 				}
 			
 //			Add for white tabBar
-//				.toolbarBackground(Color.white, for: .tabBar)
+//				.toolbarBackground(Color.red, for: .tabBar)
 //				.toolbar(.visible, for: .tabBar)
+//				.accentColor(.red)
 			
 				
 		}

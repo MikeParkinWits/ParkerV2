@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "parallaxswiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Priva28/ParallaxSwiftUI",
+      "state" : {
+        "revision" : "b2bde7ec73e2d6f3d960aa14a125bd9f1f7fa605",
+        "version" : "1.0.5"
+      }
+    },
+    {
       "identity" : "snap",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nerdsupremacist/Snap.git",
