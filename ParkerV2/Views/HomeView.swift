@@ -17,8 +17,8 @@ struct HomeView: View {
 	
 	@State private var didTapThumbsUp:Bool = false
 	@State private var didTapThumbsDown:Bool = false
-
-
+	
+	var locations: [Locations] = LocationList.nearbyFive
 	
 	var body: some View {
 		
@@ -45,35 +45,34 @@ struct HomeView: View {
 						
 						ScrollView(.horizontal, showsIndicators: false) {
 							HStack(spacing: 20) {
-								ForEach(0..<5){ index in
+								ForEach(locations.dropLast(locations.count - 5), id: \.id){ location in
 									
 									//Refactor into seperate struct later
 									
 									//Look at adding inner shadow to image for depth effect: https://www.hackingwithswift.com/articles/253/how-to-use-inner-shadows-to-simulate-depth-with-swiftui-and-core-motion
 									VStack(alignment: .leading){
 										
-										Image("test-image-two")
+										Image(location.image)
 											.resizable()
 											.scaledToFit()
 											.frame(minHeight: 100, maxHeight: 150)
 											.cornerRadius(8)
 											.padding(.top, 5)
 											.shadow(color: Color("shadowColor"), radius: 3)
-
-//											.overlay(
-//												Label("Braamfontein, Johannesburg", systemImage: "mappin.and.ellipse")
-//													.font(.footnote)
-//													.fontWeight(.regular)
-//													.foregroundColor(.white)
-//													.frame(maxWidth: .infinity, alignment: .leading)
-//													.background(Color.black.blur(radius: 10))
-//													.padding(6)
-//													.lineLimit(1)
-//													.minimumScaleFactor(0.8)
-//												, alignment: .bottomLeading)
+											.overlay(
+												Label(location.location, systemImage: "mappin.and.ellipse")
+													.font(.footnote)
+													.fontWeight(.regular)
+													.foregroundColor(.white)
+													.frame(maxWidth: .infinity, alignment: .leading)
+													.background(Color.black.blur(radius: 10))
+													.padding(6)
+													.lineLimit(1)
+													.minimumScaleFactor(0.8)
+												, alignment: .bottomLeading)
 											
 										
-										Text("44 Stanley")
+										Text(location.name)
 											.font(.subheadline)
 											.fontWeight(.bold)
 											.foregroundColor(.primary)
