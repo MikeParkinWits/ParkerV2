@@ -16,9 +16,11 @@ struct MainView: View {
 	var body: some View {
 		TabView {
 			HomeView()
+				.background(Color(.systemGroupedBackground))
 				.tabItem {
 					Label("Home", systemImage: "house")
 				}
+
 			
 //			Add for white tabBar
 //				.toolbarBackground(Color.red, for: .tabBar)
