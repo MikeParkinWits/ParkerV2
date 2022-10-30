@@ -21,8 +21,6 @@ struct HomeView: View {
 	var locations: [Locations] = LocationList.nearbyFive
 	
 	var body: some View {
-		
-		
 		ZStack{
 			
 			VStack() {
@@ -47,9 +45,18 @@ struct HomeView: View {
 								
 								Spacer()
 								
-								Text("See all")
-									.font(.subheadline)
-									.foregroundColor(.secondary)
+								NavigationLink {
+									
+										AllLocationsView()
+											.navigationBarTitle("All Parking Areas")
+									
+
+								} label: {
+									Text("See all")
+										.font(.subheadline)
+										.foregroundColor(.secondary)
+								}
+
 							}
 							.padding(.horizontal)
 							
@@ -369,7 +376,7 @@ struct HomeView: View {
 	}
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
 	static var previews: some View {
 		HomeView()
 	}
