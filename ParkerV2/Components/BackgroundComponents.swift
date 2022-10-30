@@ -10,6 +10,7 @@
 // IMPORTS
 
 import SwiftUI
+import MapKit
 
 // BLUR VIEW - Creates glassmorphism background effect
 
@@ -50,6 +51,9 @@ struct SmallSingleCard: View {
 			if (isParkingAreaCard){
 				LocationDetailView(parkingLocation: location!)
 					.navigationBarTitle(location!.name)
+			}else{
+				ParkingHistoryDetailView(parkingHistory: parkingHistory!)
+					.navigationBarTitle("#\(parkingHistory!.id)", displayMode: .inline)
 			}
 		} label: {
 			HStack(alignment: .center){
@@ -98,5 +102,152 @@ struct SmallSingleCard: View {
 		.padding(.horizontal)
 		.padding(.top, 13)
 		.buttonStyle(.plain)
+	}
+}
+
+// MAP CODE
+
+// Map Location View Code
+struct DisplayParkingAreaMap: View {
+	
+	var isParkingArea: Bool
+	
+	var parkingLocation: Locations?
+	var parkingHistory: ParkingHistory?
+	
+	@State var region: MKCoordinateRegion
+	
+	@State var places: [LocationAnnotations]
+	
+	@State private var showingAlert = false
+	
+	@State var url: URL
+	
+	init(isParkingArea: Bool, at parkingLocation: Locations?, at parkingHistory: ParkingHistory?) {
+		self.parkingLocation = parkingLocation
+		self.parkingHistory = parkingHistory
+		
+		let region = MKCoordinateRegion(
+			center: CLLocationCoordinate2D(latitude: isParkingArea ? parkingLocation!.locationLat : parkingHistory!.locationLat, longitude: isParkingArea ? parkingLocation!.locationLong : parkingHistory!.locationLong),
+			latitudinalMeters: 750,
+			longitudinalMeters: 750
+			//			span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+			
+		)
+		
+		let places: [LocationAnnotations]
+		
+		if(isParkingArea){
+			places = [
+				LocationAnnotations(name: parkingLocation!.name,
+									latitude: parkingLocation!.locationLat,
+									longitude: parkingLocation!.locationLong)
+			]
+		}else{
+			places = [
+				LocationAnnotations(name: parkingHistory!.name,
+									latitude: parkingHistory!.locationLat,
+									longitude: parkingHistory!.locationLong)
+			]
+		}
+		
+		let url = URL(string: "maps://?saddr=&daddr=\(isParkingArea ? parkingLocation!.locationLat : parkingHistory!.locationLat),\(isParkingArea ? parkingLocation!.locationLong : parkingHistory!.locationLong)")
+		
+		self._region = State(initialValue: region)
+		self._places = State(initialValue: places)
+		self._url = State(initialValue: url!)
+		self.isParkingArea = isParkingArea
+	}
+	
+	var body: some View {
+		VStack{
+			
+			
+			Map(coordinateRegion: $region, interactionModes: [], annotationItems: places){ place in
+				MapMarker(coordinate: place.coordinate)
+			}
+			.onTapGesture {
+				showingAlert = true
+			}
+			.innerShadow(color: Color("innerShadow").opacity(0.1), radius: 0.05)
+			.cornerRadius(10)
+			//				.shadow(color: Color("shadowColor"), radius: 3)
+			
+			.frame(maxWidth: .infinity, maxHeight: 250)
+			.confirmationDialog("Important message", isPresented: $showingAlert) {
+				Button("Open in Maps") { if UIApplication.shared.canOpenURL(url) {
+					UIApplication.shared.open(url, options: [:], completionHandler: nil)
+				} }
+				Button("Cancel", role: .cancel) { }
+			}
+			
+			if(isParkingArea){
+				ParkingAreaMapSubHeadline(parkingLocation: parkingLocation!)
+			}else{
+				ParkingHistoryMapSubHeadline(parkingHistory: parkingHistory!)
+			}
+		}
+	}
+}
+
+struct ParkingAreaMapSubHeadline: View{
+	
+	var parkingLocation: Locations
+	
+	var body: some View{
+		HStack {
+			Label(parkingLocation.location, systemImage: "mappin.and.ellipse")
+			
+			Spacer()
+			
+			Text("0.2km away")
+		}
+		.font(.subheadline)
+		.foregroundColor(.secondary)
+		.padding(.bottom, 5)
+		.padding(.top, 2)
+	}
+}
+
+struct ParkingHistoryMapSubHeadline: View{
+	
+	var parkingHistory: ParkingHistory
+	
+	var body: some View{
+		VStack(spacing: 25.0) {
+			HStack {
+				VStack(alignment: .leading, spacing: 1.0){
+					Text(parkingHistory.name)
+						.font(.title2)
+						.fontWeight(.bold)
+						.padding(.bottom, 5)
+					
+					Label(parkingHistory.location, systemImage: "mappin.and.ellipse")
+						.foregroundColor(.secondary)
+					
+				}
+				
+				Spacer()
+				
+				Text("R\(parkingHistory.price)")
+					.font(.largeTitle)
+					.fontWeight(.bold)
+			}
+
+		}
+		.font(.subheadline)
+		.padding(.bottom, 20)
+		.padding(.top, 2)
+	}
+}
+
+// Declaring Location Annotations Structure (Class)
+struct LocationAnnotations: Identifiable {
+	let id = UUID()
+	let name: String
+	let latitude: Double
+	let longitude: Double
+	var coordinate: CLLocationCoordinate2D {
+		CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
 	}
 }

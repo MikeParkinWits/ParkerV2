@@ -21,7 +21,7 @@ struct LocationDetailView: View {
 		NavigationView{
 			VStack(spacing: 15.0) {
 				
-				DisplayParkingAreaMap(at: parkingLocation)
+				DisplayParkingAreaMap(isParkingArea: true, at: parkingLocation, at: nil)
 				
 				VStack(alignment: .leading, spacing: 7){
 
@@ -44,89 +44,6 @@ struct LocationDetailView: View {
 			.padding(.top, 15)
 			
 		}
-	}
-}
-
-// MAP CODE
-
-// Map Location View Code
-struct DisplayParkingAreaMap: View {
-	
-	var parkingLocation: Locations
-	
-	@State var region: MKCoordinateRegion
-	
-	@State var places: [LocationAnnotations]
-	
-	@State private var showingAlert = false
-	
-	@State var url: URL
-	
-	init(at parkingLocation: Locations) {
-		self.parkingLocation = parkingLocation
-		
-		let region = MKCoordinateRegion(
-			center: CLLocationCoordinate2D(latitude: parkingLocation.locationLat, longitude: parkingLocation.locationLong),
-			latitudinalMeters: 750,
-			longitudinalMeters: 750
-			//			span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-			
-		)
-		
-		let places = [
-			LocationAnnotations(name: parkingLocation.name,
-								latitude: parkingLocation.locationLat,
-								longitude: parkingLocation.locationLong)
-		]
-		
-		let url = URL(string: "maps://?saddr=&daddr=\(parkingLocation.locationLat),\(parkingLocation.locationLong)")
-		
-		self._region = State(initialValue: region)
-		self._places = State(initialValue: places)
-		self._url = State(initialValue: url!)
-	}
-	
-	var body: some View {
-		Map(coordinateRegion: $region, interactionModes: [], annotationItems: places){ place in
-			MapMarker(coordinate: place.coordinate)
-		}
-		.onTapGesture {
-			showingAlert = true
-		}
-		.innerShadow(color: Color("innerShadow").opacity(0.1), radius: 0.05)
-		.cornerRadius(10)
-		//				.shadow(color: Color("shadowColor"), radius: 3)
-		
-		.frame(maxWidth: .infinity, maxHeight: 250)
-		.confirmationDialog("Important message", isPresented: $showingAlert) {
-			Button("Open in Maps") { if UIApplication.shared.canOpenURL(url) {
-				UIApplication.shared.open(url, options: [:], completionHandler: nil)
-			} }
-			Button("Cancel", role: .cancel) { }
-		}
-		
-		HStack {
-			Label(parkingLocation.location, systemImage: "mappin.and.ellipse")
-			
-			Spacer()
-			
-			Text("0.2km away")
-		}
-		.font(.subheadline)
-		.foregroundColor(.secondary)
-		.padding(.bottom, 5)
-		.padding(.top, 2)
-	}
-}
-
-// Declaring Location Annotations Structure (Class)
-struct LocationAnnotations: Identifiable {
-	let id = UUID()
-	let name: String
-	let latitude: Double
-	let longitude: Double
-	var coordinate: CLLocationCoordinate2D {
-		CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
 	}
 }
 
