@@ -16,9 +16,13 @@ struct MainView: View {
 	var body: some View {
 		TabView {
 			HomeView()
-				.background(Color(.systemGroupedBackground))
 				.tabItem {
 					Label("Home", systemImage: "house")
+				}
+			
+			ParkingHistoryView()
+				.tabItem {
+					Label("History", systemImage: "parkingsign.circle")
 				}
 
 			

@@ -11,31 +11,35 @@ import SwiftUI
 
 // ALL LOCATIONS VIEW
 
-struct AllLocationsView: View {
+struct ParkingHistoryView: View {
 	
-	var locations: [Locations] = LocationList.nearbyFive
+	var parkingHistory: [ParkingHistory] = ParkingHistoryList.AllParkingHistory
 	
 	@State var searchLocations = ""
 	
 	var body: some View {
 		
-		ScrollView(.vertical, showsIndicators: false) {
-			ForEach(filteredLocations, id: \.id){ index in
-				
-				SmallSingleCard(isParkingCard: true, containingArea: index, containingHistory: nil)
-				
+		NavigationView{
+			ScrollView(.vertical, showsIndicators: false) {
+				ForEach(filteredLocations, id: \.id){ index in
+					
+					SmallSingleCard(isParkingCard: false, containingArea: nil, containingHistory: index)
+					
+				}
+				.searchable(text: $searchLocations, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Parking History by Name or Area"
+							//					, suggestions: {
+							//			// 1
+							//			Button("Pizza") {
+							//				searchQuery = "pizza"
+							//			}
+							//			// 2
+							//			Text("Chicken Salad")
+							//				.searchCompletion("Chicken Salad")
+							//		}
+				)
 			}
-			.searchable(text: $searchLocations, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Parking Areas by Name or Area"
-						//					, suggestions: {
-						//			// 1
-						//			Button("Pizza") {
-						//				searchQuery = "pizza"
-						//			}
-						//			// 2
-						//			Text("Chicken Salad")
-						//				.searchCompletion("Chicken Salad")
-						//		}
-			)
+			.navigationTitle("Parking History")
+
 		}
 		
 		
@@ -103,22 +107,22 @@ struct AllLocationsView: View {
 	
 	// Function to search through locations
 	
-	var filteredLocations: [Locations] {
+	var filteredLocations: [ParkingHistory] {
 		if searchLocations.isEmpty
 		{
-			return locations
+			return parkingHistory
 		}
 		else
 		{
-			return locations.filter({$0.name.localizedCaseInsensitiveContains(searchLocations) || $0.location.localizedCaseInsensitiveContains(searchLocations)})
+			return parkingHistory.filter({$0.name.localizedCaseInsensitiveContains(searchLocations) || $0.location.localizedCaseInsensitiveContains(searchLocations)})
 		}
 	}
 }
 
 // Content Preview
 
-struct AllLocationsView_Previews: PreviewProvider {
+struct ParkingHistoryView_Previews: PreviewProvider {
 	static var previews: some View {
-		AllLocationsView()
+		ParkingHistoryView()
 	}
 }
