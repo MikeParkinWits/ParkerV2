@@ -8,9 +8,49 @@
 import SwiftUI
 import MapKit
 
+// LOCATION DETAIL VIEW
+
 struct LocationDetailView: View {
 	
-	var location: Locations
+	var parkingLocation: Locations
+	
+	var body: some View {
+		
+		NavigationView{
+			VStack(spacing: 15.0) {
+				
+				DisplayParkingAreaMap(at: parkingLocation)
+				
+				VStack(alignment: .leading, spacing: 7){
+
+					Text("Prices")
+						.font(.title2)
+						.fontWeight(.bold)
+						.padding(.bottom, 5)
+						
+						ForEach(0..<parkingLocation.prices.count, id: \.self){currentRow in
+							
+							DisplaySinglePriceRow(at: parkingLocation, on: currentRow)
+							
+						}
+				}
+				
+				Spacer()
+				
+			}
+			.padding(.horizontal)
+			.padding(.top, 15)
+			
+		}
+	}
+}
+
+// MAP CODE
+
+// Map Location View Code
+struct DisplayParkingAreaMap: View {
+	
+	var parkingLocation: Locations
 	
 	@State var region: MKCoordinateRegion
 	
@@ -20,22 +60,24 @@ struct LocationDetailView: View {
 	
 	@State var url: URL
 	
-	init(location: Locations) {
-		self.location = location
+	init(at parkingLocation: Locations) {
+		self.parkingLocation = parkingLocation
 		
 		let region = MKCoordinateRegion(
-			center: CLLocationCoordinate2D(latitude: location.locationLat, longitude: location.locationLong),
-						latitudinalMeters: 750,
-						longitudinalMeters: 750
-//			span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+			center: CLLocationCoordinate2D(latitude: parkingLocation.locationLat, longitude: parkingLocation.locationLong),
+			latitudinalMeters: 750,
+			longitudinalMeters: 750
+			//			span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
 			
 		)
 		
 		let places = [
-			LocationAnnotations(name: location.name, latitude: location.locationLat, longitude: location.locationLong)
+			LocationAnnotations(name: parkingLocation.name,
+								latitude: parkingLocation.locationLat,
+								longitude: parkingLocation.locationLong)
 		]
 		
-		let url = URL(string: "maps://?saddr=&daddr=\(location.locationLat),\(location.locationLong)")
+		let url = URL(string: "maps://?saddr=&daddr=\(parkingLocation.locationLat),\(parkingLocation.locationLong)")
 		
 		self._region = State(initialValue: region)
 		self._places = State(initialValue: places)
@@ -43,187 +85,39 @@ struct LocationDetailView: View {
 	}
 	
 	var body: some View {
-		
-		NavigationView{
-			VStack(spacing: 15.0) {
-				Map(coordinateRegion: $region, interactionModes: [], annotationItems: places){ place in
-					MapMarker(coordinate: place.coordinate)
-				}
-				.onTapGesture {
-					showingAlert = true
-				}
-				.cornerRadius(10)
-				.shadow(color: Color("shadowColor"), radius: 3)
-				.frame(maxWidth: .infinity, maxHeight: 250)
-				.confirmationDialog("Important message", isPresented: $showingAlert) {
-					Button("Open in Maps") { if UIApplication.shared.canOpenURL(url) {
-						UIApplication.shared.open(url, options: [:], completionHandler: nil)
-					} }
-					Button("Cancel", role: .cancel) { }
-			}
-//				.padding(.horizontal)
-				
-				
-				HStack {
-					Label(location.location, systemImage: "mappin.and.ellipse")
-					
-					Spacer()
-					
-					Text("0.2km away")
-				}
-				.font(.subheadline)
-				.foregroundColor(.secondary)
-				.padding(.bottom, 5)
-//				.padding(.horizontal)
-				.padding(.top, 2)
-				
-
-				
-				VStack(alignment: .leading, spacing: 7){
-					Section {
-						
-						ForEach(0..<location.prices.count, id: \.self){i in
-							HStack(spacing: 4){
-								Text(self.location.prices[i].time)
-									.font(.body)
-									.fontWeight(.medium)
-								Text("min")
-									.font(.body)
-									.fontWeight(.medium)
-									.foregroundColor(.secondary)
-
-								Spacer()
-
-								Text(self.location.prices[i].price)
-									.font(.body)
-									.fontWeight(.regular)
-							}
-							.listRowBackground(Color.gray)
-	//						.background(Color.red)
-
-
-	//						.padding(.vertical, 2)
-							Divider()
-								.opacity(0.8)
-								.padding(.vertical, 4)
-						}
-						.cornerRadius(20)
-//						.listStyle(.sidebar)
-	//					.padding(.horizontal, -10)
-	//					.padding(.horizontal, -10)
-
-//						.listRowInsets(EdgeInsets())
-
-	//					.scrollContentBackground(.hidden)
-
-//						.padding(.horizontal, 0)
-
-					}
-				header: {
-					Text("Prices")
-						.font(.title2)
-						.fontWeight(.bold)
-						.padding(.bottom, 5)
-				}
-					
-//					List {
-//							Section {
-//								ForEach(0..<location.prices.count, id: \.self){i in
-//									HStack(spacing: 4){
-//										Text(self.location.prices[i].time)
-//											.font(.body)
-//											.fontWeight(.semibold)
-//										Text("min")
-//											.font(.body)
-//											.fontWeight(.semibold)
-//											.foregroundColor(.secondary)
-//
-//										Spacer()
-//
-//										Text(self.location.prices[i].price)
-//											.font(.body)
-//											.fontWeight(.regular)
-//									}
-////									.listRowBackground(Color.gray)
-//			//						.background(Color.red)
-//
-//
-//			//						.padding(.vertical, 2)
-//			//						Divider()
-//			//							.opacity(0.5)
-//								}
-//							} header: {
-//								Text("Prices")
-//									.font(.title)
-//									.fontWeight(.bold)
-//									.foregroundColor(.primary)
-////									.padding(.leading, -10)
-//							}
-//
-////							Section {
-////								Text("One")
-////								Text("Two")
-////								Text("Three")
-////							} header: {
-////								Text("Second Section Header")
-////							} footer: {
-////								Text("Tempora distinctio excepturi quasi distinctio est voluptates voluptate et dolor iste nisi voluptatem labore ipsum blanditiis sed sit suscipit est.")
-////							}
-////
-////							Section {
-////								Text("1")
-////								Text("2")
-////								Text("3")
-////							} header: {
-////								Text("Third Section Header")
-////							} footer: {
-////								Text("Ea consequatur velit sequi voluptatibus officia maiores ducimus consequatur rerum enim omnis totam et voluptates eius consectetur rerum dolorem quis omnis ut ut.")
-////							}
-//					}
-//					.scrollDisabled(true)
-//					.padding(.bottom, -200.0)
-//						// This is the only difference.
-//						.listStyle(.inset)
-
-					
-
-					
-
-
-				}
-//				.padding(.horizontal, 17)
-//				.padding(.vertical, 17)
-//				.background(
-//					BlurView(style: .systemThinMaterial)
-//						.opacity(0.2)
-//					.cornerRadius(20)
-//					.shadow(color: Color("shadowColor").opacity(0.8), radius: 1)
-//				)
-
-
-				
-				Spacer()
-
-
-			}
-			.padding(.horizontal)
-			.padding(.top, 15)
+		Map(coordinateRegion: $region, interactionModes: [], annotationItems: places){ place in
+			MapMarker(coordinate: place.coordinate)
 		}
-
+		.onTapGesture {
+			showingAlert = true
+		}
+		.innerShadow(color: Color("innerShadow").opacity(0.1), radius: 0.05)
+		.cornerRadius(10)
+		//				.shadow(color: Color("shadowColor"), radius: 3)
 		
+		.frame(maxWidth: .infinity, maxHeight: 250)
+		.confirmationDialog("Important message", isPresented: $showingAlert) {
+			Button("Open in Maps") { if UIApplication.shared.canOpenURL(url) {
+				UIApplication.shared.open(url, options: [:], completionHandler: nil)
+			} }
+			Button("Cancel", role: .cancel) { }
+		}
 		
-		
-		
+		HStack {
+			Label(parkingLocation.location, systemImage: "mappin.and.ellipse")
+			
+			Spacer()
+			
+			Text("0.2km away")
+		}
+		.font(.subheadline)
+		.foregroundColor(.secondary)
+		.padding(.bottom, 5)
+		.padding(.top, 2)
 	}
 }
 
-struct LocationDetailView_Previews: PreviewProvider {
-	static var previews: some View {
-		LocationDetailView(location: LocationList.nearbyFive.first!)
-	}
-}
-
-//Declaring Location Annotation Class Object
+// Declaring Location Annotations Structure (Class)
 struct LocationAnnotations: Identifiable {
 	let id = UUID()
 	let name: String
@@ -232,5 +126,50 @@ struct LocationAnnotations: Identifiable {
 	var coordinate: CLLocationCoordinate2D {
 		CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
 	}
+}
+
+// PRICE CODE
+
+// Single Price Row Cell
+struct DisplaySinglePriceRow: View{
 	
+	var i: Int
+	
+	var parkingLocation: Locations
+	
+	init(at parkingLocation: Locations, on i: Int) {
+		self.i = i
+		self.parkingLocation = parkingLocation
+	}
+	
+	var body: some View{
+		HStack(spacing: 4){
+			Text(self.parkingLocation.prices[i].time)
+				.font(.body)
+				.fontWeight(.medium)
+			Text("min")
+				.font(.body)
+				.fontWeight(.medium)
+				.foregroundColor(.secondary)
+			
+			Spacer()
+			
+			Text(self.parkingLocation.prices[i].price)
+				.font(.body)
+				.fontWeight(.regular)
+		}
+		.listRowBackground(Color.gray)
+		
+		Divider()
+			.opacity(0.8)
+			.padding(.vertical, 4)
+	}
+}
+
+// Content Preview
+
+struct LocationDetailView_Previews: PreviewProvider {
+	static var previews: some View {
+		LocationDetailView(parkingLocation: LocationList.nearbyFive.first!)
+	}
 }
