@@ -24,6 +24,11 @@ struct MainView: View {
 				.tabItem {
 					Label("History", systemImage: "parkingsign.circle")
 				}
+			
+			ProfileView()
+				.tabItem {
+					Label("Profile", systemImage: "person.fill")
+				}
 
 			
 //			Add for white tabBar
