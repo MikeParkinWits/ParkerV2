@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct LocationMap: View {
-		
+	
 	var isParkingArea: Bool
 	
 	var parkingLocation: ParkingArea?
@@ -69,9 +69,9 @@ struct LocationMap: View {
 			.onTapGesture {
 				showingAlert = true
 			}
-			.innerShadow(color: Color("innerShadow").opacity(0.1), radius: 0.05)
+			//			.innerShadow(color: Color("innerShadow").opacity(0.1), radius: 0.05)
 			.cornerRadius(10)
-			//				.shadow(color: Color("shadowColor"), radius: 3)
+			.shadow(color: Color("shadowColor"), radius: 3)
 			
 			.frame(maxWidth: .infinity, maxHeight: 250)
 			.confirmationDialog("Important message", isPresented: $showingAlert) {

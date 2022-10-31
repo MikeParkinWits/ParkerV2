@@ -19,12 +19,13 @@ struct AllLocationsView: View {
 	
 	var body: some View {
 		
-		ScrollView(.vertical, showsIndicators: false) {
-			ForEach(filteredLocations, id: \.id){ index in
+//		ScrollView(.vertical, showsIndicators: false) {
+			List(filteredLocations, id: \.id){ index in
 				
 				SmallListCard(isParkingCard: true, containingArea: index, containingHistory: nil)
 				
 			}
+			.padding(.top, -30)
 			.searchable(text: $searchLocations, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Parking Areas by Name or Area"
 						//					, suggestions: {
 						//			// 1
@@ -36,7 +37,7 @@ struct AllLocationsView: View {
 						//				.searchCompletion("Chicken Salad")
 						//		}
 			)
-		}
+//		}
 		
 		
 		//			List(filteredNames, id: \.id){ location in
