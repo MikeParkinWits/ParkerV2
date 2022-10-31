@@ -128,7 +128,6 @@ struct ProfileView: View {
 					}
 					.pickerStyle(.segmented)
 					
-					
 					if (selectedColor == "Vehicle") {
 						Section {
 							TextField(carMake != "" ? carMake : "Car Make", text: $carMake)
@@ -169,12 +168,7 @@ struct ProfileView: View {
 			footer: {
 				Text("Update all of your \(selectedColor.lowercased()) information")
 			}
-				
 
-				
-				
-				
-				
 				Section {
 					Button {
 						showingSheet.toggle()
@@ -223,9 +217,6 @@ struct SheetView: View {
 					Text("About")
 						.font(.largeTitle)
 					.fontWeight(.bold)
-					
-
-				
 				
 				Spacer()
 				
@@ -243,29 +234,11 @@ struct SheetView: View {
 			}
 			.padding(.vertical)
 			
-			Group{
-				Text("Who Created Parker?")
-					.font(.title2)
-					.fontWeight(.semibold)
-				
-				Text("Parker was created for ")
-			}
-
-			Group{
-				Text("Why Was Parker Created?")
-					.font(.title2)
-					.fontWeight(.semibold)
-				
-				Text("Parker was created for ")
-			}
+			AboutQuestionCell(asking: "Who Created parker?", answer: "Parker was created for ")
 			
-			Group{
-				Text("How Does Parker Work?")
-					.font(.title2)
-					.fontWeight(.semibold)
-
-				Text("Parker was created for ")
-			}
+			AboutQuestionCell(asking: "Why was Parker Created?", answer: "Parker was created for ")
+			
+			AboutQuestionCell(asking: "How Does Parker Work?", answer: "Parker was created for ")
 
 			
 
@@ -274,5 +247,26 @@ struct SheetView: View {
 
 		}
 		.padding(.horizontal)
+	}
+}
+
+struct AboutQuestionCell: View {
+	
+	var question: String
+	var answer: String
+	
+	init(asking question: String, answer: String) {
+		self.question = question
+		self.answer = answer
+	}
+	
+	var body: some View {
+		Group{
+			Text(question)
+				.font(.title2)
+				.fontWeight(.semibold)
+			
+			Text(answer)
+		}
 	}
 }

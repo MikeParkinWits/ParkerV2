@@ -22,6 +22,11 @@ struct BottomDrawer: View {
 	var body: some View {
 		Drawer(startingHeight: CGFloat(UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height*0.23))) {
 			ZStack {
+				
+				Rectangle().fill(.blue.gradient)
+					.opacity(0.1)
+					.cornerRadius(30)
+				
 				BlurredBackground(style: .systemMaterial)
 					.foregroundColor(Color.black)
 					.cornerRadius(30)
@@ -163,9 +168,10 @@ struct BottomDrawer: View {
 							 }
 						 }
 						 .padding()
-						 .background(BlurredBackground(style: .systemThinMaterial)
+						 .background(
+							BlurredBackground(style: .systemThinMaterial)
 							 .cornerRadius(20)
-							 .shadow(color: Color("shadowColor").opacity(0.2), radius: 5)
+							 .shadow(color: Color("shadowColor").opacity(0.4), radius: 5)
  )
 						 .padding(.vertical, 10)
 						}
