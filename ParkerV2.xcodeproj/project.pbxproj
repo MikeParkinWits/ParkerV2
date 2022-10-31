@@ -137,6 +137,7 @@
 		6A51493A290FDACC0096D52A /* Drawers */ = {
 			isa = PBXGroup;
 			children = (
+				6A99D03E290FC3280012C665 /* BottomDrawer.swift */,
 			);
 			path = Drawers;
 			sourceTree = "<group>";
@@ -170,7 +171,6 @@
 		6AB56A4A290E3ED1001A826B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				6A99D03E290FC3280012C665 /* BottomDrawer.swift */,
 				6A51493A290FDACC0096D52A /* Drawers */,
 				6A99D03B290FC1FF0012C665 /* Background */,
 				6A32281B290FBF9100A43595 /* Map */,
