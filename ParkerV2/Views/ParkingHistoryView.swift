@@ -23,7 +23,7 @@ struct ParkingHistoryView: View {
 			ScrollView(.vertical, showsIndicators: false) {
 				ForEach(filteredLocations, id: \.id){ index in
 					
-					SmallSingleCard(isParkingCard: false, containingArea: nil, containingHistory: index)
+					SmallListCard(isParkingCard: false, containingArea: nil, containingHistory: index)
 					
 				}
 				.searchable(text: $searchLocations, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Parking History by Name or Area"

@@ -13,7 +13,7 @@ struct ParkingHistoryDetailView: View {
 	
     var body: some View {
 		VStack() {
-			DisplayParkingAreaMap(isParkingArea: false, at: nil, at: parkingHistory)
+			LocationMap(isParkingArea: false, at: nil, at: parkingHistory)
 
 			
 			

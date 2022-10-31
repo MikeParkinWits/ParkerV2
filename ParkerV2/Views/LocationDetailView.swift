@@ -14,14 +14,14 @@ import MapKit
 
 struct LocationDetailView: View {
 	
-	var parkingLocation: Locations
+	var parkingLocation: ParkingArea
 	
 	var body: some View {
 		
 		NavigationView{
 			VStack(spacing: 15.0) {
 				
-				DisplayParkingAreaMap(isParkingArea: true, at: parkingLocation, at: nil)
+				LocationMap(isParkingArea: true, at: parkingLocation, at: nil)
 				
 				VStack(alignment: .leading, spacing: 7){
 
@@ -54,9 +54,9 @@ struct DisplaySinglePriceRow: View{
 	
 	var i: Int
 	
-	var parkingLocation: Locations
+	var parkingLocation: ParkingArea
 	
-	init(at parkingLocation: Locations, on i: Int) {
+	init(at parkingLocation: ParkingArea, on i: Int) {
 		self.i = i
 		self.parkingLocation = parkingLocation
 	}
@@ -89,6 +89,6 @@ struct DisplaySinglePriceRow: View{
 
 struct LocationDetailView_Previews: PreviewProvider {
 	static var previews: some View {
-		LocationDetailView(parkingLocation: LocationList.nearbyFive.first!)
+		LocationDetailView(parkingLocation: ParkingAreaList.allParkingAreas.first!)
 	}
 }

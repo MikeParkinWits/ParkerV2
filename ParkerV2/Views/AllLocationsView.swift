@@ -13,7 +13,7 @@ import SwiftUI
 
 struct AllLocationsView: View {
 	
-	var locations: [Locations] = LocationList.nearbyFive
+	var locations: [ParkingArea] = ParkingAreaList.allParkingAreas
 	
 	@State var searchLocations = ""
 	
@@ -22,7 +22,7 @@ struct AllLocationsView: View {
 		ScrollView(.vertical, showsIndicators: false) {
 			ForEach(filteredLocations, id: \.id){ index in
 				
-				SmallSingleCard(isParkingCard: true, containingArea: index, containingHistory: nil)
+				SmallListCard(isParkingCard: true, containingArea: index, containingHistory: nil)
 				
 			}
 			.searchable(text: $searchLocations, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Parking Areas by Name or Area"
@@ -103,7 +103,7 @@ struct AllLocationsView: View {
 	
 	// Function to search through locations
 	
-	var filteredLocations: [Locations] {
+	var filteredLocations: [ParkingArea] {
 		if searchLocations.isEmpty
 		{
 			return locations
