@@ -65,8 +65,8 @@ struct HomeView: View {
 						
 						Spacer()
 					}
-					
-					BottomDrawer()
+					//UPDATE THIS WITH DATA
+					BottomDrawer(parkingLocation: ParkingAreaList.allParkingAreas.first!)
 				}
 			}
 		}

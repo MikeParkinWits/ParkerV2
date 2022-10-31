@@ -27,7 +27,7 @@ struct SmallListCard: View {
 	var body: some View {
 		NavigationLink {
 			if (isParkingAreaCard){
-				LocationDetailView(parkingLocation: location!)
+				ParkingAreaDetailView(parkingLocation: location!)
 					.navigationBarTitle(location!.name)
 			}else{
 				ParkingHistoryDetailView(parkingHistory: parkingHistory!)

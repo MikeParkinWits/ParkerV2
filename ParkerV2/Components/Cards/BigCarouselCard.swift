@@ -20,7 +20,7 @@ struct BigCarouselCard: View {
 		//Look at adding inner shadow to image for depth effect: https://www.hackingwithswift.com/articles/253/how-to-use-inner-shadows-to-simulate-depth-with-swiftui-and-core-motion
 		
 		NavigationLink {
-			LocationDetailView(parkingLocation: location)
+			ParkingAreaDetailView(parkingLocation: location)
 				.navigationBarTitle(location.name)
 			
 		} label: {
