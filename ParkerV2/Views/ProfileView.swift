@@ -22,6 +22,8 @@ struct ProfileView: View {
 	
 	@State private var showingSheet = false
 	
+	@EnvironmentObject var userInfo: UserInfo
+	
 	var body: some View {
 		NavigationView(){
 			//			Form{
@@ -192,6 +194,12 @@ struct ProfileView: View {
 				ToolbarItem(placement: .navigationBarTrailing){
 					Button {
 						//Logout Action Here
+						
+//						self.userInfo.isUserAuthenticated = .signedOut
+						
+						FBAuth.logout{(result) in
+							print("Logged Out")
+						}
 					} label: {
 						Text("Sign Out")
 					}

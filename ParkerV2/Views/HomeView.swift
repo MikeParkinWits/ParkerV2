@@ -10,10 +10,13 @@
 import SwiftUI
 import Drawer
 import ParallaxSwiftUI
+import Firebase
 
 // Main View - Home View
 
 struct HomeView: View {
+	
+	@EnvironmentObject var userInfo: UserInfo
 	
 	var locations: [ParkingArea] = ParkingAreaList.allParkingAreas
 	
@@ -67,6 +70,23 @@ struct HomeView: View {
 					}
 					//UPDATE THIS WITH DATA
 					BottomDrawer(parkingLocation: ParkingAreaList.allParkingAreas.first!)
+				}
+				.onAppear{
+					guard let uid = Auth.auth().currentUser?.uid else{
+						return
+					}
+					
+					FBFirestore.retrieveFBUser(uid: uid) { (result) in
+						switch result{
+						case .failure(let error):
+							print(error.localizedDescription)
+							
+							//Display Error Alert
+							
+						case .success(let user):
+							self.userInfo.user = user
+						}
+					}
 				}
 			}
 		}
