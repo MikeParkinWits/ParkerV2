@@ -15,7 +15,14 @@ struct ForgotPasswordView: View {
 	var body: some View {
 		NavigationView {
 			VStack {
-				TextField("Enter email address", text: $user.email).autocapitalization(.none).keyboardType(.emailAddress)
+				TextField("Enter email address", text: $user.email)
+					.autocapitalization(.none)
+					.keyboardType(.emailAddress)
+					.padding(10)
+					.background(BlurredBackground(style: .systemThinMaterial).cornerRadius(10)
+					)
+					.padding(.vertical, 5)
+				
 				Button(action: {
 					// Reset Password action
 					
@@ -29,29 +36,51 @@ struct ForgotPasswordView: View {
 						self.showAlert = true
 					}
 				}) {
-					Text("Reset")
-						.frame(width: 200)
+					Text("Request Password Reset")
+					
 						.padding(.vertical, 15)
-						.background(Color.green)
-						.cornerRadius(8)
+						.frame(maxWidth: .infinity, maxHeight: (UIScreen.main.bounds.size.height*0.06))                        .background(Color.blue)
+						.cornerRadius(12.5)
 						.foregroundColor(.white)
+						.fontWeight(.bold)
+					
+					//						.frame(width: 200)
+					//						.padding(.vertical, 15)
+					//						.background(Color.green)
+					//						.cornerRadius(8)
+					//						.foregroundColor(.white)
 						.opacity(user.isEmailValid(_email: user.email) ? 1 : 0.75)
 				}
 				.disabled(!user.isEmailValid(_email: user.email))
+				.padding(.top, 7.5)
+				
 				Spacer()
-			}.padding(.top)
-				.frame(width: 300)
-				.textFieldStyle(RoundedBorderTextFieldStyle())
-				.navigationBarTitle("Request a password reset", displayMode: .inline)
-				.navigationBarItems(trailing: Button("Dismiss") {
+			}
+			.padding(.horizontal)
+			.padding(.top, 7.5)
+			//				.frame(width: 300)
+			//				.textFieldStyle(RoundedBorderTextFieldStyle())
+			.navigationBarTitle("Reset Password", displayMode: .inline)
+			.navigationBarItems(trailing:
+									
+									Button {
+				self.presentationMode.wrappedValue.dismiss()
+			} label: {
+				Image(systemName: "xmark.circle.fill")
+					.resizable()
+					.scaledToFit()
+					.frame(width: 25, height: 25)
+			}
+				.buttonStyle(.plain)
+				.foregroundColor(.secondary)
+								
+			)
+			.alert(isPresented: $showAlert){
+				Alert(title: Text("Password Reset"),
+					  message: Text(self.errString ?? "Success. A reset email has been sent"), dismissButton: .default(Text("OK")){
 					self.presentationMode.wrappedValue.dismiss()
 				})
-				.alert(isPresented: $showAlert){
-					Alert(title: Text("Password Reset"),
-						  message: Text(self.errString ?? "Success. A reset email has been sent"), dismissButton: .default(Text("OK")){
-						self.presentationMode.wrappedValue.dismiss()
-					})
-				}
+			}
 		}
 	}
 	

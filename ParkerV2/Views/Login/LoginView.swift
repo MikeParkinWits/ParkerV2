@@ -17,17 +17,23 @@ struct LoginView: View {
 	@State private var action: Action?
 	
     var body: some View {
-		VStack{
-			SignInWithEmailView(showSheet: $showSheet, action: $action)
-			Spacer()
-		}
-			.sheet(isPresented: $showSheet) { [action] in
-			if action == .signUp {
-			   SignUpView()
-			  }  else  {
-				ForgotPasswordView()
-			  }
+		NavigationView {
+			VStack{
+				
+					SignInWithEmailView(showSheet: $showSheet, action: $action)
+					Spacer()
+				
 			}
+			
+			.navigationTitle(Text("Login"))
+				.sheet(isPresented: $showSheet) { [action] in
+				if action == .signUp {
+				   SignUpView()
+				  }  else  {
+					ForgotPasswordView()
+				  }
+			}
+		}
 
     }
 }

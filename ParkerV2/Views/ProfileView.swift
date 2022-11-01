@@ -140,9 +140,9 @@ struct ProfileView: View {
 							}
 							
 						}
-//					header: {
-//							Text("Car Details")
-//						}
+						//					header: {
+						//							Text("Car Details")
+						//						}
 						
 					}
 					
@@ -157,11 +157,11 @@ struct ProfileView: View {
 								// activate theme!
 							}
 						}
-//						header: {
-//							Text("User Information")
-//						}
+						//						header: {
+						//							Text("User Information")
+						//						}
 					}
-
+					
 					
 				}
 			header: {
@@ -170,7 +170,7 @@ struct ProfileView: View {
 			footer: {
 				Text("Update all of your \(selectedColor.lowercased()) information")
 			}
-
+				
 				Section {
 					Button {
 						showingSheet.toggle()
@@ -183,10 +183,10 @@ struct ProfileView: View {
 					
 				}  header: {
 					Text("About")
-				   }
-			footer: {
-					Text("Learn more about the app and projects")
 				}
+			footer: {
+				Text("Learn more about the app and projects")
+			}
 			}
 			
 			.navigationTitle("Profile")
@@ -195,7 +195,7 @@ struct ProfileView: View {
 					Button {
 						//Logout Action Here
 						
-//						self.userInfo.isUserAuthenticated = .signedOut
+						//						self.userInfo.isUserAuthenticated = .signedOut
 						
 						FBAuth.logout{(result) in
 							print("Logged Out")
@@ -203,7 +203,7 @@ struct ProfileView: View {
 					} label: {
 						Text("Sign Out")
 					}
-
+					
 				}
 			}
 		}
@@ -218,43 +218,38 @@ struct ProfileView_Previews: PreviewProvider {
 
 struct SheetView: View {
 	@Environment(\.dismiss) var dismiss
-
+	
 	var body: some View {
-		VStack(alignment: .leading, spacing: 5.0) {
-			HStack {
-					Text("About")
-						.font(.largeTitle)
-					.fontWeight(.bold)
+		NavigationView{
+			VStack(alignment: .leading, spacing: 5.0) {
+				HStack {
+					
+				}
+				.padding(.vertical)
+				
+				AboutQuestionCell(asking: "Who Created parker?", answer: "Parker was created for ")
+				
+				AboutQuestionCell(asking: "Why was Parker Created?", answer: "Parker was created for ")
+				
+				AboutQuestionCell(asking: "How Does Parker Work?", answer: "Parker was created for ")
 				
 				Spacer()
 				
-				Button {
-					dismiss()
-				} label: {
-					Image(systemName: "xmark.circle.fill")
-						.resizable()
-						.scaledToFit()
-						.frame(width: 25, height: 25)
-				}
+			}
+			.navigationBarTitle("Reset Password", displayMode: .inline)
+			.navigationBarItems(trailing:
+									Button {
+				dismiss()
+			} label: {
+				Image(systemName: "xmark.circle.fill")
+					.resizable()
+					.scaledToFit()
+					.frame(width: 25, height: 25)
+			}
 				.buttonStyle(.plain)
 				.foregroundColor(.secondary)
-				
-			}
-			.padding(.vertical)
-			
-			AboutQuestionCell(asking: "Who Created parker?", answer: "Parker was created for ")
-			
-			AboutQuestionCell(asking: "Why was Parker Created?", answer: "Parker was created for ")
-			
-			AboutQuestionCell(asking: "How Does Parker Work?", answer: "Parker was created for ")
-
-			
-
-			
-			Spacer()
-
-		}
-		.padding(.horizontal)
+			)
+		}				
 	}
 }
 

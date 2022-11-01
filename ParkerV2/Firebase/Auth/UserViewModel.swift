@@ -10,6 +10,7 @@ struct UserViewModel {
     var email: String = ""
     var password: String = ""
     var fullname: String = ""
+	var lastName: String = ""
     var confirmPassword: String = ""
     
     // MARK: - Validation Checks
@@ -57,11 +58,15 @@ struct UserViewModel {
     
     // MARK: - Validation Error Strings
     var validNameText: String {
-        if !isEmpty(_field: fullname) {
+        if !isEmpty(_field: fullname) && !isEmpty(_field: lastName) {
             return ""
-        } else {
-            return "Enter your full name"
         }
+		else if !isEmpty(_field: fullname) && isEmpty(_field: lastName)
+		{
+            return "Enter your full name"
+		} else{
+			return ""
+		}
     }
     
     
