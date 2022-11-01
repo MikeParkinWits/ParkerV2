@@ -10,14 +10,16 @@ struct FBUser {
     let name: String
     let email: String
 	let lastName: String
+	let carMake: String
     
     // App Specific properties can be added here
     
-	init(uid: String, name: String, email: String, lastName: String) {
+	init(uid: String, name: String, email: String, lastName: String, carMake: String) {
         self.uid = uid
         self.name = name
         self.email = email
 		self.lastName = lastName
+		self.carMake = carMake
     }
 
 }
@@ -28,6 +30,7 @@ extension FBUser {
         let name = documentData[FBKeys.User.name] as? String ?? ""
         let email = documentData[FBKeys.User.email] as? String ?? ""
 		let lastName = documentData[FBKeys.User.lastName] as? String ?? ""
+		let carMake = documentData[FBKeys.User.carMake] as? String ?? ""
         
         // Make sure you also initialize any app specific properties if you have them
 
@@ -35,12 +38,13 @@ extension FBUser {
         self.init(uid: uid,
                   name: name,
                   email: email,
-				  lastName: lastName
+				  lastName: lastName,
+				  carMake: carMake
                   // Dont forget any app specific ones here too
         )
     }
     
-	static func dataDict(uid: String, name: String, email: String, lastName: String) -> [String: Any] {
+	static func dataDict(uid: String, name: String, email: String, lastName: String, carMake: String) -> [String: Any] {
         var data: [String: Any]
         
         // If name is not "" this must be a new entry so add all first time data
@@ -49,7 +53,8 @@ extension FBUser {
                 FBKeys.User.uid: uid,
                 FBKeys.User.name: name,
                 FBKeys.User.email: email,
-				FBKeys.User.lastName: lastName
+				FBKeys.User.lastName: lastName,
+				FBKeys.User.carMake: carMake
                 // Again, include any app specific properties that you want stored on creation
             ]
         } else {

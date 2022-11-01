@@ -90,6 +90,7 @@ struct FBAuth {
 		
 		var name = ""
 		var lastName = ""
+		var carMake = ""
 		let fullName = signInWithAppleResult.appleIDCredential.fullName
 		// Extract all three components
 		let givenName = fullName?.givenName ?? ""
@@ -112,7 +113,8 @@ struct FBAuth {
 		let data = FBUser.dataDict(uid: uid,
 								   name: name,
 								   email: email,
-								   lastName: lastName)
+								   lastName: lastName,
+								   carMake: carMake)
 		
 		// Now create or merge the User in Firestore DB
 		FBFirestore.mergeFBUser(data, uid: uid) { (result) in
@@ -168,6 +170,7 @@ struct FBAuth {
 						   name: String,
 						   password:String,
 						   lastName: String,
+						   carMake: String,
 						   completionHandler:@escaping (Result<Bool,Error>) -> Void) {
 		Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
 			if let err = error {
@@ -181,7 +184,8 @@ struct FBAuth {
 			let data = FBUser.dataDict(uid: authResult!.user.uid,
 									   name: name,
 									   email: authResult!.user.email!,
-									   lastName: lastName)
+									   lastName: lastName,
+									   carMake: carMake)
 			
 			FBFirestore.mergeFBUser(data, uid: authResult!.user.uid) { (result) in
 				completionHandler(result)
