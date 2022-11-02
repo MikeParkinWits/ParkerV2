@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A110DDE2912600800AAB5C5 /* NotParkedDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A110DDD2912600700AAB5C5 /* NotParkedDrawer.swift */; };
 		6A2D72AE290035FC00C25F71 /* ParkerV2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2D72AD290035FC00C25F71 /* ParkerV2App.swift */; };
 		6A2D72B0290035FC00C25F71 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2D72AF290035FC00C25F71 /* HomeView.swift */; };
 		6A2D72B22900360B00C25F71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A2D72B12900360B00C25F71 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A110DDD2912600700AAB5C5 /* NotParkedDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotParkedDrawer.swift; sourceTree = "<group>"; };
 		6A2D72AA290035FC00C25F71 /* ParkerV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParkerV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A2D72AD290035FC00C25F71 /* ParkerV2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkerV2App.swift; sourceTree = "<group>"; };
 		6A2D72AF290035FC00C25F71 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -131,7 +133,7 @@
 				6AB56A4A290E3ED1001A826B /* Components */,
 				6AB56A49290E2BD7001A826B /* Extensions */,
 				6ABA7279290BDE700027E954 /* Models */,
-				6A2D72BB290036A600C25F71 /* Views */,
+				6A2D72BB290036A600C25F71 /* Main Views */,
 				6A2D72AD290035FC00C25F71 /* ParkerV2App.swift */,
 				6A3280DA2911396D009AD7B6 /* GoogleService-Info.plist */,
 				6A2D72BC29008B7800C25F71 /* UIImage+Extension.swift */,
@@ -149,10 +151,10 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		6A2D72BB290036A600C25F71 /* Views */ = {
+		6A2D72BB290036A600C25F71 /* Main Views */ = {
 			isa = PBXGroup;
 			children = (
-				6A3F954E29115B0F001FFDC6 /* Login */,
+				6A3280DE2911537F009AD7B6 /* LoginView.swift */,
 				6AB56A4B290E4106001A826B /* AllLocationsView.swift */,
 				6A2D72AF290035FC00C25F71 /* HomeView.swift */,
 				6A58A7B12901453E001F4AE8 /* MainView.swift */,
@@ -161,7 +163,7 @@
 				6AB56A53290ED0E1001A826B /* ParkingHistoryDetailView.swift */,
 				6AB0B5D4291016AF009DDF12 /* ProfileView.swift */,
 			);
-			path = Views;
+			path = "Main Views";
 			sourceTree = "<group>";
 		};
 		6A32281B290FBF9100A43595 /* Map */ = {
@@ -204,21 +206,11 @@
 			path = Firestore;
 			sourceTree = "<group>";
 		};
-		6A3F954E29115B0F001FFDC6 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				6A3280DE2911537F009AD7B6 /* LoginView.swift */,
-				6A3F955029115B1D001FFDC6 /* ForgotPasswordView.swift */,
-				6A3F954F29115B1D001FFDC6 /* SignInWithEmailView.swift */,
-				6A3F955129115B1D001FFDC6 /* SignUpView.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
 		6A51493A290FDACC0096D52A /* Drawers */ = {
 			isa = PBXGroup;
 			children = (
 				6A99D03E290FC3280012C665 /* BottomDrawer.swift */,
+				6A110DDD2912600700AAB5C5 /* NotParkedDrawer.swift */,
 			);
 			path = Drawers;
 			sourceTree = "<group>";
@@ -241,6 +233,16 @@
 			path = Cards;
 			sourceTree = "<group>";
 		};
+		6AAC0B6D29123C6E001F5384 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				6A3F955029115B1D001FFDC6 /* ForgotPasswordView.swift */,
+				6A3F954F29115B1D001FFDC6 /* SignInWithEmailView.swift */,
+				6A3F955129115B1D001FFDC6 /* SignUpView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		6AB56A49290E2BD7001A826B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +254,7 @@
 		6AB56A4A290E3ED1001A826B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				6AAC0B6D29123C6E001F5384 /* Login */,
 				6A51493A290FDACC0096D52A /* Drawers */,
 				6A99D03B290FC1FF0012C665 /* Background */,
 				6A32281B290FBF9100A43595 /* Map */,
@@ -387,6 +390,7 @@
 				6A3280DD2911399A009AD7B6 /* UserInfo.swift in Sources */,
 				6A3280DF2911537F009AD7B6 /* LoginView.swift in Sources */,
 				6A2D72AE290035FC00C25F71 /* ParkerV2App.swift in Sources */,
+				6A110DDE2912600800AAB5C5 /* NotParkedDrawer.swift in Sources */,
 				6A3F956229116415001FFDC6 /* FBKeys.swift in Sources */,
 				6AAC0B6C29122D67001F5384 /* SupportEmail.swift in Sources */,
 			);

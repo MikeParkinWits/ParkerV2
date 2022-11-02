@@ -133,7 +133,18 @@ struct ProfileView: View {
 								.font(.footnote)
 								.fontWeight(.regular)
 								.foregroundColor(.secondary)
+							
+							Spacer()
+							
+							Text("Rating: 100%")
+								.font(.footnote)
+								.fontWeight(.regular)
+								.foregroundColor(.secondary)
+								.frame(maxWidth: .infinity, alignment: .leading)
+								.lineLimit(1)
+								.minimumScaleFactor(0.8)
 						}
+						.frame(height: 75)
 					}
 					.padding(.vertical, 2)
 				}
@@ -149,7 +160,7 @@ struct ProfileView: View {
 					if (selectedColor == "Vehicle") {
 						Section {
 							//							TextField(carMake != "" ? carMake : "Car Make", text: $carMake)
-							TextField(carLicensePlate != "" ? carLicensePlate : "License Plate Number", text: $carLicensePlate)
+							TextField("\(userInfo.user.carMake)", text: $carLicensePlate)
 							
 							Button("Save changes") {
 								// activate theme!
@@ -162,7 +173,7 @@ struct ProfileView: View {
 									
 									UpdateDatabase(userID: userID, newValue: carLicensePlate, variableToUpdate: "carMake")
 									
-									userInfo.user = .init(uid: userInfo.user.uid, name: userInfo.user.name, email: userInfo.user.email, lastName: userInfo.user.lastName, carMake: carLicensePlate.uppercased())
+									userInfo.user = .init(uid: userInfo.user.uid, name: userInfo.user.name, email: userInfo.user.email, lastName: userInfo.user.lastName, carMake: carLicensePlate.uppercased(), isParked: userInfo.user.isParked)
 									
 									self.carLicensePlate = ""
 									
@@ -188,9 +199,9 @@ struct ProfileView: View {
 								
 					{
 						Section {
-							TextField("First Name", text: $firstName)
-							TextField(lastName != "" ? lastName : "Last Name", text: $lastName)
-							TextField(userEmail != "" ? userEmail : "Email", text: $userEmail)
+							TextField("\(userInfo.user.name)", text: $firstName)
+							TextField("\(userInfo.user.lastName)", text: $lastName)
+							TextField("\(userInfo.user.email)", text: $userEmail)
 							Button("Save changes") {
 								// activate theme!
 								
@@ -208,7 +219,7 @@ struct ProfileView: View {
 									
 									UpdateDatabase(userID: userID, newValue: lastName, variableToUpdate: "lastName")
 									
-									userInfo.user = .init(uid: userInfo.user.uid, name: firstName, email: userEmail, lastName: lastName, carMake: userInfo.user.carMake)
+									userInfo.user = .init(uid: userInfo.user.uid, name: firstName, email: userEmail, lastName: lastName, carMake: userInfo.user.carMake, isParked: userInfo.user.isParked)
 									
 									self.firstName = ""
 									self.lastName = ""
@@ -257,7 +268,7 @@ struct ProfileView: View {
 					Text("About")
 				}
 			footer: {
-				Text("Learn more about the app and projects")
+				Text("Learn more about the app and project")
 			}
 			}
 			

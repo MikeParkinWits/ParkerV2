@@ -62,7 +62,7 @@ struct UserViewModel {
 	// MARK: - Validation Error Strings
 	
 	var validNameText: String {
-		if !isEmpty(_field: fullname) && !isEmpty(_field: lastName)
+		if isEmpty(_field: fullname) && isEmpty(_field: lastName)
 		{
 			return "Enter your full name"
 		}

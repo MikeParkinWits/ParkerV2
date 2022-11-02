@@ -69,7 +69,11 @@ struct HomeView: View {
 						Spacer()
 					}
 					//UPDATE THIS WITH DATA
-					BottomDrawer(parkingLocation: ParkingAreaList.allParkingAreas.first!)
+					if (userInfo.user.isParked){
+						BottomDrawer(parkingLocation: ParkingAreaList.allParkingAreas.first!)
+					}else{
+						NotParkedDrawer()
+					}
 				}
 				.onAppear{
 					guard let uid = Auth.auth().currentUser?.uid else{
@@ -97,6 +101,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
 	static var previews: some View {
-		HomeView()
+		HomeView().environmentObject(UserInfo())
 	}
 }

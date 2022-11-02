@@ -11,7 +11,7 @@ struct SignUpView: View {
 	@Environment(\.presentationMode) var presentationMode
 	@State private var showError = false
 	@State private var errorString = ""
-	
+		
 	var body: some View {
 		NavigationView {
 			ScrollView {
@@ -112,6 +112,8 @@ struct SignUpView: View {
 								}
 								
 							}
+							
+							self.presentationMode.wrappedValue.dismiss()
 							
 						}) {
 							Text("Register")

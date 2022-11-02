@@ -17,30 +17,11 @@ struct MainView: View {
 	
 	@EnvironmentObject var userInfo: UserInfo
 	
-	// Splash Screen Animation Variables
-	@State private var animationState: AnimationState = .normal
-	@State private var done: Bool = false
-	func calculate() -> Double {
-		switch animationState {
-		case .compress:
-			return 0.18
-		case .expand:
-			return 10.0
-		case .normal:
-			return 0.2
-		}
-	}
-	
 	init() {
 		UITabBar.appearance().backgroundColor = UIColor.systemBackground
 	}
 	
 	var body: some View {
-		
-		
-		
-		
-		
 			ZStack {
 				
 				Group{
@@ -97,6 +78,22 @@ struct MainView_Previews: PreviewProvider {
 }
 
 struct SplashScreen: View {
+	
+	// Splash Screen Animation Variables
+	@State private var animationState: AnimationState = .normal
+	
+	@State private var done: Bool = false
+	func calculate() -> Double {
+		switch animationState {
+		case .compress:
+			return 0.18
+		case .expand:
+			return 10.0
+		case .normal:
+			return 0.2
+		}
+	}
+	
 	var body: some View {
 		VStack {
 			Image("ParkerSplashScreen_Large")

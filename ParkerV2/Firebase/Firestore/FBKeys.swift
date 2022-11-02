@@ -16,6 +16,7 @@ enum FBKeys {
         static let email = "email"
 		static let lastName = "lastName"
 		static let carMake = "carMake"
+		static let isParked = "isParked"
         
         // Add app specific keys here
     }

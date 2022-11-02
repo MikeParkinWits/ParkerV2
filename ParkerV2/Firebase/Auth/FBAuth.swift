@@ -91,6 +91,7 @@ struct FBAuth {
 		var name = ""
 		var lastName = ""
 		var carMake = ""
+		var isParked = false
 		let fullName = signInWithAppleResult.appleIDCredential.fullName
 		// Extract all three components
 		let givenName = fullName?.givenName ?? ""
@@ -114,7 +115,8 @@ struct FBAuth {
 								   name: name,
 								   email: email,
 								   lastName: lastName,
-								   carMake: carMake)
+								   carMake: carMake,
+								   isParked: isParked)
 		
 		// Now create or merge the User in Firestore DB
 		FBFirestore.mergeFBUser(data, uid: uid) { (result) in
@@ -185,7 +187,8 @@ struct FBAuth {
 									   name: name,
 									   email: authResult!.user.email!,
 									   lastName: lastName,
-									   carMake: carMake)
+									   carMake: carMake,
+									   isParked: false)
 			
 			FBFirestore.mergeFBUser(data, uid: authResult!.user.uid) { (result) in
 				completionHandler(result)
