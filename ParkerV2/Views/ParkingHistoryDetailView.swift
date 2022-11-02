@@ -11,6 +11,11 @@ struct ParkingHistoryDetailView: View {
 	
 	var parkingHistory: ParkingHistory
 	
+	@State private var showingAlert = false
+	
+	@Environment(\.openURL) var openURL
+	var email = SupportEmail(toAddress: "1894979@students.wits.ac.za", subject: "Support Email", messageHeader: "Describe your issue below")
+	
     var body: some View {
 		VStack() {
 			LocationMap(isParkingArea: false, at: nil, at: parkingHistory)
@@ -108,6 +113,7 @@ struct ParkingHistoryDetailView: View {
 			
 			Button{
 				print("Button tapped!")
+				showingAlert = true
 			}label: {
 				Label("Report an Issue", systemImage: "exclamationmark.octagon.fill")
 					.font(.headline)
@@ -116,6 +122,16 @@ struct ParkingHistoryDetailView: View {
 					.foregroundColor(.white)
 					.fontWeight(.bold)
 			}
+			.confirmationDialog("Important message", isPresented: $showingAlert) {
+				Button("Send a Report using Mail") {
+					
+					email.send(openURL: openURL)
+					
+				}
+				
+				Button("Cancel", role: .cancel) { }
+			}
+			
 			.buttonStyle(.borderedProminent)
 			.tint(.red)
 			.padding(.bottom, 20)

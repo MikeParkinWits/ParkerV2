@@ -39,6 +39,7 @@
 		6A9D3896290FBDB200F104F3 /* BlurredBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D3895290FBDB200F104F3 /* BlurredBackground.swift */; };
 		6AA7E75A2900A0DC00D67B13 /* Snap in Frameworks */ = {isa = PBXBuildFile; productRef = 6AA7E7592900A0DC00D67B13 /* Snap */; };
 		6AA7E75D2900A76A00D67B13 /* Drawer in Frameworks */ = {isa = PBXBuildFile; productRef = 6AA7E75C2900A76A00D67B13 /* Drawer */; };
+		6AAC0B6C29122D67001F5384 /* SupportEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC0B6B29122D67001F5384 /* SupportEmail.swift */; };
 		6AB0B5D5291016AF009DDF12 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0B5D4291016AF009DDF12 /* ProfileView.swift */; };
 		6AB56A48290E2AAF001A826B /* View+innerShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB56A47290E2AAF001A826B /* View+innerShadow.swift */; };
 		6AB56A4C290E4106001A826B /* AllLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB56A4B290E4106001A826B /* AllLocationsView.swift */; };
@@ -79,6 +80,7 @@
 		6A99D03C290FC2CC0012C665 /* BigCarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCarouselCard.swift; sourceTree = "<group>"; };
 		6A99D03E290FC3280012C665 /* BottomDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDrawer.swift; sourceTree = "<group>"; };
 		6A9D3895290FBDB200F104F3 /* BlurredBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredBackground.swift; sourceTree = "<group>"; };
+		6AAC0B6B29122D67001F5384 /* SupportEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportEmail.swift; sourceTree = "<group>"; };
 		6AB0B5D4291016AF009DDF12 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		6AB56A47290E2AAF001A826B /* View+innerShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+innerShadow.swift"; sourceTree = "<group>"; };
 		6AB56A4B290E4106001A826B /* AllLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsView.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				6AB56A4F290EB523001A826B /* ParkingHistory.swift */,
 				6ABA727A290BDE930027E954 /* ParkingArea.swift */,
 				6A3280DC2911399A009AD7B6 /* UserInfo.swift */,
+				6AAC0B6B29122D67001F5384 /* SupportEmail.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				6A3280DF2911537F009AD7B6 /* LoginView.swift in Sources */,
 				6A2D72AE290035FC00C25F71 /* ParkerV2App.swift in Sources */,
 				6A3F956229116415001FFDC6 /* FBKeys.swift in Sources */,
+				6AAC0B6C29122D67001F5384 /* SupportEmail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

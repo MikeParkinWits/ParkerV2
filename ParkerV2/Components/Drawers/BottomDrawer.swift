@@ -19,6 +19,11 @@ struct BottomDrawer: View {
 	
 	var parkingLocation: ParkingArea
 	
+	@State private var showingAlert = false
+	
+	@Environment(\.openURL) var openURL
+	var email = SupportEmail(toAddress: "1894979@students.wits.ac.za", subject: "Support Email", messageHeader: "Describe your issue below")
+	
 	var body: some View {
 		Drawer(startingHeight: CGFloat(UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height*0.23))) {
 			ZStack {
@@ -195,6 +200,7 @@ struct BottomDrawer: View {
 							
 							Button{
 								print("Button tapped!")
+								showingAlert = true
 							}label: {
 								Label("Report an Issue", systemImage: "exclamationmark.octagon.fill")
 									.font(.headline)
@@ -203,10 +209,23 @@ struct BottomDrawer: View {
 									.foregroundColor(.white)
 									.fontWeight(.bold)
 							}
+							.confirmationDialog("Important message", isPresented: $showingAlert) {
+								Button("Send a Report using Mail") {
+									
+									email.send(openURL: openURL)
+									
+								}
+								
+								Button("Cancel", role: .cancel) { }
+							}
+						
 							.buttonStyle(.borderedProminent)
 							.tint(.red)
 							.padding(.vertical, 3)
+						
+						
 					}
+					
 					
 //					Divider()
 ////						.padding(.vertical, 10)
