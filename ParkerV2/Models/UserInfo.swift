@@ -21,7 +21,7 @@ class UserInfo: ObservableObject {
 	func configureFirebaseStateDidChange(){
 		
 		authStateDidChangeListenerHangle = Auth.auth().addStateDidChangeListener({ (_, user) in
-			guard let _ = user else {
+			guard var _ = user else {
 				self.isUserAuthenticated = .signedOut
 				return
 			}
