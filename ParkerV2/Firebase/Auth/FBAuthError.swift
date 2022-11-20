@@ -15,7 +15,7 @@ enum SignInWithAppleAuthError: Error {
 }
 
 extension SignInWithAppleAuthError: LocalizedError {
-    // This will provide me with a specific localized description for the SignInWithAppleAuthError
+    // This provides a specific localized description for the SignInWithAppleAuthError
     var errorDescription: String? {
         switch self {
         case .noAuthDataResult:

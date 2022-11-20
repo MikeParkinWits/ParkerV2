@@ -13,6 +13,7 @@ struct UserViewModel {
 	var lastName: String = ""
 	var carLicense: String = ""
 	var confirmPassword: String = ""
+	var isParked: Bool = false
 	
 	// MARK: - Validation Checks
 	

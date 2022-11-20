@@ -93,6 +93,7 @@ struct FBAuth {
 		var carMake = ""
 		var isParked = false
 		let fullName = signInWithAppleResult.appleIDCredential.fullName
+		
 		// Extract all three components
 		let givenName = fullName?.givenName ?? ""
 		let middleName = fullName?.middleName ?? ""
@@ -173,6 +174,7 @@ struct FBAuth {
 						   password:String,
 						   lastName: String,
 						   carMake: String,
+						   isParked: Bool,
 						   completionHandler:@escaping (Result<Bool,Error>) -> Void) {
 		Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
 			if let err = error {
@@ -188,7 +190,7 @@ struct FBAuth {
 									   email: authResult!.user.email!,
 									   lastName: lastName,
 									   carMake: carMake,
-									   isParked: false)
+									   isParked: isParked)
 			
 			FBFirestore.mergeFBUser(data, uid: authResult!.user.uid) { (result) in
 				completionHandler(result)

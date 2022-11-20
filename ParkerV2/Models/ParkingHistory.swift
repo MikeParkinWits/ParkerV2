@@ -32,7 +32,7 @@ struct ParkingHistoryList{
 	static let AllParkingHistory = [
 		
 		ParkingHistory(id: 1, image: "test-image-two", imageSmall: "test-image-two-square", name: "44 Stanleyy", location: "Braam", locationLat: 1, locationLong: 1, date: "22/10/2022", price: 8),
-		ParkingHistory(id: 2, image: "test-image-two", imageSmall: "test-image-two-square", name: "44 Stanleyy", location: "Braam", locationLat: 1, locationLong: 1, date: "22/10/2022", price: 8)
+		ParkingHistory(id: 2, image: "test-image-two", imageSmall: "test-image-two-square", name: "44 Stanley", location: "Braam", locationLat: 1, locationLong: 1, date: "22/10/2022", price: 8)
 		
 		
 	]
