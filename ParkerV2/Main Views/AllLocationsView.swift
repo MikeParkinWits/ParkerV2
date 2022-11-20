@@ -17,6 +17,8 @@ struct AllLocationsView: View {
 	
 	@State var searchLocations = ""
 	
+	@StateObject private var viewModel = ParkingAreasViewModel()
+	
 	var body: some View {
 		
 //		ScrollView(.vertical, showsIndicators: false) {
@@ -37,6 +39,10 @@ struct AllLocationsView: View {
 						//				.searchCompletion("Chicken Salad")
 						//		}
 			)
+		
+			.onAppear(){
+				self.viewModel.fetchData()
+			}
 //		}
 		
 		
@@ -107,13 +113,14 @@ struct AllLocationsView: View {
 	var filteredLocations: [ParkingArea] {
 		if searchLocations.isEmpty
 		{
-			return locations
+			return viewModel.parkingAreas
 		}
 		else
 		{
-			return locations.filter({$0.name.localizedCaseInsensitiveContains(searchLocations) || $0.location.localizedCaseInsensitiveContains(searchLocations)})
+			return viewModel.parkingAreas.filter({$0.name.localizedCaseInsensitiveContains(searchLocations) || $0.location.localizedCaseInsensitiveContains(searchLocations)})
 		}
 	}
+	
 }
 
 // Content Preview

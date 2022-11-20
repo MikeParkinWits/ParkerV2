@@ -11,6 +11,7 @@ import SwiftUI
 import Drawer
 import ParallaxSwiftUI
 import Firebase
+import FirebaseFirestoreSwift
 
 // Main View - Home View
 
@@ -20,10 +21,23 @@ struct HomeView: View {
 	
 	var locations: [ParkingArea] = ParkingAreaList.allParkingAreas
 	
+
+		private var db = Firestore.firestore()
+		
+//		@FirestoreQuery(
+//			collectionPath: "parkingAreas",
+//			predicates: []
+//		) var parkingAreas: [ParkingArea1]
+//
+//
+	
+	@StateObject private var viewModel = ParkingAreasViewModel()
+	
 	var body: some View {
 		VStack() {
 			NavigationView{
 				ZStack{
+					
 					VStack(alignment: .leading){
 						
 						Text("Good Afternoon")
@@ -55,19 +69,24 @@ struct HomeView: View {
 						}
 						.padding(.horizontal)
 						
+
+						
 						ScrollView(.horizontal, showsIndicators: false) {
 							HStack(spacing: 20) {
-								ForEach(locations.dropLast(locations.count - 5), id: \.id){ locationIndex in
+								ForEach(viewModel.parkingAreas){ locationIndex in
 									
 									BigCarouselCard(for: locationIndex)
-									
+//									Text("\(locationIndex.prices)" as String)
 								}
 							}
 							.padding(.horizontal)
 						}
+					
 						
 						Spacer()
 					}
+
+					
 					//UPDATE THIS WITH DATA
 					if (userInfo.user.isParked){
 						BottomDrawer(parkingLocation: ParkingAreaList.allParkingAreas.first!)
@@ -75,11 +94,12 @@ struct HomeView: View {
 						NotParkedDrawer()
 					}
 				}
-				.onAppear{
+				.onAppear(){
 					guard let uid = Auth.auth().currentUser?.uid else{
 						return
-					}
-					
+					}					
+							self.viewModel.fetchData()
+										
 					FBFirestore.retrieveFBUser(uid: uid) { (result) in
 						switch result{
 						case .failure(let error):
