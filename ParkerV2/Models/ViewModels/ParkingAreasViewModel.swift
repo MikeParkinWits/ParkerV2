@@ -13,6 +13,7 @@ import FirebaseStorage
 
 class ParkingAreasViewModel: ObservableObject{
 	@Published var parkingAreas = [ParkingArea]()
+	@Published var unwrapped = false
 	
 	private var db = Firestore.firestore()
 	
@@ -37,13 +38,18 @@ class ParkingAreasViewModel: ObservableObject{
 				
 				var pricesArray = [Prices]()
 				if let prices = prices {
+				var count: Int = 0
 					for price in prices{
 						let parkingPrice = price.value["price"] as? String ?? ""
 						let parkingTime = price.value["time"] as? String ?? ""
 						let parkingInt = price.value["id"] as? Int ?? 1
+						count += 1
+						
+						if (count == prices.count){
+							self.unwrapped = true
+						}
 						
 						pricesArray.append(Prices(id: parkingInt, time: parkingTime, price: parkingPrice))
-						
 						
 					}
 				}
@@ -54,6 +60,7 @@ class ParkingAreasViewModel: ObservableObject{
 					   
 				pricesArray.sort { $0.id < $1.id }
 				
+
 				return ParkingArea(image: image, imageSmall: imageSmall, name: name, location: location, locationLat: locationLat, locationLong: locationLong, prices: pricesArray)
 			}
 			

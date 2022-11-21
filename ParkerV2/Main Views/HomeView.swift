@@ -89,7 +89,12 @@ struct HomeView: View {
 					
 					//UPDATE THIS WITH DATA
 					if (userInfo.user.isParked){
-						BottomDrawer(parkingLocation: ParkingAreasViewModel().parkingAreas.first!)
+//						if(viewModel.unwrapped){
+							BottomDrawer(parkingLocation: viewModel.parkingAreas.first!)
+//						}
+							
+//						Text("\(viewModel.unwrapped)" as String)
+
 					}else{
 						NotParkedDrawer()
 					}
@@ -99,6 +104,8 @@ struct HomeView: View {
 						return
 					}					
 							self.viewModel.fetchData()
+					
+					ParkingAreasViewModel().unwrapped = true
 										
 					FBFirestore.retrieveFBUser(uid: uid) { (result) in
 						switch result{

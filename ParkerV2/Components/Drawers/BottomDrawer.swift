@@ -155,8 +155,8 @@ struct BottomDrawer: View {
 //												.padding(.bottom, 1)
 						
 						NavigationLink {
-							ParkingAreaDetailView(parkingLocation: ParkingAreasViewModel().parkingAreas.first!)
-								.navigationBarTitle(ParkingAreasViewModel().parkingAreas.first!.name)
+							ParkingAreaDetailView(parkingLocation: parkingLocation)
+								.navigationBarTitle(parkingLocation.name)
 						} label: {
 							
 							VStack(alignment: .leading, spacing: 5){

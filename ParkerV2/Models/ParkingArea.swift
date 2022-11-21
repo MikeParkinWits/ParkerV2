@@ -12,15 +12,15 @@ import FirebaseFirestoreSwift
 import FirebaseStorage
 
 struct ParkingArea: Identifiable{
-	let id: String = UUID().uuidString
+	var id: String = UUID().uuidString
 	
-	let image: String
-	let imageSmall: String
-	let name: String
-	let location: String
-	let locationLat: Double
-	let locationLong: Double
-	let prices: [Prices]
+	var image: String = ""
+	var imageSmall: String = ""
+	var name: String = ""
+	var location: String = ""
+	var locationLat: Double = 0.0
+	var locationLong: Double = 0.0
+	var prices: [Prices] = [Prices(id: 1, time: "", price: "")]
 }
 
 struct Prices: Identifiable{
