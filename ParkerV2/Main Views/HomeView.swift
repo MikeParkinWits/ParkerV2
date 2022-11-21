@@ -19,7 +19,7 @@ struct HomeView: View {
 	
 	@EnvironmentObject var userInfo: UserInfo
 	
-	var locations: [ParkingArea] = ParkingAreaList.allParkingAreas
+//	var locations: [ParkingArea] = ParkingAreaList.allParkingAreas
 	
 
 		private var db = Firestore.firestore()
@@ -89,7 +89,7 @@ struct HomeView: View {
 					
 					//UPDATE THIS WITH DATA
 					if (userInfo.user.isParked){
-						BottomDrawer(parkingLocation: ParkingAreaList.allParkingAreas.first!)
+						BottomDrawer(parkingLocation: ParkingAreasViewModel().parkingAreas.first!)
 					}else{
 						NotParkedDrawer()
 					}

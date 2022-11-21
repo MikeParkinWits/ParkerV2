@@ -28,6 +28,6 @@ struct ParkingAreaMapSubHeadline: View{
 
 struct ParkingAreaMapSubHeadline_Previews: PreviewProvider {
 	static var previews: some View {
-		ParkingAreaMapSubHeadline(parkingLocation: ParkingAreaList.allParkingAreas.first!)
+		ParkingAreaMapSubHeadline(parkingLocation: ParkingAreasViewModel().parkingAreas.first!)
 	}
 }

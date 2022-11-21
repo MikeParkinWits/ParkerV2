@@ -7,13 +7,15 @@
 
 import SwiftUI
 
+import FirebaseStorage
+
 struct BigCarouselCard: View {
 	
 	var location: ParkingArea
 	
 	init(for location: ParkingArea){
 		self.location = location
-	}
+	}		
 	
 	var body: some View {
 		
@@ -65,6 +67,6 @@ struct BigCarouselCard: View {
 
 struct BigCarouselCard_Previews: PreviewProvider {
 	static var previews: some View {
-		BigCarouselCard(for: ParkingAreaList.allParkingAreas.first!)
+		BigCarouselCard(for: ParkingAreasViewModel().parkingAreas.first!)
 	}
 }

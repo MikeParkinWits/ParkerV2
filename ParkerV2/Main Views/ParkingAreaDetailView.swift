@@ -53,6 +53,6 @@ struct ParkingAreaDetailView: View {
 
 struct LocationDetailView_Previews: PreviewProvider {
 	static var previews: some View {
-		ParkingAreaDetailView(parkingLocation: ParkingAreaList.allParkingAreas.first!)
+		ParkingAreaDetailView(parkingLocation: ParkingAreasViewModel().parkingAreas.first!)
 	}
 }

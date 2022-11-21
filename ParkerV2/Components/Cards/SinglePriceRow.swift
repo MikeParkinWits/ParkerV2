@@ -47,6 +47,6 @@ struct SinglePriceRow: View{
 
 struct SinglePriceRow_Previews: PreviewProvider {
 	static var previews: some View {
-		SinglePriceRow(at: ParkingAreaList.allParkingAreas.first!, on: 1)
+		SinglePriceRow(at: ParkingAreasViewModel().parkingAreas.first!, on: 1)
 	}
 }

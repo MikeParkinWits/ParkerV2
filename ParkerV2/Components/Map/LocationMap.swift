@@ -103,7 +103,7 @@ struct LocationAnnotations: Identifiable {
 
 struct LocationMapLocationList_Previews: PreviewProvider {
 	static var previews: some View {
-		LocationMap(isParkingArea: true, at: ParkingAreaList.allParkingAreas.first!, at: nil)
+		LocationMap(isParkingArea: true, at: ParkingAreasViewModel().parkingAreas.first!, at: nil)
 	}
 }
 

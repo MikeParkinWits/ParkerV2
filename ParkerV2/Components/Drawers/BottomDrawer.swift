@@ -155,8 +155,8 @@ struct BottomDrawer: View {
 //												.padding(.bottom, 1)
 						
 						NavigationLink {
-							ParkingAreaDetailView(parkingLocation: ParkingAreaList.allParkingAreas.first!)
-								.navigationBarTitle(ParkingAreaList.allParkingAreas.first!.name)
+							ParkingAreaDetailView(parkingLocation: ParkingAreasViewModel().parkingAreas.first!)
+								.navigationBarTitle(ParkingAreasViewModel().parkingAreas.first!.name)
 						} label: {
 							
 							VStack(alignment: .leading, spacing: 5){
@@ -268,6 +268,6 @@ struct BottomDrawer: View {
 
 struct BottomDrawer_Previews: PreviewProvider {
     static var previews: some View {
-        BottomDrawer(parkingLocation: ParkingAreaList.allParkingAreas.first!)
+        BottomDrawer(parkingLocation: ParkingAreasViewModel().parkingAreas.first!)
     }
 }

@@ -13,7 +13,7 @@ import SwiftUI
 
 struct AllLocationsView: View {
 	
-	var locations: [ParkingArea] = ParkingAreaList.allParkingAreas
+//	var locations: [ParkingArea] = ParkingAreaList.allParkingAreas
 	
 	@State var searchLocations = ""
 	

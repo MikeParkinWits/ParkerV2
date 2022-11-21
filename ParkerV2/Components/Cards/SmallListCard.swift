@@ -167,7 +167,7 @@ struct SmallListCard: View {
 struct SmallListCardLocationList_Previews: PreviewProvider {
 	static var previews: some View {
 		NavigationView{
-			SmallListCard(isParkingCard: true, containingArea: ParkingAreaList.allParkingAreas.first!, containingHistory: nil)
+			SmallListCard(isParkingCard: true, containingArea: ParkingAreasViewModel().parkingAreas.first!, containingHistory: nil)
 		}
 
 	}
