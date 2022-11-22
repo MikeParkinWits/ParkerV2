@@ -89,9 +89,9 @@ struct HomeView: View {
 					
 					//UPDATE THIS WITH DATA
 					if (userInfo.user.isParked){
-//						if(viewModel.unwrapped){
+						if(viewModel.unwrapped){
 							BottomDrawer(parkingLocation: viewModel.parkingAreas.first!)
-//						}
+						}
 							
 //						Text("\(viewModel.unwrapped)" as String)
 

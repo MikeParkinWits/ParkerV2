@@ -15,6 +15,9 @@ struct LocationMap: View {
 	var parkingLocation: ParkingArea?
 	var parkingHistory: ParkingHistory?
 	
+	
+	@StateObject private var viewModel = ParkingAreasViewModel()
+	
 	@State var region: MKCoordinateRegion
 	
 	@State var places: [LocationAnnotations]

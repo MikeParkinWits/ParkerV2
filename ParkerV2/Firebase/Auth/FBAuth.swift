@@ -24,6 +24,8 @@ struct FBAuth {
 		}
 		)}
 	
+	
+	
 	static func authenticate(withEmail email :String,
 							 password:String,
 							 completionHandler:@escaping (Result<Bool, EmailAuthError>) -> ()) {
@@ -93,6 +95,7 @@ struct FBAuth {
 		var carMake = ""
 		var isParked = false
 		let fullName = signInWithAppleResult.appleIDCredential.fullName
+		var profileImageUrl = ""
 		
 		// Extract all three components
 		let givenName = fullName?.givenName ?? ""
@@ -117,7 +120,8 @@ struct FBAuth {
 								   email: email,
 								   lastName: lastName,
 								   carMake: carMake,
-								   isParked: isParked)
+								   isParked: isParked,
+								   profileImageUrl: profileImageUrl)
 		
 		// Now create or merge the User in Firestore DB
 		FBFirestore.mergeFBUser(data, uid: uid) { (result) in
@@ -175,6 +179,7 @@ struct FBAuth {
 						   lastName: String,
 						   carMake: String,
 						   isParked: Bool,
+						   profileImageUrl: String,
 						   completionHandler:@escaping (Result<Bool,Error>) -> Void) {
 		Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
 			if let err = error {
@@ -190,7 +195,8 @@ struct FBAuth {
 									   email: authResult!.user.email!,
 									   lastName: lastName,
 									   carMake: carMake,
-									   isParked: isParked)
+									   isParked: isParked,
+									   profileImageUrl: profileImageUrl)
 			
 			FBFirestore.mergeFBUser(data, uid: authResult!.user.uid) { (result) in
 				completionHandler(result)

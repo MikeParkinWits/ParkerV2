@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 import Firebase
+import Kingfisher
 
 struct ProfileView: View {
 	
@@ -106,19 +107,33 @@ struct ProfileView: View {
 				
 				Section{
 					HStack(alignment: .top, spacing: 10.0){
-						Image(systemName: "person.crop.circle")
-							.resizable()
-							.scaledToFit()
-							.padding(5)
-							.cornerRadius(10)
-							.frame(width: 80, height: 80)
-							.foregroundColor(.secondary)
-						//							.background(BlurredBackground(style: .systemThinMaterial)
-						//								.cornerRadius(10)
-						//								)
-							.background(Circle().fill(.white)
-								.shadow(color: Color("shadowColor").opacity(0.5), radius: 4)
-							)
+						
+						if (userInfo.user.profileImageUrl == ""){
+							Image(systemName: "person.fill")
+								.resizable()
+								.scaledToFit()
+								.padding(10)
+								.frame(width: 80, height: 80)
+								.foregroundColor(.secondary)
+							//							.background(BlurredBackground(style: .systemThinMaterial)
+							//								.cornerRadius(10)
+							//								)
+								.background(Rectangle().fill(Color("listBackgroundColour"))
+									.frame(width: 80, height: 80)
+									.cornerRadius(15)
+									.shadow(color: Color("shadowColor").opacity(0.3), radius: 4)
+								)
+						}
+						else
+						{
+							KFImage(URL(string: userInfo.user.profileImageUrl))
+								.centerCropped()
+								.frame(width: 80, height: 80)
+								.cornerRadius(15)
+								.shadow(color: Color("shadowColor").opacity(1), radius: 4)
+								
+						}
+
 						
 						VStack(alignment: .leading, spacing: 2.0) {
 							Text("\(userInfo.user.name) \(userInfo.user.lastName)")
@@ -173,7 +188,7 @@ struct ProfileView: View {
 									
 									UpdateDatabase(userID: userID, newValue: carLicensePlate, variableToUpdate: "carMake")
 									
-									userInfo.user = .init(uid: userInfo.user.uid, name: userInfo.user.name, email: userInfo.user.email, lastName: userInfo.user.lastName, carMake: carLicensePlate.uppercased(), isParked: userInfo.user.isParked)
+									userInfo.user = .init(uid: userInfo.user.uid, name: userInfo.user.name, email: userInfo.user.email, lastName: userInfo.user.lastName, carMake: carLicensePlate.uppercased(), isParked: userInfo.user.isParked, profileImageUrl: userInfo.user.profileImageUrl)
 									
 									self.carLicensePlate = ""
 									
@@ -219,7 +234,7 @@ struct ProfileView: View {
 									
 									UpdateDatabase(userID: userID, newValue: lastName, variableToUpdate: "lastName")
 									
-									userInfo.user = .init(uid: userInfo.user.uid, name: firstName, email: userEmail, lastName: lastName, carMake: userInfo.user.carMake, isParked: userInfo.user.isParked)
+									userInfo.user = .init(uid: userInfo.user.uid, name: firstName, email: userEmail, lastName: lastName, carMake: userInfo.user.carMake, isParked: userInfo.user.isParked, profileImageUrl: userInfo.user.profileImageUrl)
 									
 									self.firstName = ""
 									self.lastName = ""

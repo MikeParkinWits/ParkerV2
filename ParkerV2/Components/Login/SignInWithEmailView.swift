@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct SignInWithEmailView: View {
 	@EnvironmentObject var userInfo: UserInfo
@@ -15,6 +16,7 @@ struct SignInWithEmailView: View {
 	@State private var authError: EmailAuthError?
 	
 	var body: some View {
+		
 		VStack {
 			Image("ParkerLogoLogin")
 				.resizable()
@@ -85,11 +87,11 @@ struct SignInWithEmailView: View {
 						self.showSheet = true
 					}) {
 						Text("Sign Up")
-	//						.padding(.vertical, 15)
-	//						.frame(width: 200)
-	//						.background(Color.blue)
-	//						.cornerRadius(8)
-	//						.foregroundColor(.white)
+						//						.padding(.vertical, 15)
+						//						.frame(width: 200)
+						//						.background(Color.blue)
+						//						.cornerRadius(8)
+						//						.foregroundColor(.white)
 					}
 				}
 				.font(.subheadline)
@@ -114,7 +116,7 @@ struct SignInWithEmailView: View {
 		//        .frame(width: 300)
 		//        .textFieldStyle(RoundedBorderTextFieldStyle())
 		.padding(.horizontal)
-//		.padding(.top, 10)
+		//		.padding(.top, 10)
 		
 	}
 }

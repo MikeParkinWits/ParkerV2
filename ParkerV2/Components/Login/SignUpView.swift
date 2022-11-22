@@ -4,6 +4,8 @@
 //
 
 import SwiftUI
+import PhotosUI
+import FirebaseFirestore
 
 struct SignUpView: View {
 	@EnvironmentObject var userInfo: UserInfo
@@ -11,6 +13,13 @@ struct SignUpView: View {
 	@Environment(\.presentationMode) var presentationMode
 	@State private var showError = false
 	@State private var errorString = ""
+	
+	@State private var selectedItem: PhotosPickerItem? = nil
+	
+	@State private var selectedImageData: Data? = nil
+	
+	@State private var selectedImage: UIImage?
+
 		
 	var body: some View {
 		NavigationView {
@@ -19,24 +28,77 @@ struct SignUpView: View {
 					Group {
 						VStack(alignment: .leading) {
 							HStack {
-								TextField("First Name", text: self.$user.fullname).autocapitalization(.words)
-									.padding(10)
-									.background(BlurredBackground(style: .systemThinMaterial).cornerRadius(10)
-									)
 								
-								Spacer()
+								VStack(){
+									PhotosPicker(
+										selection: $selectedItem,
+										matching: .images,
+										photoLibrary: .shared()) {
+											if let selectedImageData,
+											   let uiImage = UIImage(data: selectedImageData) {
+																								
+												Image(uiImage: uiImage)
+													.centerCropped()
+													.frame(width: 100, height: 100)
+													.cornerRadius(25)
+													.shadow(color: Color("shadowColor").opacity(0.5), radius: 4)
+												
+												
+												
+											}else{
+												
+												BlurredBackground(style: .systemMaterial)						.frame(width: 100, height: 100)
+												
+													.cornerRadius(25)
+													.overlay{
+														VStack(spacing: 5){
+															Image(systemName: "camera")
+															
+															Text("Upload Profile Photo")
+																.font(.caption)
+														}
+														
+														.foregroundColor(.secondary)
+													}
+													.shadow(color: Color("shadowColor").opacity(0.5), radius: 4)
+													
+												
+												
+												
+											}
+										}
+										.onChange(of: selectedItem) { newItem in
+											Task {
+												// Retrive selected asset in the form of Data
+												if let data = try? await newItem?.loadTransferable(type: Data.self) {
+													selectedImageData = data
+												}
+											}
+										}
+										.padding(.trailing, 10)
+								}
+								VStack(alignment: .leading){
+									TextField("First Name", text: self.$user.fullname).autocapitalization(.words)
+										.padding(10)
+										.background(BlurredBackground(style: .systemThinMaterial).cornerRadius(10)
+										)
+									
+									Spacer()
+										.frame(height: 15)
+									
+									TextField("Last Name", text: self.$user.lastName).autocapitalization(.words)
+										.padding(10)
+										.background(BlurredBackground(style: .systemThinMaterial).cornerRadius(10)
+										)
+									
+									if !user.validNameText.isEmpty {
+										Text(user.validNameText).font(.caption).foregroundColor(.secondary)
+									}
+								}
 								
-								TextField("First Name", text: self.$user.lastName).autocapitalization(.words)
-									.padding(10)
-									.background(BlurredBackground(style: .systemThinMaterial).cornerRadius(10)
-									)
 							}
 							
 							.padding(.vertical, 5)
-							
-							if !user.validNameText.isEmpty {
-								Text(user.validNameText).font(.caption).foregroundColor(.secondary)
-							}
 						}
 						
 						VStack(alignment: .leading) {
@@ -49,10 +111,10 @@ struct SignUpView: View {
 								
 								Spacer()
 								
-	//							TextField("First Name", text: self.$user.lastName).autocapitalization(.words)
-	//								.padding(10)
-	//								.background(BlurredBackground(style: .systemThinMaterial).cornerRadius(10)
-	//								)
+								//							TextField("First Name", text: self.$user.lastName).autocapitalization(.words)
+								//								.padding(10)
+								//								.background(BlurredBackground(style: .systemThinMaterial).cornerRadius(10)
+								//								)
 							}
 							
 							.padding(.vertical, 5)
@@ -102,7 +164,7 @@ struct SignUpView: View {
 					
 					VStack(spacing: 20 ) {
 						Button(action: {
-							FBAuth.createUser(withEmail: self.user.email, name: self.user.fullname, password: self.user.password, lastName: self.user.lastName, carMake: self.user.carLicense, isParked: self.user.isParked) { (result) in
+							FBAuth.createUser(withEmail: self.user.email, name: self.user.fullname, password: self.user.password, lastName: self.user.lastName, carMake: self.user.carLicense, isParked: self.user.isParked, profileImageUrl: "") { (result) in
 								switch result{
 								case .failure(let error):
 									self.errorString = error.localizedDescription
@@ -112,7 +174,15 @@ struct SignUpView: View {
 								}
 								
 							}
-							
+							if (selectedImageData != nil){
+								ImageUploader.uploadImage(image: UIImage(data:selectedImageData!)!){ profileImageUrl in
+									Firestore.firestore().collection("users")
+										.document(userInfo.user.uid)
+										.updateData(["profileImageUrl": profileImageUrl])
+									
+								}
+							}
+
 							self.presentationMode.wrappedValue.dismiss()
 							
 						}) {
@@ -152,10 +222,11 @@ struct SignUpView: View {
 						.buttonStyle(.plain)
 						.foregroundColor(.secondary)
 										
-				)
+					)
 			}
 		}
 	}
+
 }
 
 struct SignUpView_Previews: PreviewProvider {

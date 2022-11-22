@@ -28,6 +28,8 @@
 		6A3F956329116415001FFDC6 /* FBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F955F29116414001FFDC6 /* FBUser.swift */; };
 		6A3F95662911641E001FFDC6 /* FBAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F95642911641C001FFDC6 /* FBAuth.swift */; };
 		6A3F95672911641E001FFDC6 /* FBAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3F95652911641E001FFDC6 /* FBAuthError.swift */; };
+		6A4592A8292C349E00D16F79 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4592A7292C349E00D16F79 /* ImageUploader.swift */; };
+		6A4592AC292C876500D16F79 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6A4592AB292C876500D16F79 /* Kingfisher */; };
 		6A514939290FCE050096D52A /* SinglePriceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A514938290FCE050096D52A /* SinglePriceRow.swift */; };
 		6A58A7B229014541001F4AE8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A58A7B12901453E001F4AE8 /* MainView.swift */; };
 		6A99D038290FC1B90012C665 /* ParkingAreaMapSubHeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99D037290FC1B90012C665 /* ParkingAreaMapSubHeadline.swift */; };
@@ -45,6 +47,7 @@
 		6AB56A52290ECC28001A826B /* ParkingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB56A51290ECC28001A826B /* ParkingHistoryView.swift */; };
 		6AB56A54290ED0E2001A826B /* ParkingHistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB56A53290ED0E1001A826B /* ParkingHistoryDetailView.swift */; };
 		6AB987A2292B6F88005EF250 /* ParkingAreasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB987A1292B6F88005EF250 /* ParkingAreasViewModel.swift */; };
+		6AB987A4292C2D6C005EF250 /* image+centerCropped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB987A3292C2D6C005EF250 /* image+centerCropped.swift */; };
 		6ABA727B290BDE930027E954 /* ParkingArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABA727A290BDE930027E954 /* ParkingArea.swift */; };
 		6ABA727D290BE86F0027E954 /* ParkingAreaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABA727C290BE86F0027E954 /* ParkingAreaDetailView.swift */; };
 		6AD942A2290AA4B700B25C1F /* ParallaxSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AD942A1290AA4B700B25C1F /* ParallaxSwiftUI */; };
@@ -78,6 +81,7 @@
 		6A3F955F29116414001FFDC6 /* FBUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBUser.swift; sourceTree = "<group>"; };
 		6A3F95642911641C001FFDC6 /* FBAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuth.swift; sourceTree = "<group>"; };
 		6A3F95652911641E001FFDC6 /* FBAuthError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuthError.swift; sourceTree = "<group>"; };
+		6A4592A7292C349E00D16F79 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
 		6A514938290FCE050096D52A /* SinglePriceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePriceRow.swift; sourceTree = "<group>"; };
 		6A58A7B12901453E001F4AE8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6A99D037290FC1B90012C665 /* ParkingAreaMapSubHeadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingAreaMapSubHeadline.swift; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 		6AB56A51290ECC28001A826B /* ParkingHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingHistoryView.swift; sourceTree = "<group>"; };
 		6AB56A53290ED0E1001A826B /* ParkingHistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingHistoryDetailView.swift; sourceTree = "<group>"; };
 		6AB987A1292B6F88005EF250 /* ParkingAreasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingAreasViewModel.swift; sourceTree = "<group>"; };
+		6AB987A3292C2D6C005EF250 /* image+centerCropped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "image+centerCropped.swift"; sourceTree = "<group>"; };
 		6ABA727A290BDE930027E954 /* ParkingArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingArea.swift; sourceTree = "<group>"; };
 		6ABA727C290BE86F0027E954 /* ParkingAreaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingAreaDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +110,7 @@
 				6AFD8533292A1996004DD299 /* FirebaseDatabase in Frameworks */,
 				6AA7E75A2900A0DC00D67B13 /* Snap in Frameworks */,
 				6AD942A2290AA4B700B25C1F /* ParallaxSwiftUI in Frameworks */,
+				6A4592AC292C876500D16F79 /* Kingfisher in Frameworks */,
 				6AFD8537292A1996004DD299 /* FirebaseFirestoreSwift in Frameworks */,
 				6AA7E75D2900A76A00D67B13 /* Drawer in Frameworks */,
 				6AFD8539292A1996004DD299 /* FirebaseStorage in Frameworks */,
@@ -121,6 +127,7 @@
 			children = (
 				6A2D72AC290035FC00C25F71 /* ParkerV2 */,
 				6A2D72AB290035FC00C25F71 /* Products */,
+				6A4592A9292C36CF00D16F79 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -185,6 +192,7 @@
 		6A3F954B29115A8A001FFDC6 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				6A4592A6292C348A00D16F79 /* Service */,
 				6A3F954D29115AEE001FFDC6 /* Firestore */,
 				6A3F954C29115AE5001FFDC6 /* Auth */,
 			);
@@ -210,6 +218,21 @@
 				6A3F955F29116414001FFDC6 /* FBUser.swift */,
 			);
 			path = Firestore;
+			sourceTree = "<group>";
+		};
+		6A4592A6292C348A00D16F79 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6A4592A7292C349E00D16F79 /* ImageUploader.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6A4592A9292C36CF00D16F79 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		6A51493A290FDACC0096D52A /* Drawers */ = {
@@ -253,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				6AB56A47290E2AAF001A826B /* View+innerShadow.swift */,
+				6AB987A3292C2D6C005EF250 /* image+centerCropped.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -314,6 +338,7 @@
 				6AFD8534292A1996004DD299 /* FirebaseFirestore */,
 				6AFD8536292A1996004DD299 /* FirebaseFirestoreSwift */,
 				6AFD8538292A1996004DD299 /* FirebaseStorage */,
+				6A4592AB292C876500D16F79 /* Kingfisher */,
 			);
 			productName = ParkerV2;
 			productReference = 6A2D72AA290035FC00C25F71 /* ParkerV2.app */;
@@ -348,6 +373,7 @@
 				6AA7E75B2900A76A00D67B13 /* XCRemoteSwiftPackageReference "swiftui-drawer" */,
 				6AD942A0290AA4B600B25C1F /* XCRemoteSwiftPackageReference "ParallaxSwiftUI" */,
 				6AFD852F292A1996004DD299 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				6A4592AA292C876500D16F79 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 6A2D72AB290035FC00C25F71 /* Products */;
 			projectDirPath = "";
@@ -408,7 +434,9 @@
 				6A3280DD2911399A009AD7B6 /* UserInfo.swift in Sources */,
 				6A3280DF2911537F009AD7B6 /* LoginView.swift in Sources */,
 				6A2D72AE290035FC00C25F71 /* ParkerV2App.swift in Sources */,
+				6AB987A4292C2D6C005EF250 /* image+centerCropped.swift in Sources */,
 				6A110DDE2912600800AAB5C5 /* NotParkedDrawer.swift in Sources */,
+				6A4592A8292C349E00D16F79 /* ImageUploader.swift in Sources */,
 				6A3F956229116415001FFDC6 /* FBKeys.swift in Sources */,
 				6AAC0B6C29122D67001F5384 /* SupportEmail.swift in Sources */,
 			);
@@ -621,6 +649,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6A4592AA292C876500D16F79 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		6AA7E7582900A0DC00D67B13 /* XCRemoteSwiftPackageReference "Snap" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nerdsupremacist/Snap.git";
@@ -656,6 +692,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6A4592AB292C876500D16F79 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A4592AA292C876500D16F79 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		6AA7E7592900A0DC00D67B13 /* Snap */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6AA7E7582900A0DC00D67B13 /* XCRemoteSwiftPackageReference "Snap" */;

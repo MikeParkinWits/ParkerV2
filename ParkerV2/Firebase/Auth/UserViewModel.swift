@@ -14,6 +14,7 @@ struct UserViewModel {
 	var carLicense: String = ""
 	var confirmPassword: String = ""
 	var isParked: Bool = false
+	var profileImageUrl:String = ""
 	
 	// MARK: - Validation Checks
 	
