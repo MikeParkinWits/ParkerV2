@@ -13,9 +13,22 @@ import SwiftUI
 
 struct ParkingHistoryView: View {
 	
-	var parkingHistory: [ParkingHistory] = ParkingHistoryList.AllParkingHistory
+//	var parkingHistory: [ParkingHistory] = ParkingHistoryList.AllParkingHistory
 	
 	@State var searchLocations = ""
+	
+	@EnvironmentObject var userInfo: UserInfo
+	
+	@StateObject var viewModelParkingHistory = ParkingHistoryViewModel()
+	
+//	init(viewModelParkingHistory: ParkingHistoryViewModel){
+//		self.viewModelParkingHistory = ParkingHistoryViewModel(userID: "userInfo.user.uid")
+//	}
+	
+	
+//	init(userInfo: UserInfo) {
+//		_viewModelParkingHistory = StateObject(wrappedValue: ParkingHistoryViewModel(userInfo: userInfo))
+//	}
 	
 	var body: some View {
 		
@@ -44,10 +57,14 @@ struct ParkingHistoryView: View {
 	
 		
 		NavigationView{
-				List(filteredLocations, id: \.id){ index in
+				List(filteredLocations){ index in
 
 					SmallListCard(isParkingCard: false, containingArea: nil, containingHistory: index)
 
+
+//					Text("\(index.locationLat)" as String)
+					
+					
 				}
 				.searchable(text: $searchLocations, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Parking History by Name or Area"
 							//					, suggestions: {
@@ -60,6 +77,9 @@ struct ParkingHistoryView: View {
 							//				.searchCompletion("Chicken Salad")
 							//		}
 				)
+			.onAppear(){
+				self.viewModelParkingHistory.fetchData()
+			}
 			
 			.navigationTitle("Parking History")
 
@@ -139,19 +159,22 @@ struct ParkingHistoryView: View {
 	var filteredLocations: [ParkingHistory] {
 		if searchLocations.isEmpty
 		{
-			return parkingHistory
+			return viewModelParkingHistory.parkingHistory.filter({$0.userID == userInfo.user.uid})
 		}
-		else
-		{
-			return parkingHistory.filter({$0.name.localizedCaseInsensitiveContains(searchLocations) || $0.location.localizedCaseInsensitiveContains(searchLocations)})
+		else{
+			return viewModelParkingHistory.parkingHistory.filter({($0.userID == userInfo.user.uid) && ($0.name.localizedCaseInsensitiveContains(searchLocations) || $0.location.localizedCaseInsensitiveContains(searchLocations))})
 		}
+//		else
+//		{
+//			return parkingHistory.filter({$0.name.localizedCaseInsensitiveContains(searchLocations) || $0.location.localizedCaseInsensitiveContains(searchLocations)})
+//		}
 	}
 }
 
 // Content Preview
 
-struct ParkingHistoryView_Previews: PreviewProvider {
-	static var previews: some View {
-		ParkingHistoryView()
-	}
-}
+//struct ParkingHistoryView_Previews: PreviewProvider {
+//	static var previews: some View {
+////		ParkingHistoryView()
+//	}
+//}

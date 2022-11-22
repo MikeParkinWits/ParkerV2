@@ -8,6 +8,7 @@
 import SwiftUI
 
 import FirebaseStorage
+import Kingfisher
 
 struct BigCarouselCard: View {
 	

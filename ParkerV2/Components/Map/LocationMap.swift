@@ -110,8 +110,8 @@ struct LocationMapLocationList_Previews: PreviewProvider {
 	}
 }
 
-struct LocationMapParkingHistory_Previews: PreviewProvider {
-	static var previews: some View {
-		LocationMap(isParkingArea: false, at: nil, at: ParkingHistoryList.AllParkingHistory.first!)
-	}
-}
+//struct LocationMapParkingHistory_Previews: PreviewProvider {
+//	static var previews: some View {
+//		LocationMap(isParkingArea: false, at: nil, at: ParkingHistoryList.AllParkingHistory.first!)
+//	}
+//}

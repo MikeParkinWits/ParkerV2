@@ -141,8 +141,8 @@ struct ParkingHistoryDetailView: View {
     }
 }
 
-struct ParkingHistoryDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-		ParkingHistoryDetailView(parkingHistory: ParkingHistoryList.AllParkingHistory.first!)
-    }
-}
+//struct ParkingHistoryDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//		ParkingHistoryDetailView(parkingHistory: ParkingHistoryList.AllParkingHistory.first!)
+//    }
+//}

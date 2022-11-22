@@ -54,8 +54,8 @@ class ParkingAreasViewModel: ObservableObject{
 					}
 				}
 
-				   print(queryDocumentSnapshot.documentID)
-				print(pricesArray)
+//				   print(queryDocumentSnapshot.documentID)
+//				print(pricesArray)
 					 
 					   
 				pricesArray.sort { $0.id < $1.id }

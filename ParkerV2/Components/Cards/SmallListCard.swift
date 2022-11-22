@@ -173,10 +173,10 @@ struct SmallListCardLocationList_Previews: PreviewProvider {
 	}
 }
 
-struct SmallListCardParkingHistory_Previews: PreviewProvider {
-	static var previews: some View {
-		NavigationView{
-			SmallListCard(isParkingCard: false, containingArea: nil, containingHistory: ParkingHistoryList.AllParkingHistory.first!)
-		}
-	}
-}
+//struct SmallListCardParkingHistory_Previews: PreviewProvider {
+//	static var previews: some View {
+//		NavigationView{
+//			SmallListCard(isParkingCard: false, containingArea: nil, containingHistory: ParkingHistoryList.AllParkingHistory.first!)
+//		}
+//	}
+//}

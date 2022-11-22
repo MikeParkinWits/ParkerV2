@@ -39,8 +39,8 @@ struct ParkingHistoryMapSubHeadline: View{
 	}
 }
 
-struct ParkingHistoryMapSubHeadline_Previews: PreviewProvider {
-	static var previews: some View {
-		ParkingHistoryMapSubHeadline(parkingHistory: ParkingHistoryList.AllParkingHistory.first!)
-	}
-}
+//struct ParkingHistoryMapSubHeadline_Previews: PreviewProvider {
+//	static var previews: some View {
+//		ParkingHistoryMapSubHeadline(parkingHistory: ParkingHistoryList.AllParkingHistory.first!)
+//	}
+//}
