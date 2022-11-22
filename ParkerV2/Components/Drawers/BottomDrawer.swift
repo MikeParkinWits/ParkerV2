@@ -108,10 +108,12 @@ struct BottomDrawer: View {
 									
 									HStack{
 										
+
+										
 										Button{
 											print("Button tapped!")
 										}label: {
-											Image(systemName: "hand.thumbsdown.fill")
+											Image(systemName: "hand.thumbsup.fill")
 												.font(.headline)
 												.frame(maxWidth: 20, maxHeight: 30)
 											
@@ -124,7 +126,7 @@ struct BottomDrawer: View {
 										Button{
 											print("Button tapped!")
 										}label: {
-											Image(systemName: "hand.thumbsup.fill")
+											Image(systemName: "hand.thumbsdown.fill")
 												.font(.headline)
 												.frame(maxWidth: 20, maxHeight: 30)
 											

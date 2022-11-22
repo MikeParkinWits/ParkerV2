@@ -18,7 +18,9 @@ struct ParkingHistoryDetailView: View {
 	
     var body: some View {
 		VStack() {
-			LocationMap(isParkingArea: false, at: nil, at: parkingHistory)
+			
+			
+				LocationMap(isParkingArea: false, at: nil, at: parkingHistory)
 
 			
 			
@@ -39,13 +41,14 @@ struct ParkingHistoryDetailView: View {
 				
 				Spacer()
 				
+				
 				VStack(alignment: .leading, spacing: 1.0){
 					Text("Time Parked")
 						.font(.title3)
 						.fontWeight(.semibold)
 						.padding(.bottom, 5)
 					
-					Text("43 Minutes")
+					Text("\(parkingHistory.timeParked) Minutes")
 						.font(.body)
 						.fontWeight(.regular)
 						.padding(.bottom, 5)
@@ -61,26 +64,33 @@ struct ParkingHistoryDetailView: View {
 						.fontWeight(.semibold)
 					
 					HStack(alignment: .top) {
-						Image("test-profile-image")
+						Image(parkingHistory.guardInfo[0].image)
 							.resizable()
 							.scaledToFit()
 							.frame(minHeight: 60, maxHeight: 60)
 							.cornerRadius(8)
 						
 						VStack(alignment: .leading, spacing: 5.0) {
-							Text("John Smith")
+							Text(parkingHistory.guardInfo[0].name)
 								.font(.headline)
 								.fontWeight(.regular)
+							
+							Text("\(parkingHistory.guardInfo[0].rating)%")
+								.font(.subheadline)
+								.fontWeight(.regular)
+								.foregroundColor(.secondary)
 						}
 						
 						Spacer()
 						
 						HStack{
 							
+
+							
 							Button{
 								print("Button tapped!")
 							}label: {
-								Image(systemName: "hand.thumbsdown.fill")
+								Image(systemName: "hand.thumbsup.fill")
 									.font(.headline)
 									.frame(maxWidth: 20, maxHeight: 30)
 								
@@ -93,7 +103,7 @@ struct ParkingHistoryDetailView: View {
 							Button{
 								print("Button tapped!")
 							}label: {
-								Image(systemName: "hand.thumbsup.fill")
+								Image(systemName: "hand.thumbsdown.fill")
 									.font(.headline)
 									.frame(maxWidth: 20, maxHeight: 30)
 								

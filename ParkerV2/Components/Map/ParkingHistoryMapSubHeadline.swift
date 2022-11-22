@@ -12,7 +12,7 @@ struct ParkingHistoryMapSubHeadline: View{
 	var parkingHistory: ParkingHistory
 	
 	var body: some View{
-		VStack(spacing: 25.0) {
+		VStack() {
 			HStack {
 				VStack(alignment: .leading, spacing: 1.0){
 					Text(parkingHistory.name)
@@ -31,10 +31,12 @@ struct ParkingHistoryMapSubHeadline: View{
 					.font(.largeTitle)
 					.fontWeight(.bold)
 			}
+			
+			Divider()
+				.padding(.vertical, -12)
 
 		}
 		.font(.subheadline)
-		.padding(.bottom, 20)
 		.padding(.top, 2)
 	}
 }

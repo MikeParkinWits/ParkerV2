@@ -89,6 +89,7 @@ struct LocationMap: View {
 			}else{
 				ParkingHistoryMapSubHeadline(parkingHistory: parkingHistory!)
 			}
+			
 		}
 	}
 }

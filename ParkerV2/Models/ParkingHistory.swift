@@ -33,6 +33,20 @@ struct ParkingHistory: Identifiable{
 	let locationLong: Double
 	let date: String
 	let price: Int
+	
+	let timeParked: Int
+	
+	var guardInfo: [GuardInfo] = [GuardInfo(image: "", name: "", rating: 1)]
+	
+}
+
+struct GuardInfo: Identifiable{
+	let id = UUID()
+
+	let image, name: String
+	
+	let rating: Int
+
 }
 
 //struct HistoryLongList: Identifiable{
