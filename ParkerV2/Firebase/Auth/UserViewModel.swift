@@ -28,7 +28,8 @@ struct UserViewModel {
 	}
 	
 	func isEmailValid(_email: String) -> Bool {
-		// Password must be 8 chars, contain a capital letter and a number
+		
+		// Email must have a string, then '@', then string, then .string
 		let passwordTest = NSPredicate(format: "SELF MATCHES %@",
 									   "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
 		return passwordTest.evaluate(with: email)
@@ -36,6 +37,7 @@ struct UserViewModel {
 	
 	
 	func isPasswordValid(_password: String) -> Bool {
+		
 		// Password must be 8 chars, contain a capital letter and a number
 		let passwordTest = NSPredicate(format: "SELF MATCHES %@",
 									   "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")

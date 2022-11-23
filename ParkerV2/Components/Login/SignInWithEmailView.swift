@@ -6,6 +6,8 @@
 import SwiftUI
 import PhotosUI
 
+// MARK: - Sign In Function
+
 struct SignInWithEmailView: View {
 	@EnvironmentObject var userInfo: UserInfo
 	@State var user: UserViewModel = UserViewModel()
@@ -50,8 +52,8 @@ struct SignInWithEmailView: View {
 			}.padding(.bottom)
 			VStack(spacing: 10) {
 				Button(action: {
-					// Sign In Action
 					
+					// Sign In Action
 					FBAuth.authenticate(withEmail: self.user.email, password: self.user.password) { (result) in
 						switch result {
 						case .failure (let error):
@@ -68,16 +70,8 @@ struct SignInWithEmailView: View {
 						.cornerRadius(12.5)
 						.foregroundColor(.white)
 						.fontWeight(.bold)
-					//						.font(.headline)
-					//						.frame(maxWidth: .infinity, maxHeight: (UIScreen.main.bounds.size.height*0.04))
-					//					                        .background(Color.green)
-					//					                        .cornerRadius(8)
-					//						.foregroundColor(.white)
-					//						.fontWeight(.bold)
 						.opacity(user.isLogInComplete ? 1 : 0.75)
 				}
-				//				.buttonStyle(.borderedProminent)
-				//				.padding(.vertical, 3)
 				.disabled(!user.isLogInComplete)
 				
 				HStack{
@@ -87,11 +81,6 @@ struct SignInWithEmailView: View {
 						self.showSheet = true
 					}) {
 						Text("Sign Up")
-						//						.padding(.vertical, 15)
-						//						.frame(width: 200)
-						//						.background(Color.blue)
-						//						.cornerRadius(8)
-						//						.foregroundColor(.white)
 					}
 				}
 				.font(.subheadline)
@@ -112,11 +101,7 @@ struct SignInWithEmailView: View {
 				})
 			}
 		}
-		//        .padding(.top, 100)
-		//        .frame(width: 300)
-		//        .textFieldStyle(RoundedBorderTextFieldStyle())
 		.padding(.horizontal)
-		//		.padding(.top, 10)
 		
 	}
 }

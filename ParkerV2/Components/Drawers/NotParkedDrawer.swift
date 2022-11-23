@@ -8,6 +8,8 @@
 import SwiftUI
 import Drawer
 
+// MARK: - Drawer on Home Screen for when parked
+
 struct NotParkedDrawer: View {
 	
 	@State var heights = [CGFloat(UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height*0.23)), CGFloat(UIScreen.main.bounds.size.height*0.33)]
@@ -25,13 +27,6 @@ struct NotParkedDrawer: View {
 					.cornerRadius(30)
 					.shadow(color: Color("shadowColor").opacity(0.5), radius: 5)
 					.frame(height: (UIScreen.main.bounds.size.height))
-				
-				//							No Blur
-				//
-				//							RoundedRectangle(cornerRadius: 30)
-				//								.foregroundColor(.white)
-				//								.shadow(radius: 100)
-				//								.frame(height: 800)
 				
 				VStack(spacing: 5.0) {
 					Spacer().frame(height: 4.0)
@@ -60,10 +55,6 @@ struct NotParkedDrawer: View {
 						}
 						.foregroundColor(.secondary)
 						.padding(10)
-
-							
-
-						
 					}
 					
 					Spacer()

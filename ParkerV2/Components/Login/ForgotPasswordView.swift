@@ -5,6 +5,8 @@
 
 import SwiftUI
 
+// MARK: - Forgot Password Function
+
 struct ForgotPasswordView: View {
 	@State var user: UserViewModel = UserViewModel()
 	@Environment(\.presentationMode) var presentationMode
@@ -24,6 +26,7 @@ struct ForgotPasswordView: View {
 					.padding(.vertical, 5)
 				
 				Button(action: {
+					
 					// Reset Password action
 					
 					FBAuth.resetPassword(email: self.user.email) { (result) in
@@ -43,12 +46,6 @@ struct ForgotPasswordView: View {
 						.cornerRadius(12.5)
 						.foregroundColor(.white)
 						.fontWeight(.bold)
-					
-					//						.frame(width: 200)
-					//						.padding(.vertical, 15)
-					//						.background(Color.green)
-					//						.cornerRadius(8)
-					//						.foregroundColor(.white)
 						.opacity(user.isEmailValid(_email: user.email) ? 1 : 0.75)
 				}
 				.disabled(!user.isEmailValid(_email: user.email))
@@ -58,8 +55,6 @@ struct ForgotPasswordView: View {
 			}
 			.padding(.horizontal)
 			.padding(.top, 7.5)
-			//				.frame(width: 300)
-			//				.textFieldStyle(RoundedBorderTextFieldStyle())
 			.navigationBarTitle("Reset Password", displayMode: .inline)
 			.navigationBarItems(trailing:
 									

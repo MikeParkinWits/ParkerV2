@@ -8,6 +8,8 @@
 import SwiftUI
 import Drawer
 
+// MARK: - Bottom Drawer for Home Screen
+
 struct BottomDrawer: View {
 	
 	@State var heights = [CGFloat(UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height*0.23)), CGFloat(UIScreen.main.bounds.size.height*0.33)]
@@ -21,7 +23,7 @@ struct BottomDrawer: View {
 	
 	@EnvironmentObject var userInfo: UserInfo
 	@EnvironmentObject var viewModel: ParkingAreasViewModel
-
+	
 	//	var viewModel = ParkingAreasViewModel()
 	
 	@State private var showingAlert = false
@@ -46,13 +48,6 @@ struct BottomDrawer: View {
 					.cornerRadius(30)
 					.shadow(color: Color("shadowColor").opacity(0.5), radius: 5)
 					.frame(height: (UIScreen.main.bounds.size.height))
-				
-				//							No Blur
-				//
-				//							RoundedRectangle(cornerRadius: 30)
-				//								.foregroundColor(.white)
-				//								.shadow(radius: 100)
-				//								.frame(height: 800)
 				
 				VStack(spacing: 5.0) {
 					Spacer().frame(height: 4.0)
@@ -87,15 +82,8 @@ struct BottomDrawer: View {
 									Text("R\(filteredLocations.prices[currentRow].price)")
 										.font(.largeTitle)
 										.fontWeight(.bold)
-									
-//									Text("\(parkingLocation.prices[currentRow])" as String)
-									
 								}
-								
 							}
-							
-
-							
 						}
 						
 						HStack{
@@ -126,8 +114,6 @@ struct BottomDrawer: View {
 									Spacer()
 									
 									HStack{
-										
-
 										
 										Button{
 											print("Button tapped!")
@@ -160,117 +146,64 @@ struct BottomDrawer: View {
 							}
 						}
 						
-//						Divider()
-//						//						.padding(.vertical, 10)
-//							.padding(.vertical, 5)
-//												Group {
-//													Text("Location Details")
-//														.font(.title3)
-//														.fontWeight(.bold)
-//
-//						//							Text("Location")
-//						//								.font(.subheadline)
-//						//								.foregroundColor(.secondary)
-//						//								.padding(.bottom, 5)
-//												}
-//												.padding(.bottom, 1)
-						
 						NavigationLink {
 							ParkingAreaDetailView(parkingLocation: filteredLocations)
 								.navigationBarTitle(filteredLocations.name)
 						} label: {
 							
 							VStack(alignment: .leading, spacing: 5){
-							 Text("Parking Price")
-								 .font(.title3)
-								 .fontWeight(.semibold)
-								 .padding(.bottom, 8)
- //								.padding(.top, 10)
-							 
-							 ForEach(0..<filteredLocations.prices.count, id: \.self){currentRow in
-								 
-								 SinglePriceRow(at: filteredLocations, on: currentRow)
-								 
-							 }
+								Text("Parking Price")
+									.font(.title3)
+									.fontWeight(.semibold)
+									.padding(.bottom, 8)
 								
-						 }
-						 .padding()
-						 .background(
-							BlurredBackground(style: .systemThinMaterial)
-							 .cornerRadius(20)
-							 .shadow(color: Color("shadowColor").opacity(0.4), radius: 5)
- )
-						 .padding(.vertical, 10)
-						}
-						.buttonStyle(.plain)
-
-						
-//						HStack{
-//							Button{
-//								print("Button tapped!")
-//							}label: {
-//								Text("View Location")
-//									.font(.headline)
-//									.frame(maxWidth: .infinity, maxHeight: (UIScreen.main.bounds.size.height*0.04))
-//
-//									.foregroundColor(.blue)
-//									.fontWeight(.bold)
-//							}
-//							.buttonStyle(.bordered)
-//							.tint(.gray)
-//							.padding(.vertical, 7)
-							
-							Button{
-								print("Button tapped!")
-								showingAlert = true
-							}label: {
-								Label("Report an Issue", systemImage: "exclamationmark.octagon.fill")
-									.font(.headline)
-									.frame(maxWidth: .infinity, maxHeight: (UIScreen.main.bounds.size.height*0.04))
-								
-									.foregroundColor(.white)
-									.fontWeight(.bold)
-							}
-							.confirmationDialog("Important message", isPresented: $showingAlert) {
-								Button("Send a Report using Mail") {
+								ForEach(0..<filteredLocations.prices.count, id: \.self){currentRow in
 									
-									email.send(openURL: openURL)
+									SinglePriceRow(at: filteredLocations, on: currentRow)
 									
 								}
 								
-								Button("Cancel", role: .cancel) { }
 							}
+							.padding()
+							.background(
+								BlurredBackground(style: .systemThinMaterial)
+									.cornerRadius(20)
+									.shadow(color: Color("shadowColor").opacity(0.4), radius: 5)
+							)
+							.padding(.vertical, 10)
+						}
+						.buttonStyle(.plain)
 						
-							.buttonStyle(.borderedProminent)
-							.tint(.red)
-							.padding(.vertical, 3)
+						Button{
+							print("Button tapped!")
+							showingAlert = true
+						}label: {
+							Label("Report an Issue", systemImage: "exclamationmark.octagon.fill")
+								.font(.headline)
+								.frame(maxWidth: .infinity, maxHeight: (UIScreen.main.bounds.size.height*0.04))
+							
+								.foregroundColor(.white)
+								.fontWeight(.bold)
+						}
+						.confirmationDialog("Important message", isPresented: $showingAlert) {
+							Button("Send a Report using Mail") {
+								
+								email.send(openURL: openURL)
+								
+							}
+							
+							Button("Cancel", role: .cancel) { }
+						}
+						
+						.buttonStyle(.borderedProminent)
+						.tint(.red)
+						.padding(.vertical, 3)
 						
 						
 					}
 					
-					
-//					Divider()
-////						.padding(.vertical, 10)
-//						.padding(.vertical, 5)
-					
 					VStack(alignment: .leading, spacing: 3){
-//						Group {
-//							Text("Location Details")
-//								.font(.title)
-//								.fontWeight(.bold)
-//
-////							Text("Location")
-////								.font(.subheadline)
-////								.foregroundColor(.secondary)
-////								.padding(.bottom, 5)
-//						}
-//						.padding(.bottom, 5)
-						
-
-						}
-
-
-//					}
+					}
 					
 					Spacer()
 					
@@ -278,7 +211,6 @@ struct BottomDrawer: View {
 				.padding(.horizontal)
 				
 			}
-			
 		}
 		.rest(at: $heights)
 		.impact(.light)
@@ -288,14 +220,14 @@ struct BottomDrawer: View {
 	}
 	
 	var filteredLocations: ParkingArea {
-
+		
 		return viewModel.parkingAreas.first(where: {$0.parkingID == userInfo.user.currentParkingAreaID}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 1, timeLow: 0, timeHigh: 0, time: "", price: 0)])
 	}
 	
 }
 
 struct BottomDrawer_Previews: PreviewProvider {
-    static var previews: some View {
-        BottomDrawer(parkingLocation: ParkingAreasViewModel().parkingAreas.first!)
-    }
+	static var previews: some View {
+		BottomDrawer(parkingLocation: ParkingAreasViewModel().parkingAreas.first!)
+	}
 }

@@ -40,7 +40,6 @@ struct LocationMap: View {
 			center: CLLocationCoordinate2D(latitude: isParkingArea ? parkingLocation!.locationLat : historyLocationValue.locationLat, longitude: isParkingArea ? parkingLocation!.locationLong : historyLocationValue.locationLong),
 			latitudinalMeters: 750,
 			longitudinalMeters: 750
-			//			span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
 			
 		)
 		
@@ -117,17 +116,3 @@ struct LocationAnnotations: Identifiable {
 		CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
 	}
 }
-
-//struct LocationMapLocationList_Previews: PreviewProvider {
-//	@EnvironmentObject var viewModel: ParkingAreasViewModel
-//
-//	static var previews: some View {
-//		LocationMap(isParkingArea: true, at: ParkingAreasViewModel().parkingAreas.first!, at: nil, viewModel: viewModel)
-//	}
-//}
-
-//struct LocationMapParkingHistory_Previews: PreviewProvider {
-//	static var previews: some View {
-//		LocationMap(isParkingArea: false, at: nil, at: ParkingHistoryList.AllParkingHistory.first!)
-//	}
-//}

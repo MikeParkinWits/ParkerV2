@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// BLUR VIEW - Creates glassmorphism background effect
+// MARK: - BLUR VIEW - Creates glassmorphism background effect
 
 struct BlurredBackground: UIViewRepresentable {
 	let style: UIBlurEffect.Style

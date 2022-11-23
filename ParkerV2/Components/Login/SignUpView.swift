@@ -7,6 +7,8 @@ import SwiftUI
 import PhotosUI
 import FirebaseFirestore
 
+// MARK: - Sign Up Function
+
 struct SignUpView: View {
 	@EnvironmentObject var userInfo: UserInfo
 	@State var user: UserViewModel = UserViewModel()
@@ -19,8 +21,8 @@ struct SignUpView: View {
 	@State private var selectedImageData: Data? = nil
 	
 	@State private var selectedImage: UIImage?
-
-		
+	
+	
 	var body: some View {
 		NavigationView {
 			ScrollView {
@@ -36,7 +38,7 @@ struct SignUpView: View {
 										photoLibrary: .shared()) {
 											if let selectedImageData,
 											   let uiImage = UIImage(data: selectedImageData) {
-																								
+												
 												Image(uiImage: uiImage)
 													.centerCropped()
 													.frame(width: 100, height: 100)
@@ -61,7 +63,7 @@ struct SignUpView: View {
 														.foregroundColor(.secondary)
 													}
 													.shadow(color: Color("shadowColor").opacity(0.5), radius: 4)
-													
+												
 												
 												
 												
@@ -159,8 +161,6 @@ struct SignUpView: View {
 						}
 					}
 					.padding(.horizontal)
-					//				.frame(width: 300)
-					//					.textFieldStyle(RoundedBorderTextFieldStyle())
 					
 					VStack(spacing: 20 ) {
 						Button(action: {
@@ -182,7 +182,7 @@ struct SignUpView: View {
 									
 								}
 							}
-
+							
 							self.presentationMode.wrappedValue.dismiss()
 							
 						}) {
@@ -192,12 +192,6 @@ struct SignUpView: View {
 								.cornerRadius(12.5)
 								.foregroundColor(.white)
 								.fontWeight(.bold)
-							
-							//							.frame(width: 200)
-							//							.padding(.vertical, 15)
-							//							.background(Color.green)
-							//							.cornerRadius(8)
-							//							.foregroundColor(.white)
 								.opacity(user.isSignInComplete ? 1 : 0.75)
 						}
 						
@@ -226,7 +220,7 @@ struct SignUpView: View {
 			}
 		}
 	}
-
+	
 }
 
 struct SignUpView_Previews: PreviewProvider {

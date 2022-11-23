@@ -16,30 +16,30 @@ struct LoginView: View {
 	@State private var showSheet = false
 	@State private var action: Action?
 	
-    var body: some View {
+	var body: some View {
 		NavigationView {
 			VStack{
 				
-					SignInWithEmailView(showSheet: $showSheet, action: $action)
-					Spacer()
+				SignInWithEmailView(showSheet: $showSheet, action: $action)
+				Spacer()
 				
 			}
 			
 			.navigationTitle(Text("Login"))
-				.sheet(isPresented: $showSheet) { [action] in
+			.sheet(isPresented: $showSheet) { [action] in
 				if action == .signUp {
-				   SignUpView()
-				  }  else  {
+					SignUpView()
+				}  else  {
 					ForgotPasswordView()
-				  }
+				}
 			}
 		}
-
-    }
+		
+	}
 }
 
 struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
+	static var previews: some View {
+		LoginView()
+	}
 }

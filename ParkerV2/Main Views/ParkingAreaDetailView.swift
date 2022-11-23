@@ -49,8 +49,6 @@ struct ParkingAreaDetailView: View {
 	}
 }
 
-// PRICE CODE
-
 // Content Preview
 
 struct LocationDetailView_Previews: PreviewProvider {

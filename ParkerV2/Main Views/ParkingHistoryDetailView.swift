@@ -18,14 +18,11 @@ struct ParkingHistoryDetailView: View {
 	var email = SupportEmail(toAddress: "1894979@students.wits.ac.za", subject: "Support Email", messageHeader: "Describe your issue below")
 	
 	@EnvironmentObject var viewModel: ParkingAreasViewModel
-
+	
 	var body: some View {
 		VStack() {
 			
 			LocationMap(isParkingArea: false, at: filteredLocations, at: parkingHistory, viewModel: viewModel)
-				
-
-			
 			
 			HStack {
 				VStack(alignment: .leading, spacing: 1.0){
@@ -38,7 +35,6 @@ struct ParkingHistoryDetailView: View {
 						.font(.body)
 						.fontWeight(.regular)
 						.padding(.bottom, 5)
-					
 					
 				}
 				
@@ -55,7 +51,6 @@ struct ParkingHistoryDetailView: View {
 						.font(.body)
 						.fontWeight(.regular)
 						.padding(.bottom, 5)
-					
 					
 				}
 			}
@@ -88,7 +83,7 @@ struct ParkingHistoryDetailView: View {
 						
 						HStack{
 							
-
+							
 							
 							Button{
 								print("Button tapped!")
@@ -119,7 +114,7 @@ struct ParkingHistoryDetailView: View {
 						}
 					}
 				}
-			
+				
 			}
 			
 			Spacer()
@@ -151,17 +146,11 @@ struct ParkingHistoryDetailView: View {
 			
 		}
 		.padding(.horizontal)
-    }
+	}
 	
 	var filteredLocations: ParkingArea {
-//		viewModel.fetchData()
+		//		viewModel.fetchData()
 		return viewModel.parkingAreas.first(where: {$0.parkingID == parkingHistory.parkingAreaId}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 1, timeLow: 0, timeHigh: 0, time: "", price: 0)])
 	}
 	
 }
-
-//struct ParkingHistoryDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//		ParkingHistoryDetailView(parkingHistory: ParkingHistoryList.AllParkingHistory.first!)
-//    }
-//}

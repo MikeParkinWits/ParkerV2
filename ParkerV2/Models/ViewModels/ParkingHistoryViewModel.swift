@@ -15,13 +15,7 @@ import Firebase
 class ParkingHistoryViewModel: ObservableObject{
 	@Published var parkingHistory = [ParkingHistory]()
 	@Published var unwrapped = false
-		
-//	var userInfoID: String
-//	
-//	init(userInfo: UserInfo){
-//		self.userInfoID = userInfo.user.uid
-//	}
-		
+	
 	func fetchData() {
 		var db = Firestore.firestore()
 		
@@ -30,7 +24,7 @@ class ParkingHistoryViewModel: ObservableObject{
 				print ("No documents")
 				return
 			}
-						
+			
 			self.parkingHistory = documents.map { (queryDocumentSnapshot) -> ParkingHistory in
 				let data = queryDocumentSnapshot.data()
 				
@@ -53,7 +47,7 @@ class ParkingHistoryViewModel: ObservableObject{
 				
 				var guardArray = [GuardInfo]()
 				if let guardInfo = guardInfo {
-				var count: Int = 0
+					var count: Int = 0
 					for guards in guardInfo{
 						let guardName = guards.value["name"] as? String ?? ""
 						let guardImage = guards.value["image"] as? String ?? ""
@@ -68,10 +62,6 @@ class ParkingHistoryViewModel: ObservableObject{
 						
 					}
 				}
-
-//				   print(queryDocumentSnapshot.documentID)
-//				print(pricesArray)
-				
 				
 				return ParkingHistory(id: id, userID: userID, image: image, imageSmall: imageSmall, name: name, location: location, locationLat: locationLat, locationLong: locationLong, date: date, price: price, timeParked: timeParked, parkingAreaId: parkingAreaId, guardInfo: guardArray)
 			}

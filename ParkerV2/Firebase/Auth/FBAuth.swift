@@ -8,9 +8,6 @@ import FirebaseAuth
 import CryptoKit
 import AuthenticationServices
 
-// This typeAlias is defined just to make it simpler to deal with the tuble used in the SignInWithApple handle function once signed in.
-typealias SignInWithAppleResult = (authDataResult: AuthDataResult, appleIDCredential: ASAuthorizationAppleIDCredential)
-
 struct FBAuth {
 	// MARK: - Sign In with Email functions
 	
@@ -52,129 +49,8 @@ struct FBAuth {
 		}
 	}
 	
-	// MARK: - SignIn with Apple Functions
-	
-	static func signInWithApple(idTokenString: String, nonce: String, completion: @escaping (Result<AuthDataResult, Error>) -> ()) {
-		// Initialize a Firebase credential.
-		let credential = OAuthProvider.credential(withProviderID: "apple.com",
-												  idToken: idTokenString,
-												  rawNonce: nonce)
-		// Sign in with Apple.
-		Auth.auth().signIn(with: credential) { (authDataResult, err) in
-			if let err = err {
-				// Error. If error.code == .MissingOrInvalidNonce, make sure
-				// you're sending the SHA256-hashed nonce as a hex string with
-				// your request to Apple.
-				print(err.localizedDescription)
-				completion(.failure(err))
-				return
-			}
-			// User is signed in to Firebase with Apple.
-			guard let authDataResult = authDataResult else {
-				completion(.failure(SignInWithAppleAuthError.noAuthDataResult))
-				return
-			}
-			completion(.success(authDataResult))
-		}
-	}
-	
-	static func handle(_ signInWithAppleResult: SignInWithAppleResult, completion: @escaping (Result<Bool, Error>) -> ()) {
-		// SignInWithAppleResult is a tuple with the authDataResult and appleIDCredentioal
-		// Now that you are signed in, we can update our User database to add this user.
-		
-		// First the uid
-		let uid = signInWithAppleResult.authDataResult.user.uid
-		
-		// Now Extract the fullname into a single string name
-		// Note, you only get this object when the account is created.
-		// All subsequent times, the fullName will be nill so you need to capture it now if you want it for
-		// your database
-		
-		var name = ""
-		var lastName = ""
-		var carMake = ""
-		var isParked = false
-		let fullName = signInWithAppleResult.appleIDCredential.fullName
-		var profileImageUrl = ""
-		var currentParkingAreaID = ""
-		
-		// Extract all three components
-		let givenName = fullName?.givenName ?? ""
-		let middleName = fullName?.middleName ?? ""
-		let familyName = fullName?.familyName ?? ""
-		let names = [givenName, middleName, familyName]
-		// remove any names that are empty
-		let filteredNames = names.filter {$0 != ""}
-		// Join the names together into a single name
-		for i in 0..<filteredNames.count {
-			name += filteredNames[i]
-			if i != filteredNames.count - 1 {
-				name += " "
-			}
-		}
-		
-		let email = signInWithAppleResult.authDataResult.user.email ?? ""
-		
-		
-		let data = FBUser.dataDict(uid: uid,
-								   name: name,
-								   email: email,
-								   lastName: lastName,
-								   carMake: carMake,
-								   isParked: isParked,
-								   profileImageUrl: profileImageUrl,
-								   currentParkingAreaID: currentParkingAreaID)
-		
-		// Now create or merge the User in Firestore DB
-		FBFirestore.mergeFBUser(data, uid: uid) { (result) in
-			completion(result)
-		}
-	}
-	
-	// Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
-	static func randomNonceString(length: Int = 32) -> String {
-		precondition(length > 0)
-		let charset: Array<Character> =
-		Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-		var result = ""
-		var remainingLength = length
-		
-		while remainingLength > 0 {
-			let randoms: [UInt8] = (0 ..< 16).map { _ in
-				var random: UInt8 = 0
-				let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-				if errorCode != errSecSuccess {
-					fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-				}
-				return random
-			}
-			
-			randoms.forEach { random in
-				if length == 0 {
-					return
-				}
-				
-				if random < charset.count {
-					result.append(charset[Int(random)])
-					remainingLength -= 1
-				}
-			}
-		}
-		
-		return result
-	}
-	
-	static func sha256(_ input: String) -> String {
-		let inputData = Data(input.utf8)
-		let hashedData = SHA256.hash(data: inputData)
-		let hashString = hashedData.compactMap {
-			return String(format: "%02x", $0)
-		}.joined()
-		
-		return hashString
-	}
-	
 	// MARK: - FB Firestore User creation
+	
 	static func createUser(withEmail email:String,
 						   name: String,
 						   password:String,

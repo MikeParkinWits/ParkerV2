@@ -22,51 +22,39 @@ struct MainView: View {
 	}
 	
 	var body: some View {
-			ZStack {
-				
-				Group{
-					if userInfo.isUserAuthenticated == .undefined {
-						Text("Loading...")
-					}
-					else if (userInfo.isUserAuthenticated == .signedOut){
-						LoginView()
-					}
-					else if (userInfo.isUserAuthenticated == .signedIn){
-						TabView {
-							HomeView()
-								.tabItem {
-									Label("Home", systemImage: "house")
-								}
-							
-							ParkingHistoryView()
-								.tabItem {
-									Label("History", systemImage: "parkingsign.circle")
-								}
-							
-							ProfileView()
-								.tabItem {
-									Label("Profile", systemImage: "person.fill")
-								}
-							
-							
-							//			Add for white tabBar
-							//				.toolbarBackground(Color.red, for: .tabBar)
-							//				.toolbar(.visible, for: .tabBar)
-							//				.accentColor(.red)
-							
-							
-						}
-						
-						//	Add to change tabBar item colour
-						//		.accentColor(Color.red)		}
-						
-					}
+		ZStack {
+			
+			Group{
+				if userInfo.isUserAuthenticated == .undefined {
+					Text("Loading...")
 				}
-				.onAppear(perform: {self.userInfo.configureFirebaseStateDidChange()})
-//				.scaleEffect(done ? 1: 0.95)
-				
-//				NavigationView {
-				SplashScreen()
+				else if (userInfo.isUserAuthenticated == .signedOut){
+					LoginView()
+				}
+				else if (userInfo.isUserAuthenticated == .signedIn){
+					TabView {
+						HomeView()
+							.tabItem {
+								Label("Home", systemImage: "house")
+							}
+						
+						ParkingHistoryView()
+							.tabItem {
+								Label("History", systemImage: "parkingsign.circle")
+							}
+						
+						ProfileView()
+							.tabItem {
+								Label("Profile", systemImage: "person.fill")
+							}
+						
+					}
+					
+				}
+			}
+			.onAppear(perform: {self.userInfo.configureFirebaseStateDidChange()})
+			
+			SplashScreen()
 		}
 	}
 }
@@ -104,10 +92,6 @@ struct SplashScreen: View {
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.background(Color("SplashScreenBackgroundColour"))
 		.opacity(done ? 0 : 1)
-		//				.navigationTitle("Home")
-		//				.navigationBarTitleDisplayMode(.inline)
-		//			}
-		//			.navigationBarHidden(done ? false: true)
 		.onAppear {
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 				withAnimation(.spring()) {

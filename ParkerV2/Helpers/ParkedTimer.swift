@@ -2,33 +2,39 @@
 //  ParkedTimer.swift
 //  ParkerV2
 //
-//  Created by Mike Parkin on 2022/11/23.
 //
+
+// MARK: - Imports
 
 import Foundation
 import Swift
 import Combine
 
 class Stopwatch: ObservableObject {
+	
 	/// String to show in UI
 	@Published private(set) var message = 0
-
-	/// Is the timer running?
+	
+	/// Checking the timer
 	@Published private(set) var isRunning = false
-
+	
 	/// Time that we're counting from
-	private var startTime: Date?                        { didSet { saveStartTime() } }
-
-	/// The timer
+	private var startTime: Date?
+	{
+		didSet { saveStartTime() }
+	}
+	
+	/// The actual timer
 	private var timer: AnyCancellable?
 	
+	/// Global Time & Price Values
 	@Published var elapsedTime = 0.0
-	
 	@Published var timerPrice = 0
-
+	
+	/// Variable Initialization
 	init() {
 		startTime = fetchStartTime()
-
+		
 		if startTime != nil {
 			start()
 		}
@@ -39,14 +45,16 @@ class Stopwatch: ObservableObject {
 
 extension Stopwatch {
 	func start() {
-		timer?.cancel()               // cancel timer if any
-
+		
+		/// Cancels the timer if other instances exist
+		timer?.cancel()
+		
 		if startTime == nil {
 			startTime = Date()
 		}
-
+		
 		message = 0
-
+		
 		timer = Timer
 			.publish(every: 0.1, on: .main, in: .common)
 			.autoconnect()
@@ -55,18 +63,18 @@ extension Stopwatch {
 					let self = self,
 					let startTime = self.startTime
 				else { return }
-
+				
 				let now = Date()
 				let elapsed = now.timeIntervalSince(startTime)
 				
 				self.elapsedTime = elapsed
-
+				
 				self.message = Int(elapsed/60)
 			}
-
+		
 		isRunning = true
 	}
-
+	
 	func stop() {
 		timer?.cancel()
 		timer = nil
@@ -87,7 +95,7 @@ private extension Stopwatch {
 			UserDefaults.standard.removeObject(forKey: "startTime")
 		}
 	}
-
+	
 	func fetchStartTime() -> Date? {
 		UserDefaults.standard.object(forKey: "startTime") as? Date
 	}
