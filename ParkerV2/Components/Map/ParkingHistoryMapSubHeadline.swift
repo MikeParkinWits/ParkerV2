@@ -34,9 +34,16 @@ struct ParkingHistoryMapSubHeadline: View{
 				
 				Spacer()
 				
-				Text("R\(parkingHistory.price)")
-					.font(.largeTitle)
-					.fontWeight(.bold)
+				ForEach(0..<filteredLocationsNotArr.prices.count, id: \.self){currentRow in
+					if (parkingHistory.timeParked >= filteredLocationsNotArr.prices[currentRow].timeLow && parkingHistory.timeParked < filteredLocationsNotArr.prices[currentRow].timeHigh) {
+
+						Text(filteredLocationsNotArr.prices[currentRow].price == 0 ? "Free" : "R\(filteredLocationsNotArr.prices[currentRow].price)")
+							.font(.largeTitle)
+							.fontWeight(.bold)
+						}
+						
+					}
+
 			}
 			
 			Divider()
@@ -50,6 +57,11 @@ struct ParkingHistoryMapSubHeadline: View{
 	var filteredLocations: [ParkingArea] {
 //		viewModel.fetchData()
 		return viewModel.parkingAreas.filter({$0.parkingID == parkingHistory.parkingAreaId})
+	}
+	
+	var filteredLocationsNotArr: ParkingArea {
+//		viewModel.fetchData()
+		return viewModel.parkingAreas.first(where: {$0.parkingID == parkingHistory.parkingAreaId}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 1, timeLow: 0, timeHigh: 0, time: "", price: 0)])
 	}
 	
 }

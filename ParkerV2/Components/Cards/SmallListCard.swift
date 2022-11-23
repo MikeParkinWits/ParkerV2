@@ -102,6 +102,8 @@ struct SmallListCard: View {
 		
 	}
 	
+	@ObservedObject var stopwatch = Stopwatch()
+	
 	var body: some View {
 		NavigationLink {
 			if (isParkingAreaCard){
@@ -141,12 +143,20 @@ struct SmallListCard: View {
 				}
 				
 				Spacer()
-				
+								
 				if (!isParkingAreaCard){
-					Text("R\(parkingHistory!.price)")
-						.font(.largeTitle)
-						.fontWeight(.bold)
+				ForEach(0..<filteredLocations.prices.count, id: \.self){currentRow in
+					if (parkingHistory!.timeParked >= filteredLocations.prices[currentRow].timeLow && parkingHistory!.timeParked < filteredLocations.prices[currentRow].timeHigh) {
+						
+							Text(filteredLocations.prices[currentRow].price == 0 ? "Free" : "R\(filteredLocations.prices[currentRow].price)")
+								.font(.title)
+								.fontWeight(.bold)
+						}
+						
+					}
+					
 				}
+				
 				
 			}
 //			.padding(.horizontal, -10)
@@ -167,7 +177,7 @@ struct SmallListCard: View {
 	
 	var filteredLocations: ParkingArea {
 //		viewModel.fetchData()
-		return viewModel.parkingAreas.first(where: {$0.parkingID == parkingHistory!.parkingAreaId}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 0, time: "", price: "")])
+		return viewModel.parkingAreas.first(where: {$0.parkingID == parkingHistory!.parkingAreaId}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 1, timeLow: 0, timeHigh: 0, time: "", price: 0)])
 	}
 	
 }

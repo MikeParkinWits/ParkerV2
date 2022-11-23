@@ -278,6 +278,17 @@ struct ProfileView: View {
 								let format = DateFormatter()
 								format.dateFormat = "dd-MM-yyyy"
 								
+//								let parkingLocation = viewModel.parkingAreas.first(where: {$0.parkingID == userInfo.user.currentParkingAreaID})
+//								var jj = 0
+//
+//								print(parkingLocation)
+//
+//								for currentRow in parkingLocation!.prices{
+//									if (Int(stopwatch.elapsedTime) >= currentRow.timeLow && Int(stopwatch.elapsedTime) < currentRow.timeHigh) {
+//										jj = currentRow.price
+//									}
+//								}
+
 								db.collection("history").document(UUID().uuidString).setData([
 									"id": idValue,
 									"userID": "\(userID)",

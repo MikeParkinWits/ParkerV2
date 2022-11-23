@@ -31,6 +31,8 @@ struct BottomDrawer: View {
 	@Environment(\.openURL) var openURL
 	var email = SupportEmail(toAddress: "1894979@students.wits.ac.za", subject: "Support Email", messageHeader: "Describe your issue below")
 	
+	@State var temptInt = 0
+	
 	var body: some View {
 		Drawer(startingHeight: CGFloat(UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height*0.23))) {
 			ZStack {
@@ -80,9 +82,18 @@ struct BottomDrawer: View {
 							
 							Spacer()
 							
-							Text("R8")
-								.font(.largeTitle)
-								.fontWeight(.bold)
+							ForEach(0..<filteredLocations.prices.count, id: \.self){currentRow in
+								if (stopwatch.message >= filteredLocations.prices[currentRow].timeLow && stopwatch.message < filteredLocations.prices[currentRow].timeHigh) {
+									Text("R\(filteredLocations.prices[currentRow].price)")
+										.font(.largeTitle)
+										.fontWeight(.bold)
+									
+//									Text("\(parkingLocation.prices[currentRow])" as String)
+								}
+								
+							}
+							
+
 							
 						}
 						
@@ -175,11 +186,12 @@ struct BottomDrawer: View {
 								 .padding(.bottom, 8)
  //								.padding(.top, 10)
 							 
-							 ForEach(0..<parkingLocation.prices.count, id: \.self){currentRow in
+							 ForEach(0..<filteredLocations.prices.count, id: \.self){currentRow in
 								 
-								 SinglePriceRow(at: parkingLocation, on: currentRow)
+								 SinglePriceRow(at: filteredLocations, on: currentRow)
 								 
 							 }
+								
 						 }
 						 .padding()
 						 .background(
@@ -276,7 +288,7 @@ struct BottomDrawer: View {
 	
 	var filteredLocations: ParkingArea {
 
-		return viewModel.parkingAreas.first(where: {$0.parkingID == userInfo.user.currentParkingAreaID}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 0, time: "", price: "")])
+		return viewModel.parkingAreas.first(where: {$0.parkingID == userInfo.user.currentParkingAreaID}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 1, timeLow: 0, timeHigh: 0, time: "", price: 0)])
 	}
 	
 }

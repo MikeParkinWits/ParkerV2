@@ -30,7 +30,7 @@ struct LocationMap: View {
 		self.parkingHistory = parkingHistory
 		self.isParkingArea = isParkingArea
 		
-		var historyLocationValue: ParkingArea = ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 0, time: "", price: "")])
+		var historyLocationValue: ParkingArea = ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 1, timeLow: 0, timeHigh: 0, time: "", price: 0)])
 		
 		if !isParkingArea{
 			historyLocationValue = viewModel.parkingAreas.first(where: {$0.parkingID == parkingHistory?.parkingAreaId})!
@@ -102,7 +102,7 @@ struct LocationMap: View {
 
 	var filteredLocations: ParkingArea {
 //		viewModel.fetchData()
-		return viewModel.parkingAreas.first(where: {$0.parkingID == parkingHistory!.parkingAreaId}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 0, time: "", price: "")])
+		return viewModel.parkingAreas.first(where: {$0.parkingID == parkingHistory!.parkingAreaId}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 1, timeLow: 0, timeHigh: 0, time: "", price: 0)])
 	}
 	
 }

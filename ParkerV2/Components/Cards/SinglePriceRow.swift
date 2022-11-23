@@ -21,7 +21,7 @@ struct SinglePriceRow: View{
 	
 	var body: some View{
 		HStack(spacing: 4){
-			Text(self.parkingLocation.prices[i].time)
+			Text(self.parkingLocation.prices[i].timeLow == self.parkingLocation.prices[i].timeHigh ? "\(self.parkingLocation.prices[i].timeLow)+" : "\(self.parkingLocation.prices[i].timeLow) - \(self.parkingLocation.prices[i].timeHigh)")
 				.font(.body)
 				.fontWeight(.medium)
 			Text("min")
@@ -31,7 +31,7 @@ struct SinglePriceRow: View{
 			
 			Spacer()
 			
-			Text(self.parkingLocation.prices[i].price)
+			Text(self.parkingLocation.prices[i].price == 0 ? "Free" : "R\(self.parkingLocation.prices[i].price)" as String)
 				.font(.body)
 				.fontWeight(.regular)
 		}

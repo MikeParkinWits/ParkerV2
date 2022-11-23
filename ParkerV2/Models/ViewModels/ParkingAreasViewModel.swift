@@ -42,8 +42,10 @@ class ParkingAreasViewModel: ObservableObject{
 				if let prices = prices {
 				var count: Int = 0
 					for price in prices{
-						let parkingPrice = price.value["price"] as? String ?? ""
+						let parkingPrice = price.value["price"] as? Int ?? 0
 						let parkingTime = price.value["time"] as? String ?? ""
+						let parkingTimeLow = price.value["timeLow"] as? Int ?? 0
+						let parkingTimeHigh = price.value["timeHigh"] as? Int ?? 0
 						let parkingInt = price.value["id"] as? Int ?? 1
 						count += 1
 						
@@ -51,7 +53,7 @@ class ParkingAreasViewModel: ObservableObject{
 							self.unwrapped = true
 						}
 						
-						pricesArray.append(Prices(id: parkingInt, time: parkingTime, price: parkingPrice))
+						pricesArray.append(Prices(id: parkingPrice, timeLow: parkingTimeLow, timeHigh: parkingTimeHigh, time: parkingTime, price: parkingPrice))
 						
 					}
 				}

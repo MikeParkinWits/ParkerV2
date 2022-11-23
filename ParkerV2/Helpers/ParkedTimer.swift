@@ -23,6 +23,8 @@ class Stopwatch: ObservableObject {
 	private var timer: AnyCancellable?
 	
 	@Published var elapsedTime = 0.0
+	
+	@Published var timerPrice = 0
 
 	init() {
 		startTime = fetchStartTime()
@@ -71,6 +73,7 @@ extension Stopwatch {
 		startTime = nil
 		isRunning = false
 		message = 0
+		timerPrice = 0
 	}
 }
 
