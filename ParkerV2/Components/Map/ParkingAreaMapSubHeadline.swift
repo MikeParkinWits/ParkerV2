@@ -17,7 +17,7 @@ struct ParkingAreaMapSubHeadline: View{
 			
 			Spacer()
 			
-			Text("0.2km away")
+//			Text("0.2km away")
 		}
 		.font(.subheadline)
 		.foregroundColor(.secondary)

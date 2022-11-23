@@ -30,9 +30,9 @@ struct UserViewModel {
 	func isEmailValid(_email: String) -> Bool {
 		
 		// Email must have a string, then '@', then string, then .string
-		let passwordTest = NSPredicate(format: "SELF MATCHES %@",
+		let emailTest = NSPredicate(format: "SELF MATCHES %@",
 									   "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
-		return passwordTest.evaluate(with: email)
+		return emailTest.evaluate(with: email)
 	}
 	
 	

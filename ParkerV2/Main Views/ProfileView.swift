@@ -82,13 +82,15 @@ struct ProfileView: View {
 							
 							Spacer()
 							
-							Text("Rating: 100%")
-								.font(.footnote)
-								.fontWeight(.regular)
-								.foregroundColor(.secondary)
-								.frame(maxWidth: .infinity, alignment: .leading)
-								.lineLimit(1)
+								Text("100%")
+									.font(.footnote)
+									.fontWeight(.regular)
+									.foregroundColor(.secondary)
+									.frame(maxWidth: .infinity, alignment: .leading)
+									.lineLimit(1)
 								.minimumScaleFactor(0.8)
+								.padding(0)
+							
 						}
 						.frame(height: 75)
 					}
@@ -141,22 +143,22 @@ struct ProfileView: View {
 						Section {
 							TextField("\(userInfo.user.name)", text: $firstName)
 							TextField("\(userInfo.user.lastName)", text: $lastName)
-							TextField("\(userInfo.user.email)", text: $userEmail)
 							Button("Save changes") {
 								
-								if (!user.isEmailValid(_email: userEmail) && user.isEmpty(_field: firstName) &&
+								if (user.isEmpty(_field: firstName) &&
 									user.isEmpty(_field: lastName)){
 									self.showAlert = true
 								}else{
 									Auth.auth().currentUser?.updateEmail(to: userEmail) { (error) in }
 									
 									guard let userID = Auth.auth().currentUser?.uid else { return }
+
 									
-									UpdateDatabase(userID: userID, newValue: firstName, variableToUpdate: "firstName")
+									UpdateDatabase(userID: userID, newValue: firstName, variableToUpdate: "name")
 									
 									UpdateDatabase(userID: userID, newValue: lastName, variableToUpdate: "lastName")
 									
-									userInfo.user = .init(uid: userInfo.user.uid, name: firstName, email: userEmail, lastName: lastName, carMake: userInfo.user.carMake, isParked: userInfo.user.isParked, profileImageUrl: userInfo.user.profileImageUrl, currentParkingAreaID: userInfo.user.currentParkingAreaID)
+									userInfo.user = .init(uid: userInfo.user.uid, name: firstName, email: userInfo.user.email, lastName: lastName, carMake: userInfo.user.carMake, isParked: userInfo.user.isParked, profileImageUrl: userInfo.user.profileImageUrl, currentParkingAreaID: userInfo.user.currentParkingAreaID)
 									
 									self.firstName = ""
 									self.lastName = ""
@@ -164,6 +166,16 @@ struct ProfileView: View {
 									
 									let impactMed = UIImpactFeedbackGenerator(style: .medium)
 									impactMed.impactOccurred()
+									
+									FBFirestore.retrieveFBUser(uid: userID) { (result) in
+										switch result{
+										case .failure(let error):
+											print(error.localizedDescription)
+											
+										case .success(let user):
+											self.userInfo.user = user
+										}
+									}
 									
 								}
 							}
@@ -175,7 +187,7 @@ struct ProfileView: View {
 					}
 				}
 			header: {
-				Text("User Details")
+				Text("Update User Details")
 			}
 			footer: {
 				Text("Update all of your \(selectedColor.lowercased()) information")
@@ -288,12 +300,13 @@ struct ProfileView: View {
 						Label("Stop Parking Session Test", systemImage: "stop.circle")
 					}
 				}
+				.foregroundColor(.red)
 					
 				}  header: {
 					Text("Test Menu")
 				}
 			footer: {
-				Text("Test the main function of the app")
+				Text("Test the main function of the application. This emulates a guard parking your car in, and out, at a random location - adding to your history when stopped")
 			}
 			}
 			.onAppear(){
@@ -330,7 +343,7 @@ struct SheetView: View {
 				
 				AboutQuestionCell(asking: "What is Parker?", answer: "Parker is an app-based platform, for mobile devices, that aims to revolutionise on-street parking in South Africa by connecting drivers directly to on-street parking guards - making on-street parking more convenient, safer, and more trustworthy for everyone.")
 				
-				AboutQuestionCell(asking: "Why was Parker Created?", answer: "Parker was created as a final year project for the University of Witwwatersrand's Digital Arts bachelor degree")
+				AboutQuestionCell(asking: "Why was Parker Created?", answer: "Parker was created as a final year project for the University of Witwatersrand's Digital Arts bachelor degree")
 				
 				Spacer()
 				

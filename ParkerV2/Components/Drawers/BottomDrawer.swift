@@ -105,7 +105,7 @@ struct BottomDrawer: View {
 											.font(.headline)
 											.fontWeight(.regular)
 										
-										Label("Location", systemImage: "mappin.and.ellipse")
+										Label("98%", systemImage: "hand.thumbsup.fill")
 											.font(.subheadline)
 											.fontWeight(.regular)
 											.foregroundColor(.secondary)
@@ -113,35 +113,7 @@ struct BottomDrawer: View {
 									
 									Spacer()
 									
-									HStack{
-										
-										Button{
-											print("Button tapped!")
-										}label: {
-											Image(systemName: "hand.thumbsup.fill")
-												.font(.headline)
-												.frame(maxWidth: 20, maxHeight: 30)
-											
-												.foregroundColor(.gray)
-												.fontWeight(.bold)
-										}
-										.buttonStyle(.bordered)
-										.tint(.gray)
-										
-										Button{
-											print("Button tapped!")
-										}label: {
-											Image(systemName: "hand.thumbsdown.fill")
-												.font(.headline)
-												.frame(maxWidth: 20, maxHeight: 30)
-											
-												.foregroundColor(.gray)
-												.fontWeight(.bold)
-										}
-										.buttonStyle(.bordered)
-										.tint(.gray)
-										
-									}
+									MyRatingButtons()
 								}
 							}
 						}

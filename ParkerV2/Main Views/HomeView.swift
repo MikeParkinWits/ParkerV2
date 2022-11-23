@@ -35,22 +35,27 @@ struct HomeView: View {
 	@EnvironmentObject var viewModel: ParkingAreasViewModel
 	@EnvironmentObject var viewModelObserved: ParkingHistoryViewModel
 			
+	let date = String(DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .short))
+
+
 	var body: some View {
 		VStack() {
 			NavigationView{
 				ZStack{
 					VStack(alignment: .leading){
 						
-						Text("Good Afternoon")
+						TitleText()
 							.font(.largeTitle)
 							.fontWeight(.bold)
 							.multilineTextAlignment(.leading)
 							.padding(.horizontal)
 							.padding(.top, 40)
 							.padding(.bottom, 5)
+							.lineLimit(1)
+							.minimumScaleFactor(0.01)
 						
 						HStack {
-							Text("Nearby Parking Areas")
+							Text("Popular Parking Areas")
 								.font(.title3)
 								.fontWeight(.semibold)
 							
@@ -74,7 +79,7 @@ struct HomeView: View {
 						
 						ScrollView(.horizontal, showsIndicators: false) {
 							HStack(spacing: 20) {
-								ForEach(viewModel.parkingAreas){ locationIndex in
+								ForEach(viewModel.parkingAreas.prefix(4)){ locationIndex in
 									
 									BigCarouselCard(for: locationIndex)
 //									Text("\(locationIndex.prices)" as String)
@@ -123,6 +128,30 @@ struct HomeView: View {
 			}
 		}
 	}
+	
+	func TitleText() -> Text{
+		let formatter = DateFormatter()
+		formatter.dateFormat = "HH"
+		let currentTime = Int(formatter.string(from: Date()))
+		
+		var titleText: String
+		
+		if (currentTime! < 12 && currentTime! >= 00)
+		{
+			titleText = "Good Morning \(userInfo.user.name)"
+		}
+		else if (currentTime! >= 12 && currentTime! < 17)
+		{
+			titleText = "Good Afternoon \(userInfo.user.name)"
+		}
+		else
+		{
+			titleText = "Good Evening \(userInfo.user.name)"
+		}
+		
+		return Text(titleText)
+				
+	}
 }
 
 // Content Preview
@@ -132,3 +161,4 @@ struct HomeView_Previews: PreviewProvider {
 		HomeView().environmentObject(UserInfo())
 	}
 }
+

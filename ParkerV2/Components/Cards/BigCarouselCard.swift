@@ -54,10 +54,10 @@ struct BigCarouselCard: View {
 					.fontWeight(.bold)
 					.foregroundColor(.primary)
 				
-				Text("0.2km")
-					.font(.footnote)
-					.fontWeight(.regular)
-					.foregroundColor(.secondary)
+//				Text("0.2km")
+//					.font(.footnote)
+//					.fontWeight(.regular)
+//					.foregroundColor(.secondary)
 			}
 			
 		}

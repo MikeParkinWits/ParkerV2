@@ -59,7 +59,7 @@ struct SmallListCard: View {
 										
 					Spacer()
 					
-					Text(isParkingAreaCard ? "0.2km Away" : parkingHistory!.date)
+					Text(isParkingAreaCard ? "" : parkingHistory!.date)
 						.font(.subheadline)
 						.fontWeight(.regular)
 						.foregroundStyle(.secondary)

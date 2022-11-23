@@ -33,6 +33,9 @@
 		6A4592AE292CC4CB00D16F79 /* ParkingHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4592AD292CC4CB00D16F79 /* ParkingHistoryViewModel.swift */; };
 		6A514939290FCE050096D52A /* SinglePriceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A514938290FCE050096D52A /* SinglePriceRow.swift */; };
 		6A58A7B229014541001F4AE8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A58A7B12901453E001F4AE8 /* MainView.swift */; };
+		6A858C97292F28B8003011E0 /* RatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A858C96292F28B7003011E0 /* RatingButton.swift */; };
+		6A858C99292F3FF0003011E0 /* AllUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A858C98292F3FEF003011E0 /* AllUserInfo.swift */; };
+		6A858C9B292F408B003011E0 /* AllUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A858C9A292F408A003011E0 /* AllUserInfoViewModel.swift */; };
 		6A99D038290FC1B90012C665 /* ParkingAreaMapSubHeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99D037290FC1B90012C665 /* ParkingAreaMapSubHeadline.swift */; };
 		6A99D03A290FC1E00012C665 /* ParkingHistoryMapSubHeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99D039290FC1E00012C665 /* ParkingHistoryMapSubHeadline.swift */; };
 		6A99D03D290FC2CC0012C665 /* BigCarouselCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99D03C290FC2CC0012C665 /* BigCarouselCard.swift */; };
@@ -87,6 +90,9 @@
 		6A4592AD292CC4CB00D16F79 /* ParkingHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingHistoryViewModel.swift; sourceTree = "<group>"; };
 		6A514938290FCE050096D52A /* SinglePriceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePriceRow.swift; sourceTree = "<group>"; };
 		6A58A7B12901453E001F4AE8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		6A858C96292F28B7003011E0 /* RatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingButton.swift; sourceTree = "<group>"; };
+		6A858C98292F3FEF003011E0 /* AllUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllUserInfo.swift; sourceTree = "<group>"; };
+		6A858C9A292F408A003011E0 /* AllUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllUserInfoViewModel.swift; sourceTree = "<group>"; };
 		6A99D037290FC1B90012C665 /* ParkingAreaMapSubHeadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingAreaMapSubHeadline.swift; sourceTree = "<group>"; };
 		6A99D039290FC1E00012C665 /* ParkingHistoryMapSubHeadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingHistoryMapSubHeadline.swift; sourceTree = "<group>"; };
 		6A99D03C290FC2CC0012C665 /* BigCarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCarouselCard.swift; sourceTree = "<group>"; };
@@ -249,6 +255,14 @@
 			path = Drawers;
 			sourceTree = "<group>";
 		};
+		6A858C95292F286A003011E0 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				6A858C96292F28B7003011E0 /* RatingButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 		6A99D03B290FC1FF0012C665 /* Background */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +303,7 @@
 		6AB56A4A290E3ED1001A826B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				6A858C95292F286A003011E0 /* Buttons */,
 				6AAC0B6D29123C6E001F5384 /* Login */,
 				6A51493A290FDACC0096D52A /* Drawers */,
 				6A99D03B290FC1FF0012C665 /* Background */,
@@ -303,6 +318,7 @@
 			children = (
 				6AB987A1292B6F88005EF250 /* ParkingAreasViewModel.swift */,
 				6A4592AD292CC4CB00D16F79 /* ParkingHistoryViewModel.swift */,
+				6A858C9A292F408A003011E0 /* AllUserInfoViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -312,6 +328,7 @@
 			children = (
 				6AB987A0292B6F6F005EF250 /* ViewModels */,
 				6AB56A4F290EB523001A826B /* ParkingHistory.swift */,
+				6A858C98292F3FEF003011E0 /* AllUserInfo.swift */,
 				6ABA727A290BDE930027E954 /* ParkingArea.swift */,
 				6A3280DC2911399A009AD7B6 /* UserInfo.swift */,
 				6AAC0B6B29122D67001F5384 /* SupportEmail.swift */,
@@ -421,7 +438,9 @@
 				6A99D038290FC1B90012C665 /* ParkingAreaMapSubHeadline.swift in Sources */,
 				6AB987A2292B6F88005EF250 /* ParkingAreasViewModel.swift in Sources */,
 				6A99D03D290FC2CC0012C665 /* BigCarouselCard.swift in Sources */,
+				6A858C99292F3FF0003011E0 /* AllUserInfo.swift in Sources */,
 				6A3F956129116415001FFDC6 /* FBFireStore.swift in Sources */,
+				6A858C97292F28B8003011E0 /* RatingButton.swift in Sources */,
 				6A3F955229115B1E001FFDC6 /* SignInWithEmailView.swift in Sources */,
 				6A4592AE292CC4CB00D16F79 /* ParkingHistoryViewModel.swift in Sources */,
 				6A32281A290FBECD00A43595 /* SmallListCard.swift in Sources */,
@@ -439,6 +458,7 @@
 				6A3F954A291159F2001FFDC6 /* UserViewModel.swift in Sources */,
 				6A99D03A290FC1E00012C665 /* ParkingHistoryMapSubHeadline.swift in Sources */,
 				6ABA727D290BE86F0027E954 /* ParkingAreaDetailView.swift in Sources */,
+				6A858C9B292F408B003011E0 /* AllUserInfoViewModel.swift in Sources */,
 				6AB0B5D5291016AF009DDF12 /* ProfileView.swift in Sources */,
 				6A514939290FCE050096D52A /* SinglePriceRow.swift in Sources */,
 				6AB56A52290ECC28001A826B /* ParkingHistoryView.swift in Sources */,

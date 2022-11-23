@@ -9,19 +9,6 @@ import Foundation
 import SwiftUI
 import Firebase
 
-//struct ParkingHistory: Identifiable{
-//	let id: Int
-//	let image: String
-//	let imageSmall: String
-//	let name: String
-//	let location: String
-//	let locationLat: Double
-//	let locationLong: Double
-//	let date: String
-//	let price: Int
-////	let prices: [HistoryLongList]
-//}
-
 struct ParkingHistory: Identifiable{
 	let id: Int
 	let userID: String

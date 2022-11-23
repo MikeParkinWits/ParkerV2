@@ -23,20 +23,41 @@ struct ParkingHistoryView: View {
 	var body: some View {
 		
 		NavigationView{
-				List(filteredLocations){ index in
+			
+			VStack(){
+				if (filteredLocations.count != 0){
+					List(filteredLocations){ index in
 
-					SmallListCard(isParkingCard: false, containingArea: nil, containingHistory: index)
-					
+						SmallListCard(isParkingCard: false, containingArea: nil, containingHistory: index)
+						
+					}
+					.searchable(text: $searchLocations, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Parking History by Number"
+					)
+					.keyboardType(.numberPad)
 				}
-				.searchable(text: $searchLocations, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Parking History by Number"
-				)
-				.keyboardType(.numberPad)
-			.onAppear(){
-				self.viewModelParkingHistory.fetchData()
+				else
+				{
+					Group{
+						VStack(spacing: 20){
+							Image(systemName: "car.2.fill")
+								.resizable()
+								.scaledToFit()
+								.frame(maxWidth: .infinity, maxHeight: 125)
+							
+							Text("No Parking History")
+								.font(.title3)
+								.fontWeight(.semibold)
+					}
+					.foregroundColor(.secondary)
+					.padding(10)
+				}
+			}
 					
 			}
-			
 			.navigationTitle("Parking History")
+			.onAppear(){
+				self.viewModelParkingHistory.fetchData()
+			}
 
 		}
 		

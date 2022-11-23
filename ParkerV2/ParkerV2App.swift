@@ -25,7 +25,6 @@ struct ParkerV2App: App {
 	var userInfo = UserInfo()
 	var viewModel = ParkingAreasViewModel()
 	var viewModelObserved = ParkingHistoryViewModel()
-
 	
     var body: some Scene {
         WindowGroup {

@@ -164,6 +164,7 @@ struct SignUpView: View {
 					
 					VStack(spacing: 20 ) {
 						Button(action: {
+							
 							FBAuth.createUser(withEmail: self.user.email, name: self.user.fullname, password: self.user.password, lastName: self.user.lastName, carMake: self.user.carLicense, isParked: self.user.isParked, profileImageUrl: "", currentParkingAreaID: userInfo.user.currentParkingAreaID) { (result) in
 								switch result{
 								case .failure(let error):
