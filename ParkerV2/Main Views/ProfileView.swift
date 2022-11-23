@@ -37,11 +37,15 @@ struct ProfileView: View {
 	@State private var showAlert = false
 	@State private var authError: EmailAuthError?
 	
+	@ObservedObject var stopwatch = Stopwatch()
+	
 	var body: some View {
 		NavigationView(){
+			
 			Form {
 				
 				Section{
+					
 					HStack(alignment: .top, spacing: 10.0){
 						
 						if (userInfo.user.profileImageUrl == ""){
@@ -236,6 +240,8 @@ struct ProfileView: View {
 
 						Button {
 							
+							stopwatch.start()
+							
 							guard let userID = Auth.auth().currentUser?.uid else { return }
 
 							if !userInfo.user.isParked{
@@ -267,8 +273,7 @@ struct ProfileView: View {
 							}else{
 								let db = Firestore.firestore()
 								let idValue = viewModelParkingHistory.parkingHistory.count
-								
-								
+																
 								let mytime = Date()
 								let format = DateFormatter()
 								format.dateFormat = "dd-MM-yyyy"
@@ -280,7 +285,7 @@ struct ProfileView: View {
 									"date": format.string(from: mytime),
 									"price": 0,
 									
-									"timeParked": 43,
+									"timeParked": Int(stopwatch.elapsedTime/60),
 									
 									"parkingAreaId": userInfo.user.currentParkingAreaID,
 																		
@@ -301,6 +306,8 @@ struct ProfileView: View {
 										print("Document successfully written!")
 									}
 								}
+								
+								stopwatch.stop()
 								
 								
 								UpdateDatabaseBool(userID: userID, newValue: false, variableToUpdate: "isParked")

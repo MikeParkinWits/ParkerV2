@@ -52,6 +52,7 @@
 		6ABA727B290BDE930027E954 /* ParkingArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABA727A290BDE930027E954 /* ParkingArea.swift */; };
 		6ABA727D290BE86F0027E954 /* ParkingAreaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABA727C290BE86F0027E954 /* ParkingAreaDetailView.swift */; };
 		6AD942A2290AA4B700B25C1F /* ParallaxSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AD942A1290AA4B700B25C1F /* ParallaxSwiftUI */; };
+		6AF087B2292E69B30047BC8E /* ParkedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF087B1292E69B30047BC8E /* ParkedTimer.swift */; };
 		6AFD8531292A1996004DD299 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFD8530292A1996004DD299 /* FirebaseAuth */; };
 		6AFD8533292A1996004DD299 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFD8532292A1996004DD299 /* FirebaseDatabase */; };
 		6AFD8535292A1996004DD299 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFD8534292A1996004DD299 /* FirebaseFirestore */; };
@@ -102,6 +103,7 @@
 		6AB987A3292C2D6C005EF250 /* image+centerCropped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "image+centerCropped.swift"; sourceTree = "<group>"; };
 		6ABA727A290BDE930027E954 /* ParkingArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingArea.swift; sourceTree = "<group>"; };
 		6ABA727C290BE86F0027E954 /* ParkingAreaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingAreaDetailView.swift; sourceTree = "<group>"; };
+		6AF087B1292E69B30047BC8E /* ParkedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkedTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 		6A2D72AC290035FC00C25F71 /* ParkerV2 */ = {
 			isa = PBXGroup;
 			children = (
+				6AF087B0292E69910047BC8E /* Helpers */,
 				6A3F954B29115A8A001FFDC6 /* Firebase */,
 				6AB56A4A290E3ED1001A826B /* Components */,
 				6AB56A49290E2BD7001A826B /* Extensions */,
@@ -316,6 +319,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		6AF087B0292E69910047BC8E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6AF087B1292E69B30047BC8E /* ParkedTimer.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -405,6 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AF087B2292E69B30047BC8E /* ParkedTimer.swift in Sources */,
 				6AB56A48290E2AAF001A826B /* View+innerShadow.swift in Sources */,
 				6A99D038290FC1B90012C665 /* ParkingAreaMapSubHeadline.swift in Sources */,
 				6AB987A2292B6F88005EF250 /* ParkingAreasViewModel.swift in Sources */,

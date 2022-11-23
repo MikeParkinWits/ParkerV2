@@ -26,6 +26,8 @@ struct BottomDrawer: View {
 	
 	@State private var showingAlert = false
 	
+	@ObservedObject var stopwatch = Stopwatch()
+	
 	@Environment(\.openURL) var openURL
 	var email = SupportEmail(toAddress: "1894979@students.wits.ac.za", subject: "Support Email", messageHeader: "Describe your issue below")
 	
@@ -72,7 +74,7 @@ struct BottomDrawer: View {
 									.font(.title3)
 									.fontWeight(.semibold)
 								
-								Text("43 Minutes")
+								Text("\(stopwatch.message) minutes")
 									.fontWeight(.regular)
 							}
 							

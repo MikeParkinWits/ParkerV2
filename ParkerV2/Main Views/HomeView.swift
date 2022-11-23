@@ -34,12 +34,11 @@ struct HomeView: View {
 	
 	@EnvironmentObject var viewModel: ParkingAreasViewModel
 	@EnvironmentObject var viewModelObserved: ParkingHistoryViewModel
-		
+			
 	var body: some View {
 		VStack() {
 			NavigationView{
 				ZStack{
-					
 					VStack(alignment: .leading){
 						
 						Text("Good Afternoon")
