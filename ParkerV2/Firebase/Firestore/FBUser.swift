@@ -13,10 +13,11 @@ struct FBUser {
 	let carMake: String
 	let isParked: Bool
 	let profileImageUrl: String
+	let currentParkingAreaID: String
     
     // App Specific properties can be added here
     
-	init(uid: String, name: String, email: String, lastName: String, carMake: String, isParked: Bool, profileImageUrl: String) {
+	init(uid: String, name: String, email: String, lastName: String, carMake: String, isParked: Bool, profileImageUrl: String, currentParkingAreaID: String) {
         self.uid = uid
         self.name = name
         self.email = email
@@ -24,6 +25,7 @@ struct FBUser {
 		self.carMake = carMake
 		self.isParked = isParked
 		self.profileImageUrl = profileImageUrl
+		self.currentParkingAreaID = currentParkingAreaID
     }
 
 }
@@ -37,6 +39,7 @@ extension FBUser {
 		let carMake = documentData[FBKeys.User.carMake] as? String ?? ""
 		let isParked = documentData[FBKeys.User.isParked] as? Bool ?? false
 		let profileImageUrl = documentData[FBKeys.User.profileImageUrl] as? String ?? ""
+		let currentParkingAreaID = documentData[FBKeys.User.currentParkingAreaID] as? String ?? ""
         
         // Make sure you also initialize any app specific properties if you have them
 
@@ -47,12 +50,13 @@ extension FBUser {
 				  lastName: lastName,
 				  carMake: carMake,
 				  isParked: isParked,
-				  profileImageUrl: profileImageUrl
+				  profileImageUrl: profileImageUrl,
+				  currentParkingAreaID: currentParkingAreaID
                   // Dont forget any app specific ones here too
         )
     }
     
-	static func dataDict(uid: String, name: String, email: String, lastName: String, carMake: String, isParked: Bool, profileImageUrl: String) -> [String: Any] {
+	static func dataDict(uid: String, name: String, email: String, lastName: String, carMake: String, isParked: Bool, profileImageUrl: String, currentParkingAreaID: String) -> [String: Any] {
         var data: [String: Any]
         
         // If name is not "" this must be a new entry so add all first time data
@@ -64,7 +68,8 @@ extension FBUser {
 				FBKeys.User.lastName: lastName,
 				FBKeys.User.carMake: carMake,
 				FBKeys.User.isParked: isParked,
-				FBKeys.User.profileImageUrl: profileImageUrl
+				FBKeys.User.profileImageUrl: profileImageUrl,
+				FBKeys.User.currentParkingAreaID: currentParkingAreaID
                 // Again, include any app specific properties that you want stored on creation
             ]
         } else {

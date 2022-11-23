@@ -23,10 +23,16 @@ struct ParkerV2App: App {
 	@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 	
 	var userInfo = UserInfo()
+	var viewModel = ParkingAreasViewModel()
+	var viewModelObserved = ParkingHistoryViewModel()
+
 	
     var body: some Scene {
         WindowGroup {
-			MainView().environmentObject(userInfo)
+			MainView()
+				.environmentObject(userInfo)
+				.environmentObject(viewModel)
+				.environmentObject(viewModelObserved)
         }
     }
 }

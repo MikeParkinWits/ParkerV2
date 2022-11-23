@@ -15,9 +15,10 @@ class ParkingAreasViewModel: ObservableObject{
 	@Published var parkingAreas = [ParkingArea]()
 	@Published var unwrapped = false
 	
-	private var db = Firestore.firestore()
 	
 	func fetchData() {
+		var db = Firestore.firestore()
+
 		db.collection("parkingAreas").addSnapshotListener { (querySnapshot, error) in
 			guard let documents = querySnapshot?.documents else{
 				print ("No documents")
@@ -33,6 +34,7 @@ class ParkingAreasViewModel: ObservableObject{
 				let location = data["location"] as? String ?? ""
 				let locationLat = data["locationLat"] as? Double ?? 0.0
 				let locationLong = data["locationLong"] as? Double ?? 0.0
+				let parkingID = data["parkingID"] as? String ?? ""
 				
 				let prices = data["price"] as? [String: [String: Any]]
 				
@@ -61,7 +63,7 @@ class ParkingAreasViewModel: ObservableObject{
 				pricesArray.sort { $0.id < $1.id }
 				
 
-				return ParkingArea(image: image, imageSmall: imageSmall, name: name, location: location, locationLat: locationLat, locationLong: locationLong, prices: pricesArray)
+				return ParkingArea(image: image, imageSmall: imageSmall, name: name, location: location, locationLat: locationLat, locationLong: locationLong, parkingID: parkingID, prices: pricesArray)
 			}
 			
 		}

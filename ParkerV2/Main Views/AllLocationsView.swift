@@ -17,7 +17,7 @@ struct AllLocationsView: View {
 	
 	@State var searchLocations = ""
 	
-	@StateObject private var viewModel = ParkingAreasViewModel()
+	@EnvironmentObject var viewModel: ParkingAreasViewModel
 	
 	var body: some View {
 		
@@ -40,9 +40,9 @@ struct AllLocationsView: View {
 						//		}
 			)
 		
-			.onAppear(){
-				self.viewModel.fetchData()
-			}
+//			.onAppear(){
+//				self.viewModel.fetchData()
+//			}
 //		}
 		
 		
@@ -105,7 +105,6 @@ struct AllLocationsView: View {
 		//						//		}
 		//			)
 		//			.padding(.top, -30)
-		
 	}
 	
 	// Function to search through locations
@@ -114,6 +113,7 @@ struct AllLocationsView: View {
 		if searchLocations.isEmpty
 		{
 			return viewModel.parkingAreas
+//				.filter({$0.parkingID == "srjZkaFHsmaYOGUs5INq"})
 		}
 		else
 		{

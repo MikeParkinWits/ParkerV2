@@ -19,6 +19,11 @@ struct BottomDrawer: View {
 	
 	var parkingLocation: ParkingArea
 	
+	@EnvironmentObject var userInfo: UserInfo
+	@EnvironmentObject var viewModel: ParkingAreasViewModel
+
+	//	var viewModel = ParkingAreasViewModel()
+	
 	@State private var showingAlert = false
 	
 	@Environment(\.openURL) var openURL
@@ -157,8 +162,8 @@ struct BottomDrawer: View {
 //												.padding(.bottom, 1)
 						
 						NavigationLink {
-							ParkingAreaDetailView(parkingLocation: parkingLocation)
-								.navigationBarTitle(parkingLocation.name)
+							ParkingAreaDetailView(parkingLocation: filteredLocations)
+								.navigationBarTitle(filteredLocations.name)
 						} label: {
 							
 							VStack(alignment: .leading, spacing: 5){
@@ -266,6 +271,12 @@ struct BottomDrawer: View {
 		.shadow(radius: 0)
 		.multilineTextAlignment(.leading)
 	}
+	
+	var filteredLocations: ParkingArea {
+
+		return viewModel.parkingAreas.first(where: {$0.parkingID == userInfo.user.currentParkingAreaID}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 0, time: "", price: "")])
+	}
+	
 }
 
 struct BottomDrawer_Previews: PreviewProvider {

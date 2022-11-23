@@ -19,7 +19,7 @@ struct ParkingHistoryView: View {
 	
 	@EnvironmentObject var userInfo: UserInfo
 	
-	@StateObject var viewModelParkingHistory = ParkingHistoryViewModel()
+	@EnvironmentObject var viewModelParkingHistory: ParkingHistoryViewModel
 	
 //	init(viewModelParkingHistory: ParkingHistoryViewModel){
 //		self.viewModelParkingHistory = ParkingHistoryViewModel(userID: "userInfo.user.uid")
@@ -79,6 +79,7 @@ struct ParkingHistoryView: View {
 				)
 			.onAppear(){
 				self.viewModelParkingHistory.fetchData()
+					
 			}
 			
 			.navigationTitle("Parking History")
@@ -159,10 +160,18 @@ struct ParkingHistoryView: View {
 	var filteredLocations: [ParkingHistory] {
 		if searchLocations.isEmpty
 		{
-			return viewModelParkingHistory.parkingHistory.filter({$0.userID == userInfo.user.uid})
+			let temp = viewModelParkingHistory.parkingHistory.filter({$0.userID == userInfo.user.uid})
+			let sortedUsers = temp.sorted{
+				$0.id > $1.id
+			}
+			return sortedUsers
 		}
 		else{
-			return viewModelParkingHistory.parkingHistory.filter({($0.userID == userInfo.user.uid) && ($0.name.localizedCaseInsensitiveContains(searchLocations) || $0.location.localizedCaseInsensitiveContains(searchLocations))})
+			let temp = viewModelParkingHistory.parkingHistory.filter({($0.userID == userInfo.user.uid) && ($0.name.localizedCaseInsensitiveContains(searchLocations) || $0.location.localizedCaseInsensitiveContains(searchLocations))})
+			let sortedUsers = temp.sorted{
+				$0.id > $1.id
+			}
+			return sortedUsers
 		}
 //		else
 //		{

@@ -10,6 +10,7 @@ import SwiftUI
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseStorage
+import Firebase
 
 class ParkingHistoryViewModel: ObservableObject{
 	@Published var parkingHistory = [ParkingHistory]()
@@ -20,10 +21,10 @@ class ParkingHistoryViewModel: ObservableObject{
 //	init(userInfo: UserInfo){
 //		self.userInfoID = userInfo.user.uid
 //	}
-	
-	private var db = Firestore.firestore()
-	
+		
 	func fetchData() {
+		var db = Firestore.firestore()
+		
 		db.collection("history").addSnapshotListener { (querySnapshot, error) in
 			guard let documents = querySnapshot?.documents else{
 				print ("No documents")
@@ -45,6 +46,9 @@ class ParkingHistoryViewModel: ObservableObject{
 				let date = data["date"] as? String ?? ""
 				let price = data["price"] as? Int ?? 0
 				let timeParked = data["timeParked"] as? Int ?? 0
+				
+				let parkingAreaID = data["parkingAreaId"] as? String ?? ""
+				let parkingArea = data["parkingArea"] as? String ?? ""
 				
 				let guardInfo = data["guardInfo"] as? [String: [String: Any]]
 				
@@ -70,7 +74,7 @@ class ParkingHistoryViewModel: ObservableObject{
 //				print(pricesArray)
 				
 				
-				return ParkingHistory(id: id, userID: userID, image: image, imageSmall: imageSmall, name: name, location: location, locationLat: locationLat, locationLong: locationLong, date: date, price: price, timeParked: timeParked, guardInfo: guardArray)
+				return ParkingHistory(id: id, userID: userID, image: image, imageSmall: imageSmall, name: name, location: location, locationLat: locationLat, locationLong: locationLong, date: date, price: price, timeParked: timeParked, parkingAreaID: parkingAreaID, parkingArea: parkingArea, guardInfo: guardArray)
 			}
 			
 		}

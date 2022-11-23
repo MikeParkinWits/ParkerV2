@@ -18,6 +18,7 @@ enum FBKeys {
 		static let carMake = "carMake"
 		static let isParked = "isParked"
 		static let profileImageUrl = "profileImageUrl"
+		static let currentParkingAreaID = "currentParkingAreaID"
         
         // Add app specific keys here
     }

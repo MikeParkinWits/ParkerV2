@@ -24,85 +24,20 @@ struct ProfileView: View {
 	@State private var colors = ["Personal", "Vehicle"]
 	
 	@State private var showingSheet = false
+	@State private var showingTestSheet = false
 	
 	@EnvironmentObject var userInfo: UserInfo
+	@EnvironmentObject var viewModel: ParkingAreasViewModel
 	
 	@State var user: UserViewModel = UserViewModel()
-	
+		
+//	var parkingLocation: [ParkingArea]
+		
 	@State private var showAlert = false
 	@State private var authError: EmailAuthError?
 	
 	var body: some View {
 		NavigationView(){
-			//			Form{
-			//				Section{
-			//					HStack(alignment: .top, spacing: 10.0){
-			//						Image("test-image-two-square")
-			//							.resizable()
-			//							.scaledToFit()
-			//							.cornerRadius(10)
-			//							.frame(width: 80, height: 80)
-			//
-			//						VStack(alignment: .leading, spacing: 2.0) {
-			//							Text("Jake Sky")
-			//								.font(.title3)
-			//								.fontWeight(.semibold)
-			//
-			//							Text("Ford Fiesta")
-			//								.font(.subheadline)
-			//								.fontWeight(.regular)
-			//
-			//							Text("BB11BB GP")
-			//								.font(.footnote)
-			//								.fontWeight(.regular)
-			//								.foregroundColor(.secondary)
-			//						}
-			//					}
-			//					.padding(.vertical, 2)
-			//				}
-			//
-			//
-			//
-			//
-			////				List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-			////					NavigationLink {
-			////						Section {
-			////							TextField(carName != "" ? carName : "Car Make", text: $carName)
-			////						} header: {
-			////							Text("Car Details")
-			////					}
-			////					} label: {
-			////						Text("Hellos")
-			////
-			////					}
-			////
-			////				}
-			//
-			////				Section {
-			////					TextField(firstName != "" ? firstName : "First Name", text: $firstName)
-			////					TextField(lastName != "" ? lastName : "Last Name", text: $lastName)
-			////					TextField(userEmail != "" ? userEmail : "Email", text: $userEmail)
-			////				} header: {
-			////					Text("User Information")
-			////			}
-			////
-			////				Section {
-			////					TextField(carMake != "" ? carMake : "Car Make", text: $carMake)
-			////					TextField(carLicensePlate != "" ? carLicensePlate : "License Plate Number", text: $carLicensePlate)
-			////				} header: {
-			////					Text("Car Details")
-			////			}
-			////
-			////				Section {
-			////					TextField(carMake != "" ? carMake : "Car Make", text: $carMake)
-			////					TextField(carLicensePlate != "" ? carLicensePlate : "License Plate Number", text: $carLicensePlate)
-			////				} header: {
-			////					Text("Car Details")
-			////			}
-			//
-			//
-			//			}
-			
 			Form {
 				
 				Section{
@@ -188,7 +123,7 @@ struct ProfileView: View {
 									
 									UpdateDatabase(userID: userID, newValue: carLicensePlate, variableToUpdate: "carMake")
 									
-									userInfo.user = .init(uid: userInfo.user.uid, name: userInfo.user.name, email: userInfo.user.email, lastName: userInfo.user.lastName, carMake: carLicensePlate.uppercased(), isParked: userInfo.user.isParked, profileImageUrl: userInfo.user.profileImageUrl)
+									userInfo.user = .init(uid: userInfo.user.uid, name: userInfo.user.name, email: userInfo.user.email, lastName: userInfo.user.lastName, carMake: carLicensePlate.uppercased(), isParked: userInfo.user.isParked, profileImageUrl: userInfo.user.profileImageUrl, currentParkingAreaID: userInfo.user.currentParkingAreaID)
 									
 									self.carLicensePlate = ""
 									
@@ -234,7 +169,7 @@ struct ProfileView: View {
 									
 									UpdateDatabase(userID: userID, newValue: lastName, variableToUpdate: "lastName")
 									
-									userInfo.user = .init(uid: userInfo.user.uid, name: firstName, email: userEmail, lastName: lastName, carMake: userInfo.user.carMake, isParked: userInfo.user.isParked, profileImageUrl: userInfo.user.profileImageUrl)
+									userInfo.user = .init(uid: userInfo.user.uid, name: firstName, email: userEmail, lastName: lastName, carMake: userInfo.user.carMake, isParked: userInfo.user.isParked, profileImageUrl: userInfo.user.profileImageUrl, currentParkingAreaID: userInfo.user.currentParkingAreaID)
 									
 									self.firstName = ""
 									self.lastName = ""
@@ -285,6 +220,31 @@ struct ProfileView: View {
 			footer: {
 				Text("Learn more about the app and project")
 			}
+				
+				
+//				Section {
+//
+//					Button {
+//						showingTestSheet.toggle()
+//					} label: {
+//						Label("Test Menu", systemImage: "info.circle")
+//					}
+//					.sheet(isPresented: $showingTestSheet) {
+//						TestSheetView()
+//					}
+//
+//
+//
+//
+//				}  header: {
+//					Text("Test Menu")
+//				}
+//			footer: {
+//				Text("Test the main function of the app")
+//			}
+			}
+			.onAppear(){
+				self.viewModel.fetchData()
 			}
 			
 			.navigationTitle("Profile")
@@ -308,11 +268,11 @@ struct ProfileView: View {
 	}
 }
 
-struct ProfileView_Previews: PreviewProvider {
-	static var previews: some View {
-		ProfileView().environmentObject(UserInfo())
-	}
-}
+//struct ProfileView_Previews: PreviewProvider {
+//	static var previews: some View {
+//		ProfileView().environmentObject(UserInfo())
+//	}
+//}
 
 struct SheetView: View {
 	@Environment(\.dismiss) var dismiss
@@ -350,6 +310,155 @@ struct SheetView: View {
 		
 	}
 }
+
+//struct TestSheetView: View {
+//	@Environment(\.dismiss) var dismiss
+//
+//	@EnvironmentObject var userInfo: UserInfo
+//
+//	@ObservedObject private var parkingAreasViewModel = ParkingAreasViewModel()
+////
+////	@StateObject var viewModelParkingHistory = ParkingHistoryViewModel()
+////
+//////		var parkingLocation: [ParkingArea]
+//
+//	var body: some View {
+//		NavigationView{
+//			VStack(alignment: .leading, spacing: 7.5) {
+//
+//				Form {
+//
+//					Section {
+//						Button {
+//
+//							if !userInfo.user.isParked{
+//								guard let userID = Auth.auth().currentUser?.uid else { return }
+//
+//								UpdateDatabaseBool(userID: userID, newValue: !userInfo.user.isParked, variableToUpdate: "isParked")
+//
+////								print(viewModel.parkingAreas)
+//
+//								UpdateDatabase(userID: userID, newValue: parkingAreasViewModel.parkingAreas.randomElement()?.parkingID ?? "", variableToUpdate: "currentParkingAreaID")
+//
+//
+//								userInfo.user = .init(uid: userInfo.user.uid, name: userInfo.user.name, email: userInfo.user.email, lastName: userInfo.user.lastName, carMake: userInfo.user.carMake, isParked: !userInfo.user.isParked, profileImageUrl: userInfo.user.profileImageUrl, currentParkingAreaID: userInfo.user.currentParkingAreaID)
+//
+//							}else{
+//								guard let userID = Auth.auth().currentUser?.uid else { return }
+//
+//								UpdateDatabaseBool(userID: userID, newValue: !userInfo.user.isParked, variableToUpdate: "isParked")
+//
+////								print(viewModel.parkingAreas)
+//
+//								UpdateDatabase(userID: userID, newValue: "", variableToUpdate: "currentParkingAreaID")
+//
+//								userInfo.user = .init(uid: userInfo.user.uid, name: userInfo.user.name, email: userInfo.user.email, lastName: userInfo.user.lastName, carMake: userInfo.user.carMake, isParked: !userInfo.user.isParked, profileImageUrl: userInfo.user.profileImageUrl, currentParkingAreaID: userInfo.user.currentParkingAreaID)
+//
+////								let db = Firestore.firestore()
+////								let idValue = viewModelParkingHistory.parkingHistory.count
+//
+////								let filtered = viewModel.parkingAreas.first(where: {$0.parkingID == userInfo.user.currentParkingAreaID})
+////
+////								print(filtered)
+//
+////								print(viewModel.parkingAreas.first(where: {$0.parkingID == userInfo.user.currentParkingAreaID})!.name)
+////								print(filteredLocations[0].imageSmall)
+////
+//
+//
+////								db.collection("history").document(UUID().uuidString).setData([
+////									"id": idValue,
+////									"userID": "\(userID)",
+////
+////									"image": filtered.image,
+////									"imageSmall": filtered.imageSmall,
+////									"name": filtered.name,
+////									"location": filtered.location,
+////									"locationLat": filtered.locationLat,
+////									"locationLong": filtered.locationLong,
+////									"date": "",
+////									"price": 0,
+////
+////									"timeParked": 43,
+////
+////									"parkingAreaID": filtered.parkingID,
+////
+////									"parkingArea": filtered.parkingID,
+////
+////									"guardInfo": [
+////										"1": [
+////											"image": "test-profile-picture",
+////											"name": "John Smith",
+////											"rating": 98
+////											]
+////										]
+////
+////
+////
+////								]) { err in
+////									if let err = err {
+////										print("Error writing document: \(err)")
+////									} else {
+////										print("Document successfully written!")
+////									}
+////								}
+//
+//							}
+//
+//
+//
+//							dismiss()
+//
+//						}
+//						 label: {
+//							 if !userInfo.user.isParked{
+//								 Label("Start Parking Session Test", systemImage: "play.circle")
+//							 }
+//							 else
+//							 {
+//								 Label("Stop Parking Session Test", systemImage: "stop.circle")
+//							 }
+//						}
+//						 .onAppear(){
+//							 self.parkingAreasViewModel.fetchData()
+////							 self.viewModelParkingHistory.fetchData()
+//					 }
+//					}
+//				header: {
+//					Text("Parking Session")
+//				}
+//			footer: {
+//				Text("Emulate a guard parking your car in and out at different locations. All emulated parking sessions are then added to your profiles parking history")
+//			}
+//				}
+//
+//				Spacer()
+//
+//			}
+//			//			.padding(.top, -25)
+//			.navigationBarTitle("Test Menu", displayMode: .inline)
+//			.navigationBarItems(trailing:
+//									Button {
+//				dismiss()
+//			} label: {
+//				Image(systemName: "xmark.circle.fill")
+//					.resizable()
+//					.scaledToFit()
+//					.frame(width: 25, height: 25)
+//			}
+//				.buttonStyle(.plain)
+//				.foregroundColor(.secondary)
+//			)
+//		}
+//
+//	}
+//
+////	var filteredLocations: [ParkingArea] {
+//////		viewModel.fetchData()
+////		return parkingLocation.filter({$0.parkingID == userInfo.user.currentParkingAreaID})
+////	}
+//}
+
 
 struct AboutQuestionCell: View {
 	
@@ -389,3 +498,17 @@ func UpdateDatabase(userID: String, newValue: String, variableToUpdate: String) 
 		}
 	}
 }
+
+//func UpdateDatabaseBool(userID: String, newValue: Bool, variableToUpdate: String) {
+//	let db = Firestore.firestore()
+//
+//	let docRef = db.collection("users").document(userID)
+//
+//	docRef.updateData([variableToUpdate: newValue]) { error in
+//		if let error = error {
+//			print("Error updating document: \(error)")
+//		} else {
+//			print("Document successfully updated!")
+//		}
+//	}
+//}

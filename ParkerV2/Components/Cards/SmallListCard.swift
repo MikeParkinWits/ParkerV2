@@ -87,6 +87,7 @@ import SwiftUI
 struct SmallListCard: View {
 	
 	var location: ParkingArea?
+		
 	var parkingHistory: ParkingHistory?
 	
 	var isParkingAreaCard = false
@@ -106,7 +107,7 @@ struct SmallListCard: View {
 					.navigationBarTitle(location!.name)
 			}else{
 				ParkingHistoryDetailView(parkingHistory: parkingHistory!)
-					.navigationBarTitle("#\(parkingHistory!.id)", displayMode: .inline)
+					.navigationBarTitle("#" + String(format: "%05d", parkingHistory!.id), displayMode: .inline)
 			}
 		} label: {
 			HStack(alignment: .center){
@@ -122,7 +123,7 @@ struct SmallListCard: View {
 						.font(.headline)
 						.fontWeight(.bold)
 					
-					Text(isParkingAreaCard ? location!.location : "\(parkingHistory!.id)")
+					Text(isParkingAreaCard ? location!.location : "#" + String(format: "%05d", parkingHistory!.id))
 						.font(.subheadline)
 						.fontWeight(.semibold)
 						.foregroundStyle(.secondary)

@@ -20,13 +20,15 @@ struct ParkingArea: Identifiable{
 	var location: String = ""
 	var locationLat: Double = 0.0
 	var locationLong: Double = 0.0
+	var parkingID: String = ""
 	var prices: [Prices] = [Prices(id: 1, time: "", price: "")]
 }
 
 struct Prices: Identifiable{
-	let id: Int
+	var id: Int = 0
 	
-	let time, price: String
+	var time: String = ""
+	var price: String = ""
 }
 
 //struct ParkingAreaList{

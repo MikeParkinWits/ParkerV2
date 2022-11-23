@@ -12,6 +12,7 @@ import Drawer
 import ParallaxSwiftUI
 import Firebase
 import FirebaseFirestoreSwift
+import FirebaseFirestore
 
 // Main View - Home View
 
@@ -31,8 +32,9 @@ struct HomeView: View {
 //
 //
 	
-	@StateObject private var viewModel = ParkingAreasViewModel()
-	
+	@EnvironmentObject var viewModel: ParkingAreasViewModel
+	@EnvironmentObject var viewModelObserved: ParkingHistoryViewModel
+		
 	var body: some View {
 		VStack() {
 			NavigationView{
@@ -93,7 +95,7 @@ struct HomeView: View {
 							BottomDrawer(parkingLocation: viewModel.parkingAreas.first!)
 						}
 							
-//						Text("\(viewModel.unwrapped)" as String)
+//						Text("\(parkingAreasViewModel.unwrapped)" as String)
 
 					}else{
 						NotParkedDrawer()

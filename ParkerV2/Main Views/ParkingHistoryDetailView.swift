@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseFirestoreSwift
 
 struct ParkingHistoryDetailView: View {
 	
@@ -16,11 +17,13 @@ struct ParkingHistoryDetailView: View {
 	@Environment(\.openURL) var openURL
 	var email = SupportEmail(toAddress: "1894979@students.wits.ac.za", subject: "Support Email", messageHeader: "Describe your issue below")
 	
-    var body: some View {
+	@EnvironmentObject var viewModel: ParkingAreasViewModel
+
+	var body: some View {
 		VStack() {
 			
-			
-				LocationMap(isParkingArea: false, at: nil, at: parkingHistory)
+			LocationMap(isParkingArea: false, at: filteredLocations, at: parkingHistory)
+				
 
 			
 			
@@ -149,6 +152,12 @@ struct ParkingHistoryDetailView: View {
 		}
 		.padding(.horizontal)
     }
+	
+	var filteredLocations: ParkingArea {
+//		viewModel.fetchData()
+		return viewModel.parkingAreas.first(where: {$0.parkingID == parkingHistory.parkingAreaID}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 0, time: "", price: "")])
+	}
+	
 }
 
 //struct ParkingHistoryDetailView_Previews: PreviewProvider {

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Firebase
 
 //struct ParkingHistory: Identifiable{
 //	let id: Int
@@ -35,6 +36,10 @@ struct ParkingHistory: Identifiable{
 	let price: Int
 	
 	let timeParked: Int
+	
+	let parkingAreaID: String
+	
+	let parkingArea: String
 	
 	var guardInfo: [GuardInfo] = [GuardInfo(image: "", name: "", rating: 1)]
 	
