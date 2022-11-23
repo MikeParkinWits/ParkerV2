@@ -49,7 +49,7 @@ struct ParkingHistoryMapSubHeadline: View{
 	
 	var filteredLocations: [ParkingArea] {
 //		viewModel.fetchData()
-		return viewModel.parkingAreas.filter({$0.parkingID == parkingHistory.parkingAreaID})
+		return viewModel.parkingAreas.filter({$0.parkingID == parkingHistory.parkingAreaId})
 	}
 	
 }

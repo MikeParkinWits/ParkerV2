@@ -47,8 +47,7 @@ class ParkingHistoryViewModel: ObservableObject{
 				let price = data["price"] as? Int ?? 0
 				let timeParked = data["timeParked"] as? Int ?? 0
 				
-				let parkingAreaID = data["parkingAreaId"] as? String ?? ""
-				let parkingArea = data["parkingArea"] as? String ?? ""
+				let parkingAreaId = data["parkingAreaId"] as? String ?? ""
 				
 				let guardInfo = data["guardInfo"] as? [String: [String: Any]]
 				
@@ -74,7 +73,7 @@ class ParkingHistoryViewModel: ObservableObject{
 //				print(pricesArray)
 				
 				
-				return ParkingHistory(id: id, userID: userID, image: image, imageSmall: imageSmall, name: name, location: location, locationLat: locationLat, locationLong: locationLong, date: date, price: price, timeParked: timeParked, parkingAreaID: parkingAreaID, parkingArea: parkingArea, guardInfo: guardArray)
+				return ParkingHistory(id: id, userID: userID, image: image, imageSmall: imageSmall, name: name, location: location, locationLat: locationLat, locationLong: locationLong, date: date, price: price, timeParked: timeParked, parkingAreaId: parkingAreaId, guardInfo: guardArray)
 			}
 			
 		}

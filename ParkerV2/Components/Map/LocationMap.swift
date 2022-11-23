@@ -15,8 +15,7 @@ struct LocationMap: View {
 	var parkingLocation: ParkingArea?
 	var parkingHistory: ParkingHistory?
 	
-	
-	@StateObject private var viewModel = ParkingAreasViewModel()
+	@EnvironmentObject var viewModel: ParkingAreasViewModel
 	
 	@State var region: MKCoordinateRegion
 	
@@ -26,12 +25,19 @@ struct LocationMap: View {
 	
 	@State var url: URL
 	
-	init(isParkingArea: Bool, at parkingLocation: ParkingArea?, at parkingHistory: ParkingHistory?) {
+	init(isParkingArea: Bool, at parkingLocation: ParkingArea?, at parkingHistory: ParkingHistory?, viewModel: ParkingAreasViewModel) {
 		self.parkingLocation = parkingLocation
 		self.parkingHistory = parkingHistory
+		self.isParkingArea = isParkingArea
+		
+		var historyLocationValue: ParkingArea = ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 0, time: "", price: "")])
+		
+		if !isParkingArea{
+			historyLocationValue = viewModel.parkingAreas.first(where: {$0.parkingID == parkingHistory?.parkingAreaId})!
+		}
 		
 		let region = MKCoordinateRegion(
-			center: CLLocationCoordinate2D(latitude: isParkingArea ? parkingLocation!.locationLat : parkingHistory!.locationLat, longitude: isParkingArea ? parkingLocation!.locationLong : parkingHistory!.locationLong),
+			center: CLLocationCoordinate2D(latitude: isParkingArea ? parkingLocation!.locationLat : historyLocationValue.locationLat, longitude: isParkingArea ? parkingLocation!.locationLong : historyLocationValue.locationLong),
 			latitudinalMeters: 750,
 			longitudinalMeters: 750
 			//			span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
@@ -48,9 +54,9 @@ struct LocationMap: View {
 			]
 		}else{
 			places = [
-				LocationAnnotations(name: parkingHistory!.name,
-									latitude: parkingHistory!.locationLat,
-									longitude: parkingHistory!.locationLong)
+				LocationAnnotations(name: historyLocationValue.name,
+									latitude: historyLocationValue.locationLat,
+									longitude: historyLocationValue.locationLong)
 			]
 		}
 		
@@ -92,6 +98,13 @@ struct LocationMap: View {
 			
 		}
 	}
+	
+
+	var filteredLocations: ParkingArea {
+//		viewModel.fetchData()
+		return viewModel.parkingAreas.first(where: {$0.parkingID == parkingHistory!.parkingAreaId}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 0, time: "", price: "")])
+	}
+	
 }
 
 // Declaring Location Annotations Structure (Class)
@@ -105,11 +118,13 @@ struct LocationAnnotations: Identifiable {
 	}
 }
 
-struct LocationMapLocationList_Previews: PreviewProvider {
-	static var previews: some View {
-		LocationMap(isParkingArea: true, at: ParkingAreasViewModel().parkingAreas.first!, at: nil)
-	}
-}
+//struct LocationMapLocationList_Previews: PreviewProvider {
+//	@EnvironmentObject var viewModel: ParkingAreasViewModel
+//
+//	static var previews: some View {
+//		LocationMap(isParkingArea: true, at: ParkingAreasViewModel().parkingAreas.first!, at: nil, viewModel: viewModel)
+//	}
+//}
 
 //struct LocationMapParkingHistory_Previews: PreviewProvider {
 //	static var previews: some View {

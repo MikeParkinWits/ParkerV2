@@ -37,10 +37,8 @@ struct ParkingHistory: Identifiable{
 	
 	let timeParked: Int
 	
-	let parkingAreaID: String
-	
-	let parkingArea: String
-	
+	let parkingAreaId: String
+		
 	var guardInfo: [GuardInfo] = [GuardInfo(image: "", name: "", rating: 1)]
 	
 }

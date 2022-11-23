@@ -92,6 +92,8 @@ struct SmallListCard: View {
 	
 	var isParkingAreaCard = false
 	
+	@EnvironmentObject var viewModel: ParkingAreasViewModel
+	
 	init(isParkingCard: Bool, containingArea location: ParkingArea?, containingHistory parkingHistory: ParkingHistory?){
 		self.isParkingAreaCard = isParkingCard
 		self.location = location
@@ -111,7 +113,7 @@ struct SmallListCard: View {
 			}
 		} label: {
 			HStack(alignment: .center){
-				Image(isParkingAreaCard ? location!.imageSmall : parkingHistory!.imageSmall)
+				Image(isParkingAreaCard ? location!.imageSmall : filteredLocations.imageSmall)
 					.resizable()
 					.scaledToFit()
 					.frame(width: 70, height: 70)
@@ -119,14 +121,16 @@ struct SmallListCard: View {
 					.shadow(color: Color("shadowColor").opacity(0.7), radius: 2)
 				
 				VStack(alignment: .leading, spacing: 1.0){
-					Text(isParkingAreaCard ? location!.name : parkingHistory!.name)
+					Text(isParkingAreaCard ? location!.name : filteredLocations.name)
 						.font(.headline)
 						.fontWeight(.bold)
 					
-					Text(isParkingAreaCard ? location!.location : "#" + String(format: "%05d", parkingHistory!.id))
+					Text(isParkingAreaCard ? location!.location : "#\(parkingHistory!.id)")
 						.font(.subheadline)
 						.fontWeight(.semibold)
 						.foregroundStyle(.secondary)
+					
+					//"#" + String(format: "%05d", parkingHistory!.id)
 					
 					Spacer()
 					
@@ -160,6 +164,12 @@ struct SmallListCard: View {
 //		.padding(.top, 13)
 		.buttonStyle(.plain)
 	}
+	
+	var filteredLocations: ParkingArea {
+//		viewModel.fetchData()
+		return viewModel.parkingAreas.first(where: {$0.parkingID == parkingHistory!.parkingAreaId}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 0, time: "", price: "")])
+	}
+	
 }
 
 

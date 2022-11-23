@@ -16,12 +16,14 @@ struct ParkingAreaDetailView: View {
 	
 	var parkingLocation: ParkingArea
 	
+	@EnvironmentObject var viewModel: ParkingAreasViewModel
+	
 	var body: some View {
 		
 		NavigationView{
 			VStack(spacing: 15.0) {
 				
-				LocationMap(isParkingArea: true, at: parkingLocation, at: nil)
+				LocationMap(isParkingArea: true, at: parkingLocation, at: nil, viewModel: viewModel)
 				
 				VStack(alignment: .leading, spacing: 7){
 

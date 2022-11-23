@@ -22,7 +22,7 @@ struct ParkingHistoryDetailView: View {
 	var body: some View {
 		VStack() {
 			
-			LocationMap(isParkingArea: false, at: filteredLocations, at: parkingHistory)
+			LocationMap(isParkingArea: false, at: filteredLocations, at: parkingHistory, viewModel: viewModel)
 				
 
 			
@@ -155,7 +155,7 @@ struct ParkingHistoryDetailView: View {
 	
 	var filteredLocations: ParkingArea {
 //		viewModel.fetchData()
-		return viewModel.parkingAreas.first(where: {$0.parkingID == parkingHistory.parkingAreaID}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 0, time: "", price: "")])
+		return viewModel.parkingAreas.first(where: {$0.parkingID == parkingHistory.parkingAreaId}) ?? ParkingArea(id: "", image: "", imageSmall: "", name: "", location: "", locationLat: 0.0, locationLong: 0.0, parkingID: "", prices: [Prices(id: 0, time: "", price: "")])
 	}
 	
 }

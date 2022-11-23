@@ -28,6 +28,7 @@ struct ProfileView: View {
 	
 	@EnvironmentObject var userInfo: UserInfo
 	@EnvironmentObject var viewModel: ParkingAreasViewModel
+	@EnvironmentObject var viewModelParkingHistory: ParkingHistoryViewModel
 	
 	@State var user: UserViewModel = UserViewModel()
 		
@@ -222,8 +223,8 @@ struct ProfileView: View {
 			}
 				
 				
-//				Section {
-//
+				Section {
+
 //					Button {
 //						showingTestSheet.toggle()
 //					} label: {
@@ -232,19 +233,176 @@ struct ProfileView: View {
 //					.sheet(isPresented: $showingTestSheet) {
 //						TestSheetView()
 //					}
+
+						Button {
+							
+							guard let userID = Auth.auth().currentUser?.uid else { return }
+
+							if !userInfo.user.isParked{
+
+								UpdateDatabaseBool(userID: userID, newValue: true, variableToUpdate: "isParked")
+
+//								print(viewModel.parkingAreas)
+
+								UpdateDatabase(userID: userID, newValue: viewModel.parkingAreas.randomElement()?.parkingID ?? "", variableToUpdate: "currentParkingAreaID")
+
+
+								userInfo.user = .init(uid: userInfo.user.uid, name: userInfo.user.name, email: userInfo.user.email, lastName: userInfo.user.lastName, carMake: userInfo.user.carMake, isParked: !userInfo.user.isParked, profileImageUrl: userInfo.user.profileImageUrl, currentParkingAreaID: userInfo.user.currentParkingAreaID)
+								
+								self.viewModel.fetchData()
+								self.viewModelParkingHistory.fetchData()
+								
+								FBFirestore.retrieveFBUser(uid: userID) { (result) in
+									switch result{
+									case .failure(let error):
+										print(error.localizedDescription)
+										
+										//Display Error Alert
+										
+									case .success(let user):
+										self.userInfo.user = user
+									}
+								}
+
+							}else{
+								let db = Firestore.firestore()
+								let idValue = viewModelParkingHistory.parkingHistory.count
+								
+								
+								let mytime = Date()
+								let format = DateFormatter()
+								format.dateFormat = "dd-MM-yyyy"
+								
+								db.collection("history").document(UUID().uuidString).setData([
+									"id": idValue,
+									"userID": "\(userID)",
+									
+									"date": format.string(from: mytime),
+									"price": 0,
+									
+									"timeParked": 43,
+									
+									"parkingAreaId": userInfo.user.currentParkingAreaID,
+																		
+									"guardInfo": [
+										"1": [
+											"image": "test-profile-image",
+											"name": "John Smith",
+											"rating": 98
+										]
+									]
+									
+									
+									
+								]) { err in
+									if let err = err {
+										print("Error writing document: \(err)")
+									} else {
+										print("Document successfully written!")
+									}
+								}
+								
+								
+								UpdateDatabaseBool(userID: userID, newValue: false, variableToUpdate: "isParked")
+
+//								print(viewModel.parkingAreas)
+
+								UpdateDatabase(userID: userID, newValue: "", variableToUpdate: "currentParkingAreaID")
+
+
+								userInfo.user = .init(uid: userInfo.user.uid, name: userInfo.user.name, email: userInfo.user.email, lastName: userInfo.user.lastName, carMake: userInfo.user.carMake, isParked: !userInfo.user.isParked, profileImageUrl: userInfo.user.profileImageUrl, currentParkingAreaID: userInfo.user.currentParkingAreaID)
+								
+							}
+//								guard let userID = Auth.auth().currentUser?.uid else { return }
+//
+//								UpdateDatabaseBool(userID: userID, newValue: !userInfo.user.isParked, variableToUpdate: "isParked")
+//
+////								print(viewModel.parkingAreas)
+//
+//								UpdateDatabase(userID: userID, newValue: "", variableToUpdate: "currentParkingAreaID")
+//
+//								userInfo.user = .init(uid: userInfo.user.uid, name: userInfo.user.name, email: userInfo.user.email, lastName: userInfo.user.lastName, carMake: userInfo.user.carMake, isParked: !userInfo.user.isParked, profileImageUrl: userInfo.user.profileImageUrl, currentParkingAreaID: userInfo.user.currentParkingAreaID)
+//
+////								let db = Firestore.firestore()
+////								let idValue = viewModelParkingHistory.parkingHistory.count
+//
+////								let filtered = viewModel.parkingAreas.first(where: {$0.parkingID == userInfo.user.currentParkingAreaID})
+////
+////								print(filtered)
+//
+////								print(viewModel.parkingAreas.first(where: {$0.parkingID == userInfo.user.currentParkingAreaID})!.name)
+////								print(filteredLocations[0].imageSmall)
+////
 //
 //
+////								db.collection("history").document(UUID().uuidString).setData([
+////									"id": idValue,
+////									"userID": "\(userID)",
+////
+////									"image": filtered.image,
+////									"imageSmall": filtered.imageSmall,
+////									"name": filtered.name,
+////									"location": filtered.location,
+////									"locationLat": filtered.locationLat,
+////									"locationLong": filtered.locationLong,
+////									"date": "",
+////									"price": 0,
+////
+////									"timeParked": 43,
+////
+////									"parkingAreaID": filtered.parkingID,
+////
+////									"parkingArea": filtered.parkingID,
+////
+////									"guardInfo": [
+////										"1": [
+////											"image": "test-profile-picture",
+////											"name": "John Smith",
+////											"rating": 98
+////											]
+////										]
+////
+////
+////
+////								]) { err in
+////									if let err = err {
+////										print("Error writing document: \(err)")
+////									} else {
+////										print("Document successfully written!")
+////									}
+////								}
 //
-//
-//				}  header: {
-//					Text("Test Menu")
-//				}
-//			footer: {
-//				Text("Test the main function of the app")
-//			}
+//							}
+
+						}
+						 label: {
+							 if !userInfo.user.isParked{
+								 Label("Start Parking Session Test", systemImage: "play.circle")
+							 }
+							 else
+							 {
+								 Label("Stop Parking Session Test", systemImage: "stop.circle")
+							 }
+						}
+//						 .onAppear(){
+//							 self.parkingAreasViewModel.fetchData()
+////							 self.viewModelParkingHistory.fetchData()
+//					 }
+					
+
+
+
+
+				}  header: {
+					Text("Test Menu")
+				}
+			footer: {
+				Text("Test the main function of the app")
+			}
 			}
 			.onAppear(){
 				self.viewModel.fetchData()
+				self.viewModelParkingHistory.fetchData()
 			}
 			
 			.navigationTitle("Profile")
@@ -499,16 +657,16 @@ func UpdateDatabase(userID: String, newValue: String, variableToUpdate: String) 
 	}
 }
 
-//func UpdateDatabaseBool(userID: String, newValue: Bool, variableToUpdate: String) {
-//	let db = Firestore.firestore()
-//
-//	let docRef = db.collection("users").document(userID)
-//
-//	docRef.updateData([variableToUpdate: newValue]) { error in
-//		if let error = error {
-//			print("Error updating document: \(error)")
-//		} else {
-//			print("Document successfully updated!")
-//		}
-//	}
-//}
+func UpdateDatabaseBool(userID: String, newValue: Bool, variableToUpdate: String) {
+	let db = Firestore.firestore()
+
+	let docRef = db.collection("users").document(userID)
+
+	docRef.updateData([variableToUpdate: newValue]) { error in
+		if let error = error {
+			print("Error updating document: \(error)")
+		} else {
+			print("Document successfully updated!")
+		}
+	}
+}
