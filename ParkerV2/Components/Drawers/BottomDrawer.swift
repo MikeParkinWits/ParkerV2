@@ -89,6 +89,7 @@ struct BottomDrawer: View {
 										.fontWeight(.bold)
 									
 //									Text("\(parkingLocation.prices[currentRow])" as String)
+									
 								}
 								
 							}
